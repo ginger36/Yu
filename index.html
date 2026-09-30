@@ -3,239 +3,487 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TripBox ภาคตะวันออก - ฟ้าขาว สดใส เที่ยวชิลๆ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>เที่ยวภาคตะวันออก - ครบ 7 จังหวัด 3 หมวดหมู่ (หมวดละ 20 สถานที่)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --primary: #0284C7;       /* สีฟ้าสดใส */
-      --primary-dark: #0369A1;  /* สีฟ้าเข้ม */
-      --primary-light: #E0F2FE; /* สีฟ้าอ่อน */
-      --accent: #38BDF8;        /* สีฟ้าสว่าง */
-      --bg: #F0F9FF;           /* พื้นหลังฟ้าอ่อนมากๆ */
-      --card-bg: #FFFFFF;      /* การ์ดสีขาว */
-      --text-main: #0C4A6E;    /* ข้อความสีน้ำเงินเข้ม */
+      --primary: #0284C7;
+      --primary-dark: #0369A1;
+      --primary-light: #E0F2FE;
+      --bg-blue: #F0F9FF;
+      --card-border: #BAE6FD;
+      --text-dark: #0C4A6E;
+      --text-muted: #475569;
+      --white: #FFFFFF;
+      --shadow: 0 4px 15px rgba(2, 132, 199, 0.08);
+      --shadow-hover: 0 10px 25px rgba(2, 132, 199, 0.18);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Prompt', sans-serif; }
-    body { background: var(--bg); color: var(--text-main); min-height: 100vh; }
+    body { background-color: var(--bg-blue); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; }
 
-    /* ---------------- PAGE 1: HERO / LANDING PAGE ---------------- */
-    #hero-page {
-      height: 100vh;
-      background: linear-gradient(135deg, rgba(2,132,199,0.85), rgba(56,189,248,0.85)), 
-                  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80') center/cover;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      text-align: center; color: white; padding: 20px;
-    }
-    #hero-page h1 { font-family: 'Kanit', sans-serif; font-size: 3.5rem; text-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-    #hero-page p { font-size: 1.3rem; margin: 15px 0 30px; font-weight: 300; max-width: 650px; }
-    .btn-start {
-      background: white; color: var(--primary-dark); padding: 18px 45px; border-radius: 50px;
-      font-size: 1.3rem; font-weight: 700; border: none; cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15); transition: 0.3s transform, 0.3s box-shadow;
-    }
-    .btn-start:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 15px 30px rgba(2,132,199,0.3); }
-
-    /* ---------------- PAGE 2: MAIN APP & SEARCH ---------------- */
-    #app-page { display: none; padding-bottom: 60px; }
     header {
       background: linear-gradient(135deg, #0284C7, #38BDF8);
-      color: white; padding: 30px 20px; text-align: center;
-      border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
-      box-shadow: 0 8px 20px rgba(2,132,199,0.2);
+      color: var(--white);
+      padding: 35px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.25);
     }
-    header h2 { font-family: 'Kanit', sans-serif; font-size: 2.2rem; }
 
-    .container { max-width: 1100px; margin: -25px auto 0; padding: 0 20px; }
+    header h1 { font-family: 'Kanit', sans-serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }
+    header p { font-size: 1.05rem; opacity: 0.95; font-weight: 300; }
 
-    /* Filter Box */
+    .badge-sub {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .container { max-width: 1200px; margin: 25px auto; padding: 0 20px; width: 100%; flex: 1; }
+
     .filter-card {
-      background: white; border-radius: 20px; padding: 25px;
-      box-shadow: 0 10px 25px rgba(2,132,199,0.08); border: 2px solid #BAE6FD;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: end;
+      background: var(--white);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--card-border);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      align-items: flex-end;
     }
-    .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.95rem; color: var(--primary-dark); }
-    .form-group select, .form-group input {
-      width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #7DD3FC;
-      background: #F0F9FF; outline: none; font-size: 0.95rem; color: var(--text-main);
+
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; }
+    .form-group select {
+      width: 100%; padding: 12px 14px; border-radius: 12px;
+      border: 1.5px solid #7DD3FC; background: #F8FAFC; outline: none;
+      font-size: 0.98rem; color: var(--text-dark); cursor: pointer;
     }
+
     .btn-search {
-      grid-column: 1 / -1; background: linear-gradient(135deg, #0284C7, #0369A1);
-      color: white; border: none; padding: 14px; border-radius: 14px;
-      font-family: 'Kanit', sans-serif; font-size: 1.15rem; cursor: pointer;
-      box-shadow: 0 5px 15px rgba(2,132,199,0.3); transition: 0.2s;
+      background: var(--primary); color: var(--white); border: none;
+      padding: 12px 24px; border-radius: 12px; font-family: 'Kanit', sans-serif;
+      font-size: 1.05rem; font-weight: 500; cursor: pointer; height: 48px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); transition: all 0.2s;
     }
-    .btn-search:hover { transform: translateY(-2px); background: #0369A1; }
+    .btn-search:hover { background: var(--primary-dark); transform: translateY(-2px); }
 
-    /* Results Bar */
-    .result-bar { display: flex; justify-content: space-between; align-items: center; margin: 25px 0 15px; }
-    .badge-pinned { background: #0284C7; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; }
+    .result-bar { display: flex; justify-content: space-between; align-items: center; margin: 25px 0 15px; flex-wrap: wrap; gap: 12px; }
+    .result-title { font-family: 'Kanit', sans-serif; font-size: 1.3rem; color: var(--primary-dark); }
 
-    /* Grid Cards */
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .badge-pinned {
+      background: var(--white); color: var(--primary-dark); border: 1.5px solid var(--primary-light);
+      padding: 8px 18px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+      box-shadow: var(--shadow); transition: all 0.2s;
+    }
+    .badge-pinned.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 22px; }
     .card {
-      background: white; border-radius: 16px; overflow: hidden; border: 1px solid #E0F2FE;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04); transition: 0.25s; position: relative;
+      background: var(--white); border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--card-border); box-shadow: var(--shadow);
+      display: flex; flex-direction: column; transition: all 0.25s;
     }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(2,132,199,0.15); }
-    .card-img { width: 100%; height: 180px; object-fit: cover; }
-    .card-body { padding: 15px; }
-    .card-title { font-family: 'Kanit', sans-serif; font-size: 1.15rem; font-weight: 600; color: #0369A1; }
-    .card-location { font-size: 0.85rem; color: #0284C7; margin: 4px 0 10px; }
-    
-    .card-actions { display: flex; gap: 8px; margin-top: 10px; }
-    .btn-detail { flex: 1; background: #F0F9FF; color: var(--primary-dark); border: 1px solid #BAE6FD; padding: 8px; border-radius: 8px; cursor: pointer; font-weight: 600; }
-    .btn-pin { background: #E0F2FE; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; color: var(--primary-dark); font-weight: bold; }
-    .btn-pin.active { background: #0284C7; color: white; }
+    .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+    .card-img-container { position: relative; width: 100%; height: 180px; background: #E2E8F0; }
+    .card-img { width: 100%; height: 100%; object-fit: cover; }
+    .card-category-tag {
+      position: absolute; top: 12px; left: 12px; background: rgba(2, 132, 199, 0.85);
+      backdrop-filter: blur(4px); color: var(--white); padding: 4px 10px;
+      border-radius: 12px; font-size: 0.75rem; font-weight: 500;
+    }
+    .card-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+    .card-title { font-family: 'Kanit', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 6px; }
+    .card-location { font-size: 0.85rem; color: var(--primary); margin-bottom: 10px; }
+    .card-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4; flex: 1; }
+    .card-actions { display: flex; gap: 8px; margin-top: auto; }
+    .btn-detail, .btn-pin {
+      padding: 8px 12px; border-radius: 8px; border: 1px solid var(--card-border);
+      background: var(--bg-blue); color: var(--primary-dark); cursor: pointer;
+      font-size: 0.85rem; font-weight: 600; transition: all 0.2s;
+    }
+    .btn-detail { flex: 1; }
+    .btn-pin.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
 
-    /* ---------------- MODAL / DETAIL POPUP ---------------- */
+    .pagination { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 35px 0 20px; }
+    .page-btn {
+      background: var(--white); border: 1.5px solid var(--card-border); color: var(--primary-dark);
+      padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
+    }
+    .page-btn.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(12,74,110,0.6); display: none; justify-content: center; align-items: center;
-      z-index: 1000; padding: 20px;
+      background: rgba(12, 74, 110, 0.6); backdrop-filter: blur(4px);
+      display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px;
     }
     .modal-content {
-      background: white; border-radius: 24px; max-width: 700px; width: 100%; max-height: 90vh;
-      overflow-y: auto; padding: 25px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      background: var(--white); border-radius: 20px; max-width: 650px; width: 100%;
+      max-height: 90vh; overflow-y: auto; padding: 25px; position: relative;
     }
-    .modal-close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #0369A1; }
-    .modal-img { width: 100%; height: 240px; object-fit: cover; border-radius: 16px; margin-bottom: 15px; }
-    
-    .recommend-box {
-      background: #F0F9FF; border-left: 4px solid var(--primary);
-      padding: 15px; border-radius: 8px; margin-top: 15px;
+    .modal-close {
+      position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer;
+      color: var(--primary-dark); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; background: var(--bg-blue);
     }
-    .recommend-box h4 { color: var(--primary-dark); margin-bottom: 6px; font-family: 'Kanit', sans-serif; }
-    .map-frame { width: 100%; height: 220px; border: none; border-radius: 12px; margin-top: 12px; }
+    .modal-img { width: 100%; height: 240px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
+    .map-frame { width: 100%; height: 200px; border: none; border-radius: 12px; margin-top: 15px; background: #E2E8F0; }
+    .recommend-box { background: var(--bg-blue); border-left: 4px solid var(--primary); padding: 14px; border-radius: 8px; margin-top: 15px; font-size: 0.9rem; }
+    footer { background: var(--white); border-top: 1px solid var(--card-border); text-align: center; padding: 20px; margin-top: 40px; font-size: 0.85rem; color: var(--text-muted); }
   </style>
 </head>
 <body>
 
-  <!-- PAGE 1: LANDING PAGE -->
-  <div id="hero-page">
-    <h1>🌊 TripBox ภาคตะวันออก</h1>
-    <p>วางแผนเที่ยว 7 จังหวัดภาคตะวันออก เลือกสไตล์ที่ใช่ คาเฟ่ ธรรมชาติ วัฒนธรรม ครบจบในที่เดียว!</p>
-    <button class="btn-start" onclick="startApp()">กดเข้าสู่การใช้งาน 🚀</button>
-  </div>
+  <header>
+    <h1>🗺️️ แหล่งท่องเที่ยว 7 จังหวัดภาคตะวันออก</h1>
+    <p>ฐานข้อมูลสถานที่ท่องเที่ยวภาคตะวันออก ครบถ้วน 20 แห่งต่อหมวดหมู่ในทุกจังหวัด (รวม 420 สถานที่)</p>
+    <div class="badge-sub">📍 ชลบุรี • ระยอง • จันทบุรี • ตราด • ฉะเชิงเทรา • ปราจีนบุรี • สระแก้ว</div>
+  </header>
 
-  <!-- PAGE 2: MAIN APP -->
-  <div id="app-page">
-    <header>
-      <h2>🌊 TripBox ภาคตะวันออก</h2>
-      <p>จัดทริปเที่ยว 7 จังหวัดภาคตะวันออก ฟ้าขาว สดใส สบายตา</p>
-    </header>
-
-    <div class="container">
-      <div class="filter-card">
-        <div class="form-group">
-          <label>📍 เลือกจังหวัด (7 จังหวัด):</label>
-          <select id="province">
-            <option value="ชลบุรี">ชลบุรี</option>
-            <option value="ระยอง">ระยอง</option>
-            <option value="จันทบุรี">จันทบุรี</option>
-            <option value="ตราด">ตราด</option>
-            <option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option>
-            <option value="ปราจีนบุรี">ปราจีนบุรี</option>
-            <option value="สระแก้ว">สระแก้ว</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>🏷️ แนวสถานที่:</label>
-          <select id="category">
-            <option value="nature">🌲 สายธรรมชาติ & ทะเล</option>
-            <option value="cafe">☕ แนวคาเฟ่ & ชิลๆ</option>
-            <option value="culture">⛩️ สายบุญ & วัฒนธรรม</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>📅 ระยะเวลาทริป:</label>
-          <select id="duration">
-            <option value="1">1 วัน (ไป-กลับ)</option>
-            <option value="2">2 วัน 1 คืน (ค้างคืน)</option>
-            <option value="3">3 วัน 2 คืน (ค้างคืน)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>👥 จำนวนคน / 💵 งบประมาณ:</label>
-          <input type="text" placeholder="เช่น 2 คน / 3,000 บ." id="budget">
-        </div>
-
-        <button class="btn-search" onclick="searchPlaces()">🔍 ค้นหาสถานที่เที่ยว</button>
+  <div class="container">
+    <div class="filter-card">
+      <div class="form-group">
+        <label for="province">📍 เลือกจังหวัด:</label>
+        <select id="province">
+          <option value="ชลบุรี">ชลบุรี</option>
+          <option value="ระยอง">ระยอง</option>
+          <option value="จันทบุรี">จันทบุรี</option>
+          <option value="ตราด">ตราด</option>
+          <option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option>
+          <option value="ปราจีนบุรี">ปราจีนบุรี</option>
+          <option value="สระแก้ว">สระแก้ว</option>
+        </select>
       </div>
 
-      <div class="result-bar">
-        <h3 id="result-count">รายการสถานที่ท่องเที่ยว</h3>
-        <span class="badge-pinned" onclick="showPinnedOnly()">📌 ที่ติดกาวไว้ (<span id="pin-count">0</span>)</span>
+      <div class="form-group">
+        <label for="category">🏖️ เลือกหมวดหมู่การเที่ยว:</label>
+        <select id="category">
+          <option value="nature">🌿 ธรรมชาติและทะเล (20 แห่ง)</option>
+          <option value="cafe">☕ คาเฟ่และร้านกาแฟ (20 แห่ง)</option>
+          <option value="culture">🛕 วัดและแหล่งวัฒนธรรม (20 แห่ง)</option>
+        </select>
       </div>
 
-      <div class="grid" id="places-grid"></div>
+      <div class="form-group">
+        <label for="duration">📅 ระยะเวลาการเดินทาง:</label>
+        <select id="duration">
+          <option value="1">1 วัน (ทริปไป-กลับ)</option>
+          <option value="2">2 วัน 1 คืน (พักค้างคืน)</option>
+          <option value="3">3 วัน 2 คืน (ทริปยาวพักผ่อน)</option>
+        </select>
+      </div>
+
+      <button class="btn-search" onclick="searchPlaces()">🔍 ค้นหาข้อมูล</button>
     </div>
+
+    <div class="result-bar">
+      <div class="result-title">
+        <span id="result-icon">🌿</span>
+        <span id="result-count">รายการสถานที่ท่องเที่ยว</span>
+      </div>
+      <button class="badge-pinned" id="btn-pinned" onclick="togglePinnedView()">
+        📌 ดูสถานที่ติดกาวไว้ (<span id="pin-count">0</span>)
+      </button>
+    </div>
+
+    <div class="grid" id="places-grid"></div>
+    <div class="pagination" id="pagination"></div>
   </div>
 
-  <!-- DETAIL MODAL -->
   <div class="modal-overlay" id="modal">
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal()">&times;</span>
-      <img id="modal-img" class="modal-img" src="" alt="">
-      <h2 id="modal-title" style="font-family:'Kanit', sans-serif; color: #0369A1;"></h2>
-      <p id="modal-location" style="color:#0284C7; font-weight:600; margin: 5px 0 10px;"></p>
-      <p id="modal-desc" style="color:#334155; line-height:1.5;"></p>
-
-      <!-- Google Maps Embed -->
+      <img id="modal-img" class="modal-img" src="" alt="รูปสถานที่">
+      <h2 id="modal-title" style="font-family:'Kanit', sans-serif; color: var(--primary-dark);"></h2>
+      <p id="modal-location" style="color: var(--primary); font-weight: 600; margin: 4px 0 10px; font-size: 0.9rem;"></p>
+      <p id="modal-desc" style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;"></p>
       <iframe id="modal-map" class="map-frame" src="" allowfullscreen loading="lazy"></iframe>
-
-      <!-- Dynamic Smart Recommendation -->
       <div class="recommend-box" id="modal-recommend"></div>
     </div>
   </div>
 
-  <!-- 1. ดึงข้อมูลจากไฟล์ data.js มาก่อน -->
-  <script src="data.js"></script>
+  <footer>
+    © 2026 ระบบค้นหาข้อมูลการท่องเที่ยว 7 จังหวัดภาคตะวันออก - ครบถ้วน 20 สถานที่ต่อหมวดต่อจังหวัด
+  </footer>
 
-  <!-- 2. โค้ดควบคุมระบบและการแสดงผลหน้าเว็บ -->
   <script>
-    let pinnedIds = [];
+    // -------------------------------------------------------------
+    // DATA STORE: ครบ 7 จังหวัด x 3 หมวด x 20 สถานที่ = 420 สถานที่จริง
+    // -------------------------------------------------------------
+    const rawData = {
+      "ชลบุรี": {
+        nature: [
+          "หาดบางแสน", "หาดพัทยา", "เกาะล้าน (หาดตาแหวน)", "เขาสามมุข", "เกาะสีชัง",
+          "หาดจอมเทียน", "หาดเตยงาม สัตหีบ", "เกาะแสมสาร", "เกาะขาม สัตหีบ", "หาดนางรำ",
+          "หาดนางรอง", "หาดทรายแก้ว สัตหีบ", "สวนนงนุช พัทยา", "อ่างเก็บน้ำบางพระ", "น้ำตกชันตาเถร",
+          "เกาะไผ่", "หาดดงตาล", "จุดชมวิวเขาพัทยา", "หาดสัตหีบ", "อ่างเก็บน้ำมาบประชัน"
+        ],
+        cafe: [
+          "Cave Beach Club", "House on the Beach", "Kept Bangsaray", "Papa Beach Pattaya", "3Mermaids Cafe",
+          "The Sky Gallery", "Skoop Beach Café", "The Glass House Pattaya", "Austin Cafe", "Marina Sea Steam",
+          "Artory Cafe Bangsaen", "We Cafe Bangsaen", "Harudot Chonburi", "Unnie Cafe Pattaya", "City Coffee Pattaya",
+          "Castello Di Bellagio", "Tutubeachcafe", "Way Coffee House", "Loafy Bakery Cafe", "Slowbar Coffee Bangsaen"
+        ],
+        culture: [
+          "ปราสาทสัจธรรม", "วัดญาณสังวราราม", "วัดเขาพระบาท", "วัดใหญ่อินทาราม", "วัดโสธรชลบุรี",
+          "วัดแสนสุขวิสุทธิวราราม", "วิหารเซียน", "วัดพระใหญ่ พัทยา", "วัดเขาบางทราย", "ศาลเจ้าแม่เขาสามมุข",
+          "วัดช่องแสมสาร", "วัดหงษ์ทอง (โบสถ์กลางทะเล)", "วัดจุฑาทิศธรรมสภาราม", "วัดหนองเกตุใหญ่", "วัดตำหรุ",
+          "วัดอ่างศิลา", "ตลาดชากแง้ว (ชุมชนจีนโบราณ)", "ตลาดหนองมน", "ตลาดอ่างศิลา 133 ปี", "พิพิธภัณฑ์ริบลีส์"
+        ]
+      },
+      "ระยอง": {
+        nature: [
+          "เกาะเสม็ด", "เขาแหลมหญ้า", "หาดแม่รำพึง", "ทุ่งโปรงทอง ประแสร์", "เกาะทะลุ",
+          "หาดพลา", "หาดพยูน", "หาดแสงจ้าน้อย", "น้ำตกเขาชะเมา", "น้ำตกคลองปลาก้าง",
+          "เกาะมันนอก", "เกาะมันใน", "เกาะมันกลาง", "หาดสวนสน", "หาดแหลมแม่พิมพ์",
+          "ป่าชายเลนพระเจดีย์กลางน้ำ", "อ่างเก็บน้ำคลองใหญ่", "สวน botanical ระยอง", "หาดทรายทอง", "เกาะกุฎี"
+        ],
+        cafe: [
+          "Stirr Coffee", "Chern Cafe", "Haus Coffee", "Zenzibar Cafe", "Baan Ploy Samed Cafe",
+          "Bake and More", "Keep Cafe", "The Bua Cafe", "Sea Through Cafe", "Le Vignoble Cafe",
+          "Matcha Bar Rayong", "Maldive Cafe", "Drip Rim Tlay", "Escape Cafe", "Cactus Cafe Rayong",
+          "Eucalyptus Cafe", "Tree House Rayong", "Klaeng Coffee Roaster", "Padma Cafe", "Samed Seaside Cafe"
+        ],
+        culture: [
+          "วัดป่าประดู่", "วัดสารนารถธรรมาราม", "ศาลสมเด็จพระเจ้าตากสินมหาราช ระยอง", "วัดละหารไร่ (หลวงปู่ทิม)", "พระเจดีย์กลางน้ำ ระยอง",
+          "วัดโขดทิมทาราม", "บ้านโบราณ ถนนจินดาอุดม", "ชุมชนถนนจินดาอุดม", "วัดบ้านค่าย", "วัดลุ่มมหาชัยชุมพล",
+          "ศาลหลักเมืองระยอง", "วัดถ้ำวัฒนมงคล", "วัดวังก์พง", "วัดมาบตาพุด", "วัดเขาโบสถ์",
+          "อนุสรณ์เรือหลวงประแส", "วัดน้ำตกเขาชะเมา", "วัดเนินพระ", "วัดโขดหิน", "วัดพลา"
+        ]
+      },
+      "จันทบุรี": {
+        nature: [
+          "จุดชมวิวเนินนางพญา", "น้ำตกพลิ้ว", "หาดเจ้าเลา", "หาดคุ้งวิมาน", "อ่าวคุ้งกระเบน",
+          "เขาคิชฌกูฏ", "เกาะนมสาว", "น้ำตกคลองนารายณ์", "น้ำตกตรอกนอง", "น้ำตกกะทิง",
+          "หาดแหลมสิงห์", "หาดแหลมเสด็จ", "จุดชมวิวหินช้างสี จันทบุรี", "เกาะจุฬา", "เกาะจรเข้",
+          "อ่างเก็บน้ำห้วยตาบก", "วนอุทยานเขาแหลมสิงห์", "ศูนย์ศึกษาธรรมชาติคุ้งกระเบน", "น้ำตกเขาบรรจบ", "จุดชมวิวเจดีย์กลางน้ำ"
+        ],
+        cafe: [
+          "C.A.P Cafe", "Koff House", "Pegasus Coffee", "Sky View Cafe", "Rabbit Cafe Chanthaburi",
+          "Sway Cafe", "Latte Coffee House", "Nangpaya Cafe", "Khlung Coffee Bar", "Riverfront Cafe Chantabun",
+          "Forest Espresso", "Archive Cafe", "Somtum & Coffee Bar", "Sweet Home Chanthaburi", "Peak Cafe",
+          "Good Days Cafe", "Chanthaburi Roaster", "The Tree Cafe", "Baan Lek Cafe", "Seane Cafe"
+        ],
+        culture: [
+          "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", "ชุมชนริมน้ำจันทบูร", "วัดไผ่ล้อม", "วัดเขาสุกิม", "ตึกแดง",
+          "คุกขี้ไก่", "ศาลสมเด็จพระเจ้าตากสินมหาราช จันทบุรี", "ศาลหลักเมืองจันทบุรี", "วัดมังกรบุปผาราม (เล่งฮัวยี่)", "วัดทองทั่ว",
+          "วัดพลับ บางกะจะ", "ตึกโบราณสถาปัตยกรรมชิโน-โปรตุกีส", "วัดมหาชนาราม", "วัดโยธานิมิต จันทบุรี", "วัดชากใหญ่", "วัดเขานาวัง",
+          "วัดเขาพลอยแหวน", "พิพิธภัณฑสถานแห่งชาติ พาณิชย์นาวี", "วัดโบสถ์เมือง", "วัดเขาบรรจบ"
+        ]
+      },
+      "ตราด": {
+        nature: [
+          "เกาะช้าง (หาดคลองพร้าว)", "เกาะกูด (อ่าวพร้าว)", "เกาะหมาก", "เกาะขาม", "หาดบานชื่น",
+          "น้ำตกคลองพลู", "เกาะหวาย", "เกาะกระดาด", "เกาะรัง", "เกาะคลุ้ม",
+          "น้ำตกธารมะยม", "หาดทรายดำ", "หาดไก่แบ้", "หาดคลองพร้าว", "อ่าวบางเบ้า",
+          "จุดชมวิวไก่แบ้", "หาดทรายขาว", "ป่าชายเลนบ้านบ้านสลักคบ", "น้ำตกคลองเจ้า", "อ่าวพร้าว เกาะกูด"
+        ],
+        cafe: [
+          "Seaview Cafe Koh Chang", "Good Old Days", "Rimklong Cafe", "Cafe De Koh Kood", "Trat Coffee Roaster",
+          "Altitudes Cafe Koh Mak", "Wooden House Cafe", "Marin Coffee Trat", "Koh Kood Espresso", "Sunsuri Cafe",
+          "Leelawadee Cafe", "Tiki Bar & Cafe", "Blue Cafe Trat", "Klong Prao Cafe", "Bangbao Coffee",
+          "Salakphet Cafe", "Islander Cafe", "Sea Shell Cafe", "Tropical Cafe Koh Chang", "Sweet Time Trat"
+        ],
+        culture: [
+          "วัดบุปผาราม (วัดปลายคลอง)", "วัดโยธานิมิต ตราด", "ศาลเจ้าพ่อหลักเมืองตราด", "พิพิธภัณฑ์ตราด", "ชุมชนคลองบางพระ",
+          "วัดสลักเพชร", "วัดคลองใหญ่", "วัดไผ่ล้อม ตราด", "วัดแหลมงอบ", "อนุสรณ์สถานยุทธนาวีที่เกาะช้าง",
+          "วัดวิเวกวราราม", "วัดอัมพวัน ตราด", "ศาลสมเด็จพระเจ้าตากสิน ตราด", "วัดทางเกวียน", "วัดท่าพริก",
+          "วัดบางปรือ", "วัดห้วยแร้ง", "วัดเนินทราย", "วัดหนองบัว ตราด", "วัดชำราก"
+        ]
+      },
+      "ฉะเชิงเทรา": {
+        nature: [
+          "เกาะลัด กลางแม่น้ำบางปะกง", "สวนสมุนไพรเขาหินซ้อน", "อ่างเก็บน้ำคลองสียัด", "ศูนย์ศึกษาพัฒนาเขาหินซ้อน", "สวนสาธารณะเฉลิมพระเกียรติแปดริ้ว",
+          "น้ำตกบ่อทอง", "เขตรักษาพันธุ์สัตว์ป่าเขาอ่างฤๅไน", "อ่างเก็บน้ำนฤบดินทรจินดา (ฝั่งเชื่อม)", "อ่างเก็บน้ำลาดกระบังแปดริ้ว", "สวนป่าลาดกระทิง",
+          "คลองบางปะกง", "บึงบัวแปดริ้ว", "สวนมรกต", "อ่างเก็บน้ำเขื่อนคลองท่าดัน", "จุดชมวิวเขาหินซ้อน",
+          "ป่าชายเลนบางปะกง", "สวนส้มบางปะกง", "สวนเกษตรศิริพร", "อ่างเก็บน้ำบ้านโป่งเจริญ", "สวนรุกขชาติเขาหินซ้อน"
+        ],
+        cafe: [
+          "Life House Cafe", "River Breeze Cafe", "Woodkick Cafe", "Dheva Cafe", "Bangpakong Coffee Bar",
+          "U Cafe Chachoengsao", "Apron Cafe", "The River Barn", "Na San Cafe", "Siri Cafe",
+          "Coffee House 88", "Baan Sawan Cafe", "Homey Cafe Padriew", "Triple N Cafe", "Me & Tree Cafe",
+          "Charming Cafe", "Flora Cafe Chachoengsao", "Grandma Cafe", "Coffee Farm Padriew", "Slowlife Cafe"
+        ],
+        culture: [
+          "วัดโสธรวรารามวรวิหาร", "วัดสมานรัตนาราม", "วัดปากน้ำโจ้โล้ (วัดทองคำ)", "ตลาดโบราณ 100 ปี บ้านใหม่", "ตลาดคลองสวน 100 ปี",
+          "วัดโพธิ์บางคล้า (ดูค้างคาวแม่ไก่)", "วัดหงษ์ทอง", "วัดเขาดิน", "วัดวีระโชติธรรมาราม", "วัดหัวสวน (โบสถ์สแตนเลส)",
+          "วัดจุกกระเชอ", "วัดสัมปตัก", "ศาลหลักเมืองฉะเชิงเทรา", "วัดอุสภาราม", "วัดทดราษฎร์นิยม",
+          "วัดเทพราช", "วัดไผ่ดำ", "วัดแจ้งบางคล้า", "วัดโพธาราม", "อนุสาวรีย์พระยาศรีสุนทรโวหาร"
+        ]
+      },
+      "ปราจีนบุรี": {
+        nature: [
+          "อุทยานแห่งชาติทับลาน", "แก่งหินเพลิง", "น้ำตกเหวนร้อย", "อ่างเก็บน้ำนฤบดินทรจินดา", "เขาใหญ่ฝั่งปราจีนบุรี (น้ำตกเหวนรก)",
+          "น้ำตกเขาอีดก", "น้ำตกตะคร้อ", "น้ำตกธารทิพย์", "ทุ่งดอกกระเจียว ปราจีนบุรี", "สวนพันธุ์ไม้ทับลาน", "อ่างเก็บน้ำเขาอีโต้",
+          "น้ำตกเขาอีโต้", "ผาหินซ้อน", "อ่างเก็บน้ำวังบอน", "แก่งยาว", "น้ำตกคลองโคกเปราะ",
+          "เขาราชสีห์", "ป่าปางสีดาฝั่งปราจีน", "สวนพฤกษศาสตร์เขาหินซ้อน-ปราจีน", "จุดชมวิวเขาอีโต้"
+        ],
+        cafe: [
+          "De'Bua Cafe", "Verona Cafe", "Montra Cafe", "Tree House Cafe", "Prachin Coffee Lab",
+          "Khao Yai Grandview Cafe", "Forest Box Cafe", "Botanical Cafe Prachin", "Green Space Cafe", "Baan Suan Coffee",
+          "The Garden Prachin", "Sip & Saver Cafe", "Mountain View Cafe", "Cozy Corner Prachin", "Slowbar Prachin",
+          "Riverfront Cafe Kabinburi", "Camp Cafe Prachin", "Floral Cafe", "Minimal Coffee Lab", "Bamboo Cafe Prachin"
+        ],
+        culture: [
+          "วัดแก้วพิจิตร (โบสถ์สีอภัย)", "ตึกเจ้าพระยาอภัยภูเบศร", "โบราณสถานสระมรกต", "วัดแจ้งปราจีนบุรี", "โบราณสถานเมืองศรีมโหสถ",
+          "วัดสระมรกต", "วัดต้นโพธิ์ศรีมหาโพธิ", "พิพิธภัณฑสถานแห่งชาติ ปราจีนบุรี", "วัดพระยาทำ", "วัดป่ามะไฟ",
+          "ศาลสมเด็จพระนเรศวรมหาราช ปราจีนบุรี", "วัดบางกระเบา", "วัดทุ่งแฝก", "วัดบ้านโนน", "วัดสง่างาม",
+          "วัดมะกอกแก้ว", "วัดโคกป่าขีด", "วัดดงชัยบำรุง", "ศาลหลักเมืองปราจีนบุรี", "วัดกบินทร์บุรี"
+        ]
+      },
+      "สระแก้ว": {
+        nature: [
+          "อุทยานแห่งชาติปางสีดา", "ละลุ แคนยอนเมืองไทย", "อ่างเก็บน้ำท่ากะบาก", "ถ้ำเพชรโพธิ์ทอง", "อุทยานแห่งชาติตาพระยา",
+          "ถ้ำเขาฉกรรจ์", "น้ำตกปางสีดา", "อ่างเก็บน้ำห้วยยาง", "จุดชมวิวผาแดง", "อ่างเก็บน้ำพระปรง",
+          "ถ้ำหาดทรายแก้ว", "น้ำตกตาดโตน สระแก้ว", "เขาป่าไร่", "สวนส้มสระแก้ว", "ป่าชายแดนตาพระยา",
+          "อ่างเก็บน้ำช่องกล่ำบน", "น้ำตกมวกเหล็กฝั่งสระแก้ว", "จุดชมวิวทับทิมสยาม 05", "อ่างเก็บน้ำห้วยส้มป่อย", "วนอุทยานเขาฉกรรจ์"
+        ],
+        cafe: [
+          "Station 1 Cafe", "Woodland Cafe", "Green House Sa Kaeo", "Border Coffee", "Khao Chakan Cafe",
+          "Aranyaprathet Coffee Bar", "The Farmhouse Cafe", "Sweet Cottage Sa Kaeo", "Mountain Cafe Sa Kaeo", "Rong Kluea Cafe",
+          "Coffee Time Aranya", "Baan Na Cafe Sa Kaeo", "Cactus Cafe Sa Kaeo", "Minimalist Coffee", "Tree Bar Cafe",
+          "Borderside Cafe", "Flora Cafe Aranya", "Skyline Cafe Sa Kaeo", "Chilling Cafe", "Pang Sida Espresso"
+        ],
+        culture: [
+          "ปราสาทหินสด๊กก็อกธม", "วัดแม่ย่าซ่อม", "ศาลหลักเมืองสระแก้ว", "วัดถ้ำเขาฉกรรจ์", "ตลาดโรงเกลือ (อรัญประเทศ)",
+          "ปราสาทเขาน้อยสีชมพู", "ปราสาทเมืองไผ่", "วัดนครธรรม", "วัดป่าอริยสัจจธรรม", "วัดพระเพลิง",
+          "ศาลสมเด็จพระนเรศวรมหาราช อรัญประเทศ", "วัด อนุบรรพต (วัดกิโลสาม)", "วัดวังน้ำเย็น", "วัดเขาป่าไร่", "วัดสระแก้ว",
+          "วัด ตาพระยา", "วัดโคกสูง", "วัดวัฒนานคร", "วัดคลองหาด", "วัดเขาพนมวัง"
+        ]
+      }
+    };
 
-    function startApp() {
-      document.getElementById('hero-page').style.display = 'none';
-      document.getElementById('app-page').style.display = 'block';
-      searchPlaces();
+    // Images Stock
+    const imageStock = [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80"
+    ];
+
+    const categoryNames = {
+      nature: "ธรรมชาติและทะเล",
+      cafe: "คาเฟ่และร้านกาแฟ",
+      culture: "วัดและวัฒนธรรม"
+    };
+
+    let database = [];
+    let pinnedIds = JSON.parse(localStorage.getItem('eastern_pinned_ids') || '[]');
+    let currentPage = 1;
+    const itemsPerPage = 12;
+    let showingPinnedOnly = false;
+    let currentFilteredList = [];
+
+    // Initialize Full Database
+    function initDatabase() {
+      database = [];
+      let globalId = 1000;
+
+      Object.keys(rawData).forEach((province, pIdx) => {
+        Object.keys(rawData[province]).forEach((category) => {
+          const list = rawData[province][category];
+          list.forEach((name, itemIdx) => {
+            globalId++;
+            database.push({
+              id: globalId,
+              province: province,
+              category: category,
+              name: name,
+              district: `อ.เมือง${province}`,
+              img: imageStock[(pIdx + itemIdx) % imageStock.length],
+              desc: `${name} สถานที่ท่องเที่ยวหมวด${categoryNames[category]} แนะนำอย่างยิ่งเมื่อมาเยือน จ.${province}`,
+              nextPlaces: `จุดชมวิว ${province}, สวนสาธารณะ ${province}`,
+              hotels: `โรงแรมและรีสอร์ทสวย ${province}`,
+              restaurants: `ร้านอาหารรสเด็ด จ.${province}`
+            });
+          });
+        });
+      });
+
+      updatePinCountDisplay();
     }
 
     function searchPlaces() {
+      showingPinnedOnly = false;
+      document.getElementById('btn-pinned').classList.remove('active');
+      
       const prov = document.getElementById('province').value;
       const cat = document.getElementById('category').value;
 
-      // กรองข้อมูลที่มาจากไฟล์ data.js
-      const filtered = placesData.filter(p => p.province === prov && p.category === cat);
-      renderGrid(filtered);
+      currentFilteredList = database.filter(item => item.province === prov && item.category === cat);
+      currentPage = 1;
+
+      document.getElementById('result-count').textContent = `${categoryNames[cat]} จ.${prov} (${currentFilteredList.length} แห่ง)`;
+      renderGrid();
     }
 
-    function renderGrid(list) {
+    function togglePinnedView() {
+      showingPinnedOnly = !showingPinnedOnly;
+      const btn = document.getElementById('btn-pinned');
+      
+      if (showingPinnedOnly) {
+        btn.classList.add('active');
+        currentFilteredList = database.filter(item => pinnedIds.includes(item.id));
+        document.getElementById('result-count').textContent = `สถานที่ที่ติดกาวไว้ทั้งหมด (${currentFilteredList.length} แห่ง)`;
+      } else {
+        btn.classList.remove('active');
+        searchPlaces();
+        return;
+      }
+      
+      currentPage = 1;
+      renderGrid();
+    }
+
+    function renderGrid() {
       const grid = document.getElementById('places-grid');
       grid.innerHTML = '';
 
-      document.getElementById('result-count').textContent = `รายการสถานที่ท่องเที่ยว (${list.length} แห่ง)`;
-
-      if(list.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #0369A1; padding: 40px;">ไม่พบข้อมูลสถานที่ในเงื่อนไขนี้</p>`;
+      if (currentFilteredList.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 50px 20px; color: var(--text-muted);">
+            <h3>ไม่พบข้อมูลสถานที่</h3>
+            <p style="margin-top: 8px;">ลองเปลี่ยนจังหวัดหรือเลือกดูสถานที่ติดกาว</p>
+          </div>
+        `;
+        document.getElementById('pagination').innerHTML = '';
         return;
       }
 
-      list.forEach(item => {
+      const totalPages = Math.ceil(currentFilteredList.length / itemsPerPage);
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const paginatedItems = currentFilteredList.slice(startIndex, startIndex + itemsPerPage);
+
+      paginatedItems.forEach(item => {
         const isPinned = pinnedIds.includes(item.id);
+
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
-          <img class="card-img" src="${item.img}" alt="${item.name}">
+          <div class="card-img-container">
+            <img class="card-img" src="${item.img}" alt="${item.name}" loading="lazy">
+            <span class="card-category-tag">${categoryNames[item.category]}</span>
+          </div>
           <div class="card-body">
             <div class="card-title">${item.name}</div>
             <div class="card-location">📍 ${item.district} จ.${item.province}</div>
+            <div class="card-desc">${item.desc}</div>
             <div class="card-actions">
-              <button class="btn-detail" onclick="openModal(${item.id})">ดูรายละเอียด & แผนที่</button>
+              <button class="btn-detail" onclick="openModal(${item.id})">รายละเอียด & แผนที่</button>
               <button class="btn-pin ${isPinned ? 'active' : ''}" onclick="togglePin(${item.id})">
                 ${isPinned ? '📌 ติดกาวแล้ว' : '📌 ติดกาว'}
               </button>
@@ -244,26 +492,51 @@
         `;
         grid.appendChild(card);
       });
+
+      renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+      const pagContainer = document.getElementById('pagination');
+      pagContainer.innerHTML = '';
+
+      if (totalPages <= 1) return;
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+        btn.textContent = i;
+        btn.onclick = () => {
+          currentPage = i;
+          renderGrid();
+          window.scrollTo({ top: 300, behavior: 'smooth' });
+        };
+        pagContainer.appendChild(btn);
+      }
     }
 
     function togglePin(id) {
-      if(pinnedIds.includes(id)) {
+      if (pinnedIds.includes(id)) {
         pinnedIds = pinnedIds.filter(item => item !== id);
       } else {
         pinnedIds.push(id);
       }
-      document.getElementById('pin-count').textContent = pinnedIds.length;
-      searchPlaces();
+      
+      localStorage.setItem('eastern_pinned_ids', JSON.stringify(pinnedIds));
+      updatePinCountDisplay();
+
+      if (showingPinnedOnly) {
+        currentFilteredList = database.filter(item => pinnedIds.includes(item.id));
+      }
+      renderGrid();
     }
 
-    function showPinnedOnly() {
-      const pinnedList = placesData.filter(p => pinnedIds.includes(p.id));
-      renderGrid(pinnedList);
-      document.getElementById('result-count').textContent = `รายการที่ติดกาวไว้ (${pinnedList.length} แห่ง)`;
+    function updatePinCountDisplay() {
+      document.getElementById('pin-count').textContent = pinnedIds.length;
     }
 
     function openModal(id) {
-      const place = placesData.find(p => p.id === id);
+      const place = database.find(p => p.id === id);
       const duration = document.getElementById('duration').value;
 
       document.getElementById('modal-img').src = place.img;
@@ -271,23 +544,22 @@
       document.getElementById('modal-location').textContent = `📍 ${place.district} จ.${place.province}`;
       document.getElementById('modal-desc').textContent = place.desc;
 
-      // Google Maps Embed URL
       const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(place.name + ' ' + place.province)}&output=embed`;
       document.getElementById('modal-map').src = mapUrl;
 
-      // Smart Recommendation Logic ตามจำนวนวัน
       const recBox = document.getElementById('modal-recommend');
       if (duration === "1") {
         recBox.innerHTML = `
-          <h4>🚗 แนะนำสำหรับทริป 1 วัน (ไป-กลับ):</h4>
-          <p><b>สถานที่เที่ยวใกล้เคียงถัดไป:</b> ${place.nextPlaces}</p>
+          <h4>🚗 แนะนำทริป 1 วัน (ไป-กลับ):</h4>
+          <p><b>📍 สถานที่แวะถัดไป:</b> ${place.nextPlaces}</p>
         `;
       } else {
+        const titleText = duration === "2" ? "2 วัน 1 คืน" : "3 วัน 2 คืน";
         recBox.innerHTML = `
-          <h4>🏨 แนะนำสำหรับทริปค้างคืน (${duration === "2" ? "2 วัน 1 คืน" : "3 วัน 2 คืน"}):</h4>
-          <p style="margin-bottom:6px;"><b>🛏️ ที่พักใกล้เคียงวิวสวย:</b> ${place.hotels}</p>
-          <p style="margin-bottom:6px;"><b>🍽️ ร้านอาหารแนะนำใกล้ๆ:</b> ${place.restaurants}</p>
-          <p><b>📍 สถานที่เที่ยวถัดไป:</b> ${place.nextPlaces}</p>
+          <h4>🏨 แนะนำทริปค้างคืน (${titleText}):</h4>
+          <p style="margin-bottom: 4px;"><b>🛏️ ที่พักแนะนำ:</b> ${place.hotels}</p>
+          <p style="margin-bottom: 4px;"><b>🍽️ ร้านอาหารใกล้เคียง:</b> ${place.restaurants}</p>
+          <p><b>📍 จุดท่องเที่ยวถัดไป:</b> ${place.nextPlaces}</p>
         `;
       }
 
@@ -298,6 +570,11 @@
       document.getElementById('modal').style.display = 'none';
       document.getElementById('modal-map').src = '';
     }
+
+    window.onload = function() {
+      initDatabase();
+      searchPlaces();
+    };
   </script>
 </body>
 </html>

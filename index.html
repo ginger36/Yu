@@ -1,583 +1,581 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
- <head>
-  <script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260930-05-8966983","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YACgEZulLoA,0","Arial Narrow":"YAGyDvJ_4Ts,0","Arial Rounded MT Bold":"YAFcfoaHu-s,0","Arial":"YAGyDvJ_4Ts,0","Avenir Next":"YAFcfmNq6UY,0","Baloo 2":"YADK30bC6HQ,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Broken Glyph":"YADZ-exUkv0,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAFcfvtOAUY,1","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Georgia":"YAGzXkO0pEM,0","Ghost Mono":"YAHQutsX00Q,0","Hanken Grotesk":"YAFcfhwp99E,0","Helvetica Neue":"YAFcf6CtJfI,0","Helvetica":"YAFcf6CtJfI,0","IBM Plex Mono":"YAFdJkmvhGI,0","Impact":"YAFcfnjI7Vk,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YADK3zbC6RM,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Oswald":"YACgEQY10lw,0","Pacifico":"YADLjORQ1u4,0","Phantom Sans":"YAFdJvgJ5TU,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAGvf3_u0_Q,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Source Serif 4":"YACgEfdj394,0","Space Grotesk":"YADZ-dYEmhg,0","Space Mono":"YADW1-vpsoc,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","UV Display":"YAEdVfSSpYo,0","UV Sans":"YAFdJvgJ5TU,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YAD1aFjegN8,0","ui-sans-serif":"YACkoD1yZN0,0"}}');</script>
-  <script src="/_sdk/6542d56fbfe7a3eb.telemetry_sdk.js" integrity="sha512-ECdM0nK7EkwDuOqho2qxgyRQXyBHk9hZqRKMBr+Xsu6zjeHlt+qkO2N2YRiHN7Kg4e1fEHDhjIp4bGJYVypv1g=="></script>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trip Box – ตู้จัดทริปเที่ยวภาคตะวันออก</title>
+  <title>East Trip Box - สุ่มทริปเที่ยวภาคตะวันออก</title>
+  <!-- Google Fonts: Prompt & Kanit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
+
   <style>
     :root {
-      --primary: #0284c7;
-      --primary-hover: #0369a1;
-      --primary-light: #e0f2fe;
-      --primary-glow: rgba(2, 132, 199, 0.15);
-      --navy: #0f172a;
-      --ink: #334155;
-      --muted: #64748b;
-      --line: #e2e8f0;
-      --bg: #f8fafc;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --accent-yellow: #f59e0b;
+      --bg-cream: #FBF9F1;
+      --soft-blue: #E5E1DA;
+      --pastel-blue: #89CFF0;
+      --sky-blue: #0284C7;
+      --deep-navy: #1E293B;
+      --accent-yellow: #FDE047;
+      --card-bg: #FFFFFF;
+      --text-main: #334155;
+      --text-sub: #64748B;
+      --radius-xl: 28px;
+      --radius-lg: 18px;
+      --shadow-soft: 0 10px 30px rgba(137, 207, 240, 0.25);
     }
 
-    * { 
-      box-sizing: border-box; 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      margin: 0;
-      width: 100%;
-      font-family: "Prompt", "Plus Jakarta Sans", sans-serif;
-      color: var(--ink);
-      background-color: var(--bg);
-      -webkit-font-smoothing: antialiased;
+      font-family: 'Prompt', sans-serif;
+      background-color: #E2E8F0;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 10px;
     }
 
-    .app-shell {
+    /* Mobile Container Frame */
+    .mobile-wrapper {
       width: 100%;
-      min-height: 100vh;
-      background: 
-        radial-gradient(circle at 85% 10%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 10% 90%, rgba(14, 165, 233, 0.08) 0%, transparent 45%),
-        #f8fafc;
+      max-width: 414px;
+      height: 870px;
+      max-height: 94vh;
+      background: var(--bg-cream);
+      border-radius: 40px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 12px #334155;
+      overflow: hidden;
+      position: relative;
       display: flex;
       flex-direction: column;
     }
 
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 3rem 1.5rem;
-      background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(224,242,254,0.4) 100%);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.6);
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-image {
-      position: absolute;
-      inset: 0;
+    /* Top Notch & Bar */
+    .notch-bar {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: .12;
-      mix-blend-mode: multiply;
-      pointer-events: none;
+      height: 30px;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 8px;
+      z-index: 100;
+    }
+    .notch {
+      width: 120px;
+      height: 18px;
+      background: #334155;
+      border-radius: 20px;
     }
 
-    .bubble {
-      position: absolute;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(56, 189, 248, 0.05));
-      backdrop-filter: blur(4px);
-      pointer-events: none;
+    .app-header {
+      padding: 12px 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #F1F5F9;
+    }
+    .app-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.4rem;
+      color: var(--sky-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
-    .view {
+    /* Scrollable Main Content */
+    .content-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      scroll-behavior: smooth;
+    }
+
+    .content-container::-webkit-scrollbar {
       display: none;
     }
 
-    .view.active { 
-      display: block; 
-      animation: fadeInUp .4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* Section Cards */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      border: 2px solid #F1F5F9;
     }
 
-    @keyframes fadeInUp {
-      from { 
-        opacity: 0; 
-        transform: translateY(16px); 
-      }
-      to { 
-        opacity: 1; 
-        transform: translateY(0); 
-      }
+    .section-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.05rem;
+      color: var(--deep-navy);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .panel { 
-      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.07), 0 0 1px 1px rgba(15, 23, 42, 0.03); 
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(12px);
-    }
-
-    .step-dot {
-      width: 36px;
-      height: 36px;
+    /* Filter Grid Buttons */
+    .filter-grid {
       display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: #f1f5f9;
-      color: var(--muted);
-      font-size: .9rem;
-      font-weight: 700;
-      transition: all .3s ease;
-      border: 2px solid transparent;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
     }
-
-    .step-line {
-      height: 3px;
-      flex: 1;
-      margin-top: 17px;
-      background: #e2e8f0;
-      border-radius: 99px;
-      transition: background-color .3s ease;
-    }
-
-    .step.active .step-dot {
-      color: #fff;
-      background: var(--primary);
-      box-shadow: 0 0 0 4px var(--primary-glow);
-    }
-
-    .step.done .step-dot {
-      color: #fff;
-      background: var(--primary);
-    }
-
-    .step.done + .step-line { 
-      background: var(--primary); 
-    }
-
-    .choice {
-      position: relative;
-      min-height: 110px;
-      border: 2px solid var(--line);
-      border-radius: 20px;
-      background: #fff;
-      transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+    .filter-btn {
+      background: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 10px;
+      font-family: 'Prompt', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-main);
       cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .filter-btn.selected {
+      background: #E0F2FE;
+      border-color: var(--sky-blue);
+      color: var(--sky-blue);
+      font-weight: 600;
     }
 
-    .choice:hover {
-      border-color: #38bdf8;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 24px -6px var(--primary-glow);
-    }
-
-    .choice.selected {
-      border-color: var(--primary);
-      background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
-      box-shadow: 0 12px 20px -8px var(--primary-glow);
-    }
-
-    .choice .tick {
-      opacity: 0;
-      transform: scale(.5);
-      transition: all .2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .choice.selected .tick {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .place-card {
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: #fff;
-      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
-      transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .place-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.1);
-    }
-
-    .place-card.saved {
-      border-color: var(--accent-yellow);
-      box-shadow: 0 0 0 2px var(--accent-yellow), 0 12px 24px -6px rgba(245, 158, 11, 0.2);
-    }
-
-    .place-photo {
+    /* Random Action Button */
+    .btn-random {
       width: 100%;
-      height: 190px;
+      background: linear-gradient(135deg, #38BDF8, #0284C7);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 16px;
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 0.1s ease, box-shadow 0.2s ease;
+      margin-top: 8px;
+    }
+    .btn-random:active {
+      transform: scale(0.97);
+    }
+
+    /* Result Card Display */
+    .result-box {
+      display: none;
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      border: 2px solid #E0F2FE;
+      animation: popIn 0.4s ease;
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .result-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: 200px;
+    }
+    .result-img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      background: #e2e8f0;
+    }
+    .result-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--sky-blue);
     }
 
-    .result-card { display: none; }
-    .result-card.is-match { 
-      display: block; 
-      animation: fadeInUp .4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+    .result-details {
+      padding: 18px;
+    }
+    .place-name {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.3rem;
+      color: var(--deep-navy);
+      margin-bottom: 4px;
+    }
+    .place-province {
+      font-size: 0.85rem;
+      color: var(--sky-blue);
+      font-weight: 500;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .place-desc {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      line-height: 1.5;
+      margin-bottom: 14px;
     }
 
-    button {
-      transition: all .2s ease;
+    /* Budget Estimator Table */
+    .budget-card {
+      background: #F0F9FF;
+      border-radius: var(--radius-lg);
+      padding: 12px;
+      margin-top: 12px;
+    }
+    .budget-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--deep-navy);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .budget-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+    .budget-item {
+      background: white;
+      padding: 8px 4px;
+      border-radius: 12px;
+      border: 1px solid #BAE6FD;
+    }
+    .budget-day {
+      font-size: 0.7rem;
+      color: var(--text-sub);
+    }
+    .budget-price {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--sky-blue);
     }
 
-    button:focus-visible {
-      outline: 3px solid #38bdf8;
-      outline-offset: 2px;
+    /* Hotel Zone Recommendation */
+    .hotel-zone {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      border-radius: var(--radius-lg);
+      font-size: 0.8rem;
+      color: #92400E;
     }
 
-    .toast {
-      opacity: 0;
-      transform: translate(-50%, 20px) scale(0.95);
-      transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
+    /* Bottom Navigation Bar */
+    .bottom-nav {
+      height: 60px;
+      background: white;
+      border-top: 1px solid #F1F5F9;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-bottom: 10px;
     }
-
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0) scale(1);
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--text-sub);
+      text-decoration: none;
+    }
+    .nav-item.active {
+      color: var(--sky-blue);
+      font-weight: 600;
     }
   </style>
-  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
-  <script src="/_sdk/6c2ecc939521f244.data_sdk.js" type="text/javascript" integrity="sha512-gRx8s+XsZDN6mSIQu2sivLZysbV0WHhb5kXNUWlgVb5lCMU1foJYukyMEDPv8Tnoocb8iwqB4XdRrWc7oEGzIQ=="></script>
-  <script src="/_sdk/6e4b845d05dd79e4.editing_sdk.js" type="text/javascript" integrity="sha512-nfDAoBO2Sn6o6rLYgdnzgUs0nZfi4v1NV7M2ioocHZ6oj+ZnIEUmJGLGqFu2dnCue3Bjs5kWMae4qsFt05LfIA=="></script>
-  <script src="/_sdk/ddcab3e45959c817.resizing_sdk.js" type="text/javascript" integrity="sha512-VAviUKfZVzugWBSeULYjSljTX+nb84wc6Zzbx5GQaQgh6X2ISSjXi8eIiCDGdwDh10esJMY0+QFQgUy9NcrTlQ=="></script>
- </head>
- <body data-template-id="__page-root">
-  <div class="app-shell">
-   <header class="w-full">
-    <section id="welcome-view" class="hero view active" data-template-id="hero-section">
-     <img data-template-id="hero-image" class="canva-image hero-image" loading="lazy"> 
-     <span class="bubble right-[8%] top-[15%] h-32 w-32"></span> 
-     <span class="bubble bottom-[10%] left-[5%] h-20 w-20"></span>
-     
-     <div class="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center text-center px-4 py-12 md:py-20">
-      <p data-template-id="hero-badge" class="canva-tag mb-4 inline-flex items-center gap-1.5 rounded-full bg-sky-100 px-4 py-1.5 text-xs md:text-sm font-semibold text-sky-700 border border-sky-200/60 shadow-sm"></p>
-      <h1 data-template-id="hero-title" class="canva-text m-0 max-w-3xl text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl leading-tight"></h1>
-      <p data-template-id="hero-description" class="canva-text mt-4 max-w-2xl text-base text-slate-600 md:text-lg leading-relaxed"></p>
-      
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-       <button id="start-button" data-template-id="start-button" type="button" class="canva-button rounded-2xl bg-sky-600 px-8 py-4 font-semibold text-white shadow-lg shadow-sky-500/25 hover:bg-sky-700 hover:shadow-xl hover:shadow-sky-500/30 active:scale-95 text-base md:text-lg"></button>
-       <div class="rounded-2xl border border-white/80 bg-white/70 px-5 py-3.5 text-sm font-medium text-slate-600 backdrop-blur-md shadow-sm">
-        <span data-template-id="welcome-note" class="canva-text"></span>
-       </div>
-      </div>
-     </div>
-    </section>
-   </header>
+</head>
+<body>
 
-   <main class="mx-auto w-full max-w-5xl px-4 py-8 md:px-8 md:py-12 flex-1">
-    <section id="planner-panel" class="panel hidden rounded-3xl bg-white/90 p-6 md:p-10" aria-live="polite">
-     <div class="mb-8 flex items-center justify-between gap-4 border-b border-slate-100 pb-6">
-      <div>
-       <p data-template-id="planner-eyebrow" class="canva-text m-0 text-xs font-bold uppercase tracking-wider text-sky-600"></p>
-       <h2 data-template-id="planner-title" class="canva-text mt-1 text-2xl font-bold text-slate-900 md:text-3xl"></h2>
-      </div>
-      <div class="rounded-full bg-sky-50 px-4 py-1.5 text-xs font-bold text-sky-600 border border-sky-100">
-       <span id="step-count">1 / 3</span>
-      </div>
-     </div>
+  <!-- Mobile Frame Container -->
+  <div class="mobile-wrapper">
+    <!-- Notch -->
+    <div class="notch-bar"><div class="notch"></div></div>
 
-     <nav aria-label="ขั้นตอนการจัดทริป" class="mb-10 max-w-xl mx-auto">
-      <ol class="flex items-start">
-       <li class="step active flex flex-1 flex-col items-center text-center" data-indicator="1">
-        <span class="step-dot">1</span> 
-        <span data-template-id="step-province" class="canva-text mt-2.5 text-xs font-semibold text-slate-600"></span>
-       </li>
-       <li class="step-line"></li>
-       <li class="step flex flex-1 flex-col items-center text-center" data-indicator="2">
-        <span class="step-dot">2</span> 
-        <span data-template-id="step-style" class="canva-text mt-2.5 text-xs font-semibold text-slate-600"></span>
-       </li>
-       <li class="step-line"></li>
-       <li class="step flex flex-1 flex-col items-center text-center" data-indicator="3">
-        <span class="step-dot">3</span> 
-        <span data-template-id="step-result" class="canva-text mt-2.5 text-xs font-semibold text-slate-600"></span>
-       </li>
-      </ol>
-     </nav>
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="app-title">
+        <i data-lucide="compass"></i> East Trip Box
+      </div>
+    </header>
 
-     <!-- Step 1: Province Selection -->
-     <section id="view-province" class="view active" aria-labelledby="province-heading">
-      <div class="text-center md:text-left">
-       <h3 id="province-heading" data-template-id="province-heading" class="canva-text text-xl font-bold text-slate-900"></h3>
-       <p data-template-id="province-help" class="canva-text mt-1 text-sm text-slate-500"></p>
-      </div>
-      
-      <div class="mt-6 grid gap-4 sm:grid-cols-3">
-       <button type="button" class="choice p-5 text-left" data-group="province" data-value="ชลบุรี" aria-pressed="false"> 
-        <span class="tick absolute right-3.5 top-3.5 rounded-full bg-sky-600 p-1 text-white shadow-sm"><i data-lucide="check" class="h-3.5 w-3.5"></i></span> 
-        <span class="text-3xl block mb-2">🌴</span> 
-        <span data-template-id="province-chonburi" class="canva-text font-bold text-slate-800 text-lg"></span> 
-       </button> 
-       
-       <button type="button" class="choice p-5 text-left" data-group="province" data-value="ระยอง" aria-pressed="false"> 
-        <span class="tick absolute right-3.5 top-3.5 rounded-full bg-sky-600 p-1 text-white shadow-sm"><i data-lucide="check" class="h-3.5 w-3.5"></i></span> 
-        <span class="text-3xl block mb-2">🌊</span> 
-        <span data-template-id="province-rayong" class="canva-text font-bold text-slate-800 text-lg"></span> 
-       </button> 
-       
-       <button type="button" class="choice p-5 text-left" data-group="province" data-value="ตราด" aria-pressed="false"> 
-        <span class="tick absolute right-3.5 top-3.5 rounded-full bg-sky-600 p-1 text-white shadow-sm"><i data-lucide="check" class="h-3.5 w-3.5"></i></span> 
-        <span class="text-3xl block mb-2">🏝️</span> 
-        <span data-template-id="province-trat" class="canva-text font-bold text-slate-800 text-lg"></span> 
-       </button>
-      </div>
-     </section>
+    <!-- Scrollable Content -->
+    <div class="content-container">
 
-     <!-- Step 2: Travel Style -->
-     <section id="view-style" class="view" aria-labelledby="style-heading">
-      <div class="text-center md:text-left">
-       <h3 id="style-heading" data-template-id="style-heading" class="canva-text text-xl font-bold text-slate-900"></h3>
-       <p data-template-id="style-help" class="canva-text mt-1 text-sm text-slate-500"></p>
-      </div>
-      
-      <div class="mt-6 grid gap-4 sm:grid-cols-2">
-       <button type="button" class="choice p-6 text-left" data-group="type" data-value="ทะเลและเกาะ" aria-pressed="false"> 
-        <span class="tick absolute right-4 top-4 rounded-full bg-sky-600 p-1 text-white shadow-sm"><i data-lucide="check" class="h-3.5 w-3.5"></i></span> 
-        <span class="text-3xl block mb-2">🏖️</span> 
-        <span data-template-id="type-sea" class="canva-text font-bold text-slate-800 text-lg block"></span> 
-        <span data-template-id="type-sea-help" class="canva-text mt-1 block text-xs text-slate-500 leading-relaxed"></span> 
-       </button> 
-       
-       <button type="button" class="choice p-6 text-left" data-group="type" data-value="ธรรมชาติและน้ำตก" aria-pressed="false"> 
-        <span class="tick absolute right-4 top-4 rounded-full bg-sky-600 p-1 text-white shadow-sm"><i data-lucide="check" class="h-3.5 w-3.5"></i></span> 
-        <span class="text-3xl block mb-2">🌿</span> 
-        <span data-template-id="type-nature" class="canva-text font-bold text-slate-800 text-lg block"></span> 
-        <span data-template-id="type-nature-help" class="canva-text mt-1 block text-xs text-slate-500 leading-relaxed"></span> 
-       </button>
-      </div>
-     </section>
-
-     <!-- Step 3: Result -->
-     <section id="view-result" class="view" aria-labelledby="result-heading">
-      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end border-b border-slate-100 pb-4">
-       <div>
-        <h3 id="result-heading" data-template-id="result-heading" class="canva-text text-xl font-bold text-slate-900"></h3>
-        <p data-template-id="result-help" class="canva-text mt-1 text-sm text-slate-500"></p>
-       </div>
-       <div id="summary" class="inline-flex items-center gap-2 rounded-xl bg-sky-50 border border-sky-100 px-4 py-2 text-sm font-semibold text-sky-700"></div>
-      </div>
-
-      <div id="results" class="mt-6 grid gap-6 md:grid-cols-2">
-       <article class="result-card place-card" data-place="bang-saen" data-province="ชลบุรี" data-type="ทะเลและเกาะ">
-        <img data-template-id="place-bang-saen-image" class="canva-image place-photo" loading="lazy">
-        <div class="p-6">
-         <p data-template-id="place-bang-saen-province" class="canva-text m-0 text-xs font-bold text-sky-600 uppercase tracking-wider"></p>
-         <h4 data-template-id="place-bang-saen-title" class="canva-text mt-1 text-xl font-bold text-slate-900"></h4>
-         <p data-template-id="place-bang-saen-description" class="canva-text mt-2.5 text-sm leading-relaxed text-slate-600"></p>
-         <span data-template-id="place-bang-saen-tag" class="canva-tag mt-4 inline-block rounded-lg bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600"></span> 
-         <button type="button" data-save="bang-saen" class="save-button mt-6 w-full rounded-xl px-4 py-3 text-sm font-semibold transition-all"> 
-          <span data-template-id="save-bang-saen" class="canva-text save-default"></span> 
-          <span data-template-id="saved-bang-saen" class="canva-text save-active hidden"></span> 
-         </button>
+      <!-- Step 1: Select Type -->
+      <div class="section-card">
+        <div class="section-title">
+          <i data-lucide="sparkles" style="color:#0284C7;"></i> เลือกสไตล์ที่ชอบ
         </div>
-       </article>
-
-       <article class="result-card place-card" data-place="koh-samet" data-province="ระยอง" data-type="ทะเลและเกาะ">
-        <img data-template-id="place-koh-samet-image" class="canva-image place-photo" loading="lazy">
-        <div class="p-6">
-         <p data-template-id="place-koh-samet-province" class="canva-text m-0 text-xs font-bold text-sky-600 uppercase tracking-wider"></p>
-         <h4 data-template-id="place-koh-samet-title" class="canva-text mt-1 text-xl font-bold text-slate-900"></h4>
-         <p data-template-id="place-koh-samet-description" class="canva-text mt-2.5 text-sm leading-relaxed text-slate-600"></p>
-         <span data-template-id="place-koh-samet-tag" class="canva-tag mt-4 inline-block rounded-lg bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600"></span> 
-         <button type="button" data-save="koh-samet" class="save-button mt-6 w-full rounded-xl px-4 py-3 text-sm font-semibold transition-all"> 
-          <span data-template-id="save-koh-samet" class="canva-text save-default"></span> 
-          <span data-template-id="saved-koh-samet" class="canva-text save-active hidden"></span> 
-         </button>
+        <div class="filter-grid" id="type-filters">
+          <button class="filter-btn selected" data-value="all"><i data-lucide="grid"></i> ทั้งหมด</button>
+          <button class="filter-btn" data-value="cafe"><i data-lucide="coffee"></i> คาเฟ่ชิลๆ</button>
+          <button class="filter-btn" data-value="sea"><i data-lucide="waves"></i> ทะเล & เกาะ</button>
+          <button class="filter-btn" data-value="nature"><i data-lucide="trees"></i> ภูเขา & น้ำตก</button>
+          <button class="filter-btn" data-value="culture"><i data-lucide="landmark"></i> โบราณ & วัด</button>
         </div>
-       </article>
-
-       <article class="result-card place-card" data-place="phlio" data-province="ระยอง" data-type="ธรรมชาติและน้ำตก">
-        <img data-template-id="place-phlio-image" class="canva-image place-photo" loading="lazy">
-        <div class="p-6">
-         <p data-template-id="place-phlio-province" class="canva-text m-0 text-xs font-bold text-sky-600 uppercase tracking-wider"></p>
-         <h4 data-template-id="place-phlio-title" class="canva-text mt-1 text-xl font-bold text-slate-900"></h4>
-         <p data-template-id="place-phlio-description" class="canva-text mt-2.5 text-sm leading-relaxed text-slate-600"></p>
-         <span data-template-id="place-phlio-tag" class="canva-tag mt-4 inline-block rounded-lg bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600"></span> 
-         <button type="button" data-save="phlio" class="save-button mt-6 w-full rounded-xl px-4 py-3 text-sm font-semibold transition-all"> 
-          <span data-template-id="save-phlio" class="canva-text save-default"></span> 
-          <span data-template-id="saved-phlio" class="canva-text save-active hidden"></span> 
-         </button>
-        </div>
-       </article>
-
-       <article class="result-card place-card" data-place="koh-chang" data-province="ตราด" data-type="ทะเลและเกาะ">
-        <img data-template-id="place-koh-chang-image" class="canva-image place-photo" loading="lazy">
-        <div class="p-6">
-         <p data-template-id="place-koh-chang-province" class="canva-text m-0 text-xs font-bold text-sky-600 uppercase tracking-wider"></p>
-         <h4 data-template-id="place-koh-chang-title" class="canva-text mt-1 text-xl font-bold text-slate-900"></h4>
-         <p data-template-id="place-koh-chang-description" class="canva-text mt-2.5 text-sm leading-relaxed text-slate-600"></p>
-         <span data-template-id="place-koh-chang-tag" class="canva-tag mt-4 inline-block rounded-lg bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600"></span> 
-         <button type="button" data-save="koh-chang" class="save-button mt-6 w-full rounded-xl px-4 py-3 text-sm font-semibold transition-all"> 
-          <span data-template-id="save-koh-chang" class="canva-text save-default"></span> 
-          <span data-template-id="saved-koh-chang" class="canva-text save-active hidden"></span> 
-         </button>
-        </div>
-       </article>
       </div>
 
-      <div id="empty-results" class="hidden mt-8 rounded-2xl border border-dashed border-slate-300 bg-slate-50/50 p-10 text-center">
-       <p data-template-id="empty-text" class="canva-text m-0 font-medium text-slate-600"></p>
+      <!-- Step 2: Select Province -->
+      <div class="section-card">
+        <div class="section-title">
+          <i data-lucide="map-pin" style="color:#0284C7;"></i> จังหวัดภาคตะวันออก
+        </div>
+        <div class="filter-grid" id="province-filters">
+          <button class="filter-btn selected" data-province="all">ทุกจังหวัด</button>
+          <button class="filter-btn" data-province="ชลบุรี">ชลบุรี</button>
+          <button class="filter-btn" data-province="ระยอง">ระยอง</button>
+          <button class="filter-btn" data-province="จันทบุรี">จันทบุรี</button>
+          <button class="filter-btn" data-province="ตราด">ตราด</button>
+          <button class="filter-btn" data-province="ฉะเชิงเทรา">ฉะเชิงเทรา</button>
+          <button class="filter-btn" data-province="นครนายก">นครนายก</button>
+          <button class="filter-btn" data-province="ปราจีนบุรี">ปราจีนบุรี</button>
+        </div>
       </div>
-     </section>
 
-     <!-- Bottom Navigation Buttons -->
-     <div class="mt-10 flex items-center justify-between gap-4 border-t border-slate-100 pt-6">
-      <button id="back-button" data-template-id="back-button" class="canva-button invisible rounded-xl border border-slate-200 bg-white px-5 py-2.5 font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 active:scale-95" type="button"></button> 
-      <button id="next-button" data-template-id="next-button" class="canva-button ml-auto rounded-xl bg-sky-600 px-6 py-2.5 font-semibold text-white shadow-lg shadow-sky-500/20 hover:bg-sky-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none" type="button" disabled></button> 
-      <button id="restart-button" data-template-id="restart-button" class="canva-button hidden ml-auto rounded-xl bg-sky-600 px-6 py-2.5 font-semibold text-white shadow-lg shadow-sky-500/20 hover:bg-sky-700 active:scale-95" type="button"></button>
-     </div>
-    </section>
-   </main>
+      <!-- Random Action Button -->
+      <button class="btn-random" id="btn-spin">
+        <i data-lucide="dices"></i> กดสุ่มที่เที่ยวกันเลย!
+      </button>
 
-   <footer class="mx-auto w-full max-w-5xl px-4 pb-8 text-right md:px-8">
-    <div class="inline-flex items-center rounded-xl border border-slate-200/80 bg-white/80 px-4 py-2.5 text-sm shadow-sm backdrop-blur-md">
-     <span data-template-id="saved-label" class="canva-text font-medium text-slate-600"></span> 
-     <span id="saved-count" class="ml-2 rounded-full bg-sky-100 px-2.5 py-0.5 text-xs font-bold text-sky-700" aria-live="polite">0</span>
+      <!-- Result Card Display -->
+      <div style="margin-top: 16px;">
+        <div class="result-box" id="result-box">
+          <div class="result-img-wrapper">
+            <img src="" id="res-img" class="result-img" alt="ภาพสถานที่จริง">
+            <span class="result-badge" id="res-cat">หมวดหมู่</span>
+          </div>
+
+          <div class="result-details">
+            <div class="place-name" id="res-title">ชื่อสถานที่</div>
+            <div class="place-province"><i data-lucide="map-pin" style="width: 14px;"></i> <span id="res-prov">จังหวัด</span></div>
+            <p class="place-desc" id="res-desc">รายละเอียดสถานที่บรรยายความสวยงามและไฮไลต์สำคัญ...</p>
+
+            <!-- Budget Info -->
+            <div class="budget-card">
+              <div class="budget-title"><i data-lucide="wallet" style="width: 16px; color:#0284C7;"></i> ค่าใช้จ่ายคร่าวๆ (ต่อคน)</div>
+              <div class="budget-grid">
+                <div class="budget-item">
+                  <div class="budget-day">1 วัน (เช้า-เย็น)</div>
+                  <div class="budget-price" id="b-1d">฿500</div>
+                </div>
+                <div class="budget-item">
+                  <div class="budget-day">2 วัน 1 คืน</div>
+                  <div class="budget-price" id="b-2d">฿1,800</div>
+                </div>
+                <div class="budget-item">
+                  <div class="budget-day">3 วัน 2 คืน</div>
+                  <div class="budget-price" id="b-3d">฿3,200</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Accommodation Zone Info -->
+            <div class="hotel-zone">
+              <strong><i data-lucide="bed" style="width:14px; vertical-align:middle;"></i> โซนที่พักแนะนำ:</strong>
+              <span id="res-hotel">แนะนำที่พักบริเวณใกล้เคียง</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-   </footer>
 
-   <!-- Toast Notification -->
-   <div id="toast" class="toast fixed bottom-6 left-1/2 z-50 flex items-center gap-2 rounded-2xl bg-slate-900/90 px-6 py-3.5 text-sm font-medium text-white shadow-2xl backdrop-blur-md border border-slate-700/50" aria-live="polite"></div>
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="#" class="nav-item active"><i data-lucide="dices"></i> สุ่มทริป</a>
+      <a href="#" class="nav-item"><i data-lucide="heart"></i> บันทึก</a>
+      <a href="#" class="nav-item"><i data-lucide="user"></i> โปรไฟล์</a>
+    </nav>
   </div>
 
   <script>
-    const state = {
-      step: 1,
-      province: "",
-      type: "",
-      saved: new Set()
-    };
-
-    const planner = document.getElementById("planner-panel");
-    const nextButton = document.getElementById("next-button");
-    const backButton = document.getElementById("back-button");
-    const restartButton = document.getElementById("restart-button");
-
-    function canAdvance() {
-      return state.step === 1 ? Boolean(state.province) : state.step === 2 ? Boolean(state.type) : true;
-    }
-
-    function notify(message) {
-      const toast = document.getElementById("toast");
-      toast.textContent = message;
-      toast.classList.add("show");
-      clearTimeout(window.toastTimer);
-      window.toastTimer = setTimeout(() => toast.classList.remove("show"), 2100);
-    }
-
-    function showPlanner() {
-      document.getElementById("welcome-view").classList.remove("active");
-      planner.classList.remove("hidden");
-      updatePlanner();
-      planner.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function renderResults() {
-      let matchCount = 0;
-
-      document.querySelectorAll(".result-card").forEach((card) => {
-        const matched = card.dataset.province === state.province && card.dataset.type === state.type;
-        card.classList.toggle("is-match", matched);
-        if (matched) matchCount += 1;
-      });
-
-      document.getElementById("summary").textContent = state.province + " · " + state.type;
-      document.getElementById("empty-results").classList.toggle("hidden", matchCount > 0);
-    }
-
-    function updatePlanner() {
-      ["province", "style", "result"].forEach((name, index) => {
-        document.getElementById("view-" + name).classList.toggle("active", state.step === index + 1);
-      });
-
-      document.querySelectorAll("[data-indicator]").forEach((indicator) => {
-        const number = Number(indicator.dataset.indicator);
-        indicator.classList.toggle("active", number === state.step);
-        indicator.classList.toggle("done", number < state.step);
-      });
-
-      document.getElementById("step-count").textContent = state.step + " / 3";
-      backButton.classList.toggle("invisible", state.step === 1);
-      nextButton.classList.toggle("hidden", state.step === 3);
-      restartButton.classList.toggle("hidden", state.step !== 3);
-      nextButton.disabled = !canAdvance();
-
-      if (state.step === 3) renderResults();
-    }
-
-    function updateSaveButton(button, isSaved) {
-      button.classList.toggle("bg-sky-600", !isSaved);
-      button.classList.toggle("text-white", !isSaved);
-      button.classList.toggle("hover:bg-sky-700", !isSaved);
-      button.classList.toggle("bg-amber-100", isSaved);
-      button.classList.toggle("text-amber-800", isSaved);
-      button.classList.toggle("hover:bg-amber-200", isSaved);
-      button.querySelector(".save-default").classList.toggle("hidden", isSaved);
-      button.querySelector(".save-active").classList.toggle("hidden", !isSaved);
-    }
-
-    document.getElementById("start-button").addEventListener("click", showPlanner);
-
-    document.querySelectorAll("[data-group]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const group = button.dataset.group;
-        state[group] = button.dataset.value;
-
-        document.querySelectorAll('[data-group="' + group + '"]').forEach((item) => {
-          const selected = item === button;
-          item.classList.toggle("selected", selected);
-          item.setAttribute("aria-pressed", String(selected));
-        });
-
-        nextButton.disabled = !canAdvance();
-      });
-    });
-
-    document.querySelectorAll(".save-button").forEach((button) => {
-      button.classList.add("bg-sky-600", "text-white");
-
-      button.addEventListener("click", () => {
-        const placeId = button.dataset.save;
-        const card = button.closest(".place-card");
-        const isSaved = !state.saved.has(placeId);
-
-        if (isSaved) {
-          state.saved.add(placeId);
-          card.classList.add("saved");
-          notify("📌 บันทึกสถานที่ไว้แล้ว");
-        } else {
-          state.saved.delete(placeId);
-          card.classList.remove("saved");
-          notify("นำสถานที่ออกจากรายการแล้ว");
-        }
-
-        updateSaveButton(button, isSaved);
-        document.getElementById("saved-count").textContent = state.saved.size;
-      });
-    });
-
-    nextButton.addEventListener("click", () => {
-      if (!canAdvance()) return;
-      state.step += 1;
-      updatePlanner();
-    });
-
-    backButton.addEventListener("click", () => {
-      if (state.step > 1) {
-        state.step -= 1;
-        updatePlanner();
+    // Database of Eastern Thailand Attractions
+    const places = [
+      {
+        title: "หาดบางแสน & วอนนภา",
+        province: "ชลบุรี",
+        category: "sea",
+        catLabel: "ทะเล & เกาะ",
+        img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop",
+        desc: "หาดทรายยอดฮิตใกล้กรุงเทพฯ เดินเล่นรับลมทะเล ชิมอาหารทะเลสดๆ และนั่งคาเฟ่สุดชิลริมหาดวอนนภา",
+        b1: "฿500", b2: "฿1,800", b3: "฿3,200",
+        hotel: "โซนหาดวอนนภา หรือ ถนนลงหาดบางแสน มีโรงแรมและโฮสเทลแนวมินิมอลเยอะมาก"
+      },
+      {
+        title: "เกาะเสม็ด (หาดทรายแก้ว)",
+        province: "ระยอง",
+        category: "sea",
+        catLabel: "ทะเล & เกาะ",
+        img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=600&auto=format&fit=crop",
+        desc: "เกาะสวยน้ำใสปิ่นเกล้าทะเลตะวันออก เดินทางง่าย ชายหาดทรายขาวละเอียด เหมาะทั้งพักผ่อนและปาร์ตี้ริมหาดยามค่ำคืน",
+        b1: "฿1,200", b2: "฿2,800", b3: "฿4,500",
+        hotel: "รีสอร์ตติดชายหาดบริเวณ หาดทรายแก้ว หรือ อ่าววงเดือน"
+      },
+      {
+        title: "เกาะกูด (อ่าวบางเบ้า)",
+        province: "ตราด",
+        category: "sea",
+        catLabel: "ทะเล & เกาะ",
+        img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&auto=format&fit=crop",
+        desc: "มัลดีฟส์เมืองไทย น้ำทะเลใสราวกระจก บรรยากาศเงียบสงบ เหมาะสำหรับคนอยากหนีความวุ่นวายมาพักผ่อนแท้จริง",
+        b1: "฿1,800", b2: "฿4,500", b3: "฿7,500",
+        hotel: "บังกะโลริมหาดอ่าวบางเบ้า หรือ อ่าวคลองเจ้า"
+      },
+      {
+        title: "เขาแหลมหญ้า",
+        province: "ระยอง",
+        category: "nature",
+        catLabel: "ภูเขา & น้ำตก",
+        img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&auto=format&fit=crop",
+        desc: "อุทยานแห่งชาติริมทะเล มีทุ่งหญ้าสีทอง เส้นทางเดินศึกษาธรรมชาติ และสะพานเทียบเรือสุดโรแมนติกมุมถ่ายรูปเพียบ",
+        b1: "฿600", b2: "฿2,000", b3: "฿3,500",
+        hotel: "กางเต็นท์ในอุทยาน หรือ พักรีสอร์ตริมหาดแม่รำพึง"
+      },
+      {
+        title: "น้ำตกสาริกา & เขื่อนขุนด่าน",
+        province: "นครนายก",
+        category: "nature",
+        catLabel: "ภูเขา & น้ำตก",
+        img: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=600&auto=format&fit=crop",
+        desc: "สัมผัสธรรมชาติเขียวขจี เล่นน้ำตกสาริกาเย็นฉ่ำ ล่องแก่งเรือยาง และชมวิวสันเขื่อนขุนด่านปราการชล",
+        b1: "฿700", b2: "฿2,200", b3: "฿3,800",
+        hotel: "รีสอร์ตติดริมน้ำนครนายก หรือ โฮมสเตย์ใกล้น้ำตก"
+      },
+      {
+        title: "คาเฟ่ทุ่งโปรงทอง",
+        province: "ระยอง",
+        category: "cafe",
+        catLabel: "คาเฟ่ชิลๆ",
+        img: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&auto=format&fit=crop",
+        desc: "เดินเล่นป่าชายเลนต้นโปรงทองสีเหลืองอร่าม พร้อมแวะคาเฟ่บรรยากาศธรรมชาติจิบกาแฟสดและเบเกอร์รี่อร่อยๆ",
+        b1: "฿500", b2: "฿1,800", b3: "฿3,000",
+        hotel: "โฮมสเตย์ปากน้ำประแส สัมผัสวิถีชีวิตชาวประมง"
+      },
+      {
+        title: "วัดปากน้ำโจ้โล้ (โบสถ์สีทอง)",
+        province: "ฉะเชิงเทรา",
+        category: "culture",
+        catLabel: "โบราณ & วัด",
+        img: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=600&auto=format&fit=crop",
+        desc: "ชมพระอุโบสถสีทองเจิดจรัสหนึ่งเดียวในไทย ตั้งอยู่ริมแม่น้ำบางปะกง สักการะเพื่อความเป็นสิริมงคล",
+        b1: "฿400", b2: "฿1,500", b3: "฿2,800",
+        hotel: "โรงแรมในตัวเมืองฉะเชิงเทรา หรือ บูทีค hotel ริมแม่น้ำบางปะกง"
+      },
+      {
+        title: "ชุมชนริมน้ำจันทบูร",
+        province: "จันทบุรี",
+        category: "culture",
+        catLabel: "โบราณ & วัด",
+        img: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=600&auto=format&fit=crop",
+        desc: "ชุมชนเก่าแก่ริมแม่น้ำจันทบุรี เดินชมบ้านไม้โบราณ ถ่ายรูปชิคๆ ชิมขนมไข่โบราณ และก๋วยเตี๋ยวต้มยำกั้ง",
+        b1: "฿800", b2: "฿2,300", b3: "฿4,000",
+        hotel: "โฮสเทลเรือนไม้โบราณในชุมชนจันทบูร"
+      },
+      {
+        title: "ตึกอภัยภูเบศร & อุทยานทับลาน",
+        province: "ปราจีนบุรี",
+        category: "culture",
+        catLabel: "โบราณ & วัด",
+        img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&auto=format&fit=crop",
+        desc: "ชมตึกสถาปัตยกรรมยุโรปสีเหลืองสดใส เรียนรู้สมุนไพรไทย และเดินทางไปสูดอากาศบริสุทธิ์ที่อุทยานแห่งชาติทับลาน",
+        b1: "฿500", b2: "฿1,700", b3: "฿3,000",
+        hotel: "โรงแรมและรีสอร์ตในตัวเมืองปราจีนบุรี หรือ โซนนาดี"
       }
+    ];
+
+    // Selected Filters State
+    let selectedType = 'all';
+    let selectedProvince = 'all';
+
+    // Filter Click Handlers
+    document.querySelectorAll('#type-filters .filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#type-filters .filter-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedType = btn.dataset.value;
+      });
     });
 
-    restartButton.addEventListener("click", () => {
-      state.step = 1;
-      state.province = "";
-      state.type = "";
+    document.querySelectorAll('#province-filters .filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#province-filters .filter-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedProvince = btn.dataset.province;
+      });
+    });
 
-      document.querySelectorAll("[data-group]").forEach((item) => {
-        item.classList.remove("selected");
-        item.setAttribute("aria-pressed", "false");
+    // Random Spin Action
+    const spinBtn = document.getElementById('btn-spin');
+    const resultBox = document.getElementById('result-box');
+
+    spinBtn.addEventListener('click', () => {
+      // Filter Places
+      let filtered = places.filter(p => {
+        const matchType = (selectedType === 'all' || p.category === selectedType);
+        const matchProv = (selectedProvince === 'all' || p.province === selectedProvince);
+        return matchType && matchProv;
       });
 
-      planner.classList.add("hidden");
-      document.getElementById("welcome-view").classList.add("active");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      notify("🔄 เริ่มจัดทริปใหม่แล้ว");
+      if (filtered.length === 0) {
+        alert('ไม่พบสถานที่ในตัวเลือกนี้ ลองเลือกจังหวัดหรือหมวดไม้อื่นดูน้า!');
+        return;
+      }
+
+      // Spin Effect Animation
+      spinBtn.style.transform = "scale(0.95)";
+      setTimeout(() => spinBtn.style.transform = "scale(1)", 150);
+
+      // Pick Random
+      const randomPlace = filtered[Math.floor(Math.random() * filtered.length)];
+
+      // Populate UI
+      document.getElementById('res-img').src = randomPlace.img;
+      document.getElementById('res-cat').textContent = randomPlace.catLabel;
+      document.getElementById('res-title').textContent = randomPlace.title;
+      document.getElementById('res-prov').textContent = randomPlace.province;
+      document.getElementById('res-desc').textContent = randomPlace.desc;
+      document.getElementById('b-1d').textContent = randomPlace.b1;
+      document.getElementById('b-2d').textContent = randomPlace.b2;
+      document.getElementById('b-3d').textContent = randomPlace.b3;
+      document.getElementById('res-hotel').textContent = randomPlace.hotel;
+
+      // Show Result
+      resultBox.style.display = 'block';
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
 
+    // Initialize Lucide Icons
     lucide.createIcons();
   </script>
- </body>
+</body>
 </html>

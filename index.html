@@ -3,650 +3,429 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>East Travel Guide - รวบรวมที่เที่ยวภาคตะวันออก 100+</title>
+  <title>ทริป Box ภาคตะวันออก</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary-blue: #0284C7;
-      --dark-navy: #0F172A;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --text-main: #1E293B;
+      --primary: #0284C7;
+      --primary-dark: #0369A1;
+      --bg-gradient: linear-gradient(135deg, #FFFDF9 0%, #E0F2FE 50%, #F0FDFA 100%);
+      --text-dark: #0F172A;
       --text-sub: #475569;
+      --card-bg: rgba(255, 255, 255, 0.9);
       --border-color: #E2E8F0;
-      --accent-yellow: #FEF08A;
-      --danger-red: #EF4444;
       --star-gold: #F59E0B;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Prompt', sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Prompt', sans-serif; }
+    body { background: var(--bg-gradient); background-attachment: fixed; color: var(--text-dark); min-height: 100vh; }
 
-    /* ตกแต่งพื้นหลังแบบ Soft Creamy Gradient สวยงามสบายตา */
-    body {
-      background: linear-gradient(135deg, #FDFBF7 0%, #E0F2FE 50%, #F0FDFA 100%);
-      background-attachment: fixed;
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+    /* Page Navigation Logic */
+    .page-section { display: none; animation: fadeIn 0.3s ease-in-out; }
+    .page-section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* แถบเมนูด้านบน */
+    /* 1. Landing Page */
+    #landing-page {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;
+    }
+    .landing-card {
+      background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 32px;
+      padding: 48px 28px; max-width: 600px; width: 100%; box-shadow: 0 20px 40px rgba(2, 132, 199, 0.1);
+    }
+    .landing-card h1 { font-family: 'Kanit'; font-size: 2.2rem; color: var(--primary-dark); margin-bottom: 12px; }
+    .landing-card p { color: var(--text-sub); margin-bottom: 32px; font-size: 1.05rem; }
+    .btn-enter {
+      background: linear-gradient(135deg, #0284C7, #0369A1); color: #fff; border: none;
+      padding: 16px 36px; border-radius: 16px; font-family: 'Kanit'; font-size: 1.2rem;
+      cursor: pointer; box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3); transition: 0.2s;
+    }
+    .btn-enter:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(2, 132, 199, 0.4); }
+
+    /* Header Navbar */
     header {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color); padding: 14px 24px;
+      display: flex; justify-content: space-between; align-items: center; sticky; top: 0; z-index: 90;
     }
-
-    .brand-logo {
-      font-family: 'Kanit', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary-blue);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 10px;
-    }
-
+    .logo { font-family: 'Kanit'; font-size: 1.3rem; font-weight: 700; color: var(--primary); cursor: pointer; }
+    .nav-btns { display: flex; gap: 8px; }
     .nav-btn {
-      background: #E0F2FE;
-      color: var(--primary-blue);
-      border: none;
-      padding: 10px 18px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
+      background: #F1F5F9; border: none; padding: 8px 16px; border-radius: 10px;
+      font-weight: 500; cursor: pointer; color: var(--text-dark); transition: 0.2s;
+    }
+    .nav-btn:hover { background: var(--primary); color: white; }
+
+    main { max-width: 1000px; margin: 0 auto; padding: 24px 16px; }
+
+    /* Form Container */
+    .filter-box {
+      background: var(--card-bg); border-radius: 24px; padding: 28px;
+      border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 24px;
+    }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; color: var(--text-dark); }
+    .form-group select, .form-group input {
+      width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border-color);
+      outline: none; font-size: 0.95rem; background: white;
+    }
+    .btn-search {
+      width: 100%; background: var(--primary); color: white; border: none; padding: 14px;
+      border-radius: 14px; font-family: 'Kanit'; font-size: 1.1rem; cursor: pointer; font-weight: 600;
     }
 
-    .nav-btn:hover {
-      background: var(--primary-blue);
-      color: white;
-      transform: translateY(-1px);
-    }
-
-    /* คอนเทนเนอร์หลักรองรับทุกหน้าจอ */
-    main {
-      flex: 1;
-      max-width: 1240px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 24px 16px;
-    }
-
-    .page-section {
-      display: none;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .page-section.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .btn-back {
-      background: #FFFFFF;
-      color: var(--text-main);
-      border: 1px solid var(--border-color);
-      padding: 8px 20px;
-      border-radius: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 20px;
-      display: inline-flex;
-      align-items: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-
-    /* Banner ต้อนรับ */
-    .welcome-banner {
-      text-align: center;
-      margin-bottom: 28px;
-      padding: 24px;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(8px);
-    }
-
-    .welcome-title {
-      font-family: 'Kanit', sans-serif;
-      font-size: 2rem;
-      color: var(--dark-navy);
-      margin-bottom: 8px;
-    }
-
-    .welcome-subtitle {
-      font-size: 1.05rem;
-      color: var(--text-sub);
-    }
-
-    /* 1. หน้าค้นหา/กรอกข้อมูล */
-    .search-container {
-      background: var(--card-bg);
-      border-radius: 24px;
-      padding: 32px 24px;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-      max-width: 850px;
-      margin: 0 auto;
-      backdrop-filter: blur(10px);
-    }
-
-    .form-group {
-      margin-bottom: 24px;
-    }
-
-    .form-title {
-      font-family: 'Kanit', sans-serif;
-      font-size: 1.15rem;
-      color: var(--dark-navy);
-      margin-bottom: 12px;
-    }
-
-    .chip-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 10px;
-    }
-
-    .chip-btn {
-      background: #FFFFFF;
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 12px 8px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-main);
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s;
-    }
-
-    .chip-btn.active {
-      background: var(--primary-blue);
-      border-color: var(--primary-blue);
-      color: white;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
-    }
-
-    .btn-search-main {
-      width: 100%;
-      background: linear-gradient(135deg, #0284C7, #0369A1);
-      color: white;
-      border: none;
-      border-radius: 16px;
-      padding: 16px;
-      font-family: 'Kanit', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.3);
-      transition: transform 0.1s;
-    }
-
-    .btn-search-main:active { transform: scale(0.98); }
-
-    /* 2. หน้ารวมผลลัพธ์ (Cards Grid) */
-    .places-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 20px;
-    }
-
+    /* Cards Grid */
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
     .place-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      border: 1px solid var(--border-color);
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.25s;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      background: white; border-radius: 18px; border: 1px solid var(--border-color);
+      overflow: hidden; cursor: pointer; transition: 0.25s; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
+    .place-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+    .place-card img { width: 100%; height: 180px; object-fit: cover; }
+    .place-card-body { padding: 16px; }
+    .place-card-title { font-family: 'Kanit'; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 4px; }
+    .place-card-sub { font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 8px; }
 
-    .place-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 32px rgba(0,0,0,0.08);
-      border-color: var(--primary-blue);
+    /* Modal / Popup Detail */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);
+      display: none; justify-content: center; align-items: center; z-index: 1000; padding: 16px;
     }
-
-    .card-img-wrapper {
-      width: 100%;
-      height: 180px;
-      position: relative;
+    .modal-overlay.active { display: flex; }
+    .modal-content {
+      background: white; border-radius: 24px; max-width: 700px; width: 100%;
+      max-height: 90vh; overflow-y: auto; padding: 24px; position: relative;
     }
-
-    .card-img-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .modal-close {
+      position: absolute; top: 16px; right: 20px; background: #F1F5F9; border: none;
+      width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer;
     }
-
-    .card-content {
-      padding: 16px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .modal-img { width: 100%; height: 260px; object-fit: cover; border-radius: 16px; margin-bottom: 16px; }
+    .map-box {
+      background: #E2E8F0; border-radius: 12px; height: 140px; display: flex;
+      align-items: center; justify-content: center; color: var(--text-sub); margin: 16px 0;
+      border: 1px dashed #94A3B8; font-size: 0.95rem;
     }
-
-    .card-title {
-      font-family: 'Kanit', sans-serif;
-      font-size: 1.1rem;
-      color: var(--dark-navy);
-      margin-bottom: 4px;
+    .detail-box { background: #F8FAFC; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+    .rec-item {
+      display: flex; gap: 12px; align-items: center; background: #FFF; border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 8px; margin-top: 8px; cursor: pointer; transition: 0.2s;
     }
+    .rec-item:hover { border-color: var(--primary); }
+    .rec-item img { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; }
 
-    .card-prov {
-      font-size: 0.85rem;
-      color: var(--primary-blue);
-      font-weight: 600;
-      margin-bottom: 8px;
+    /* Share Box */
+    .share-section {
+      margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-color);
     }
+    .share-input-group { display: flex; gap: 8px; margin-top: 8px; }
+    .share-input-group input { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid var(--border-color); }
+    .share-input-group button { background: #10B981; color: white; border: none; padding: 0 16px; border-radius: 10px; cursor: pointer; font-weight: 600; }
 
-    .card-rating {
-      color: var(--star-gold);
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    /* 3. หน้ารายละเอียดสถานที่ (Detail View) */
-    .detail-card {
-      background: var(--card-bg);
-      border-radius: 24px;
-      border: 1px solid var(--border-color);
-      overflow: hidden;
-      box-shadow: 0 12px 36px rgba(0,0,0,0.05);
-    }
-
-    .detail-hero-img {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-    }
-
-    .detail-body { padding: 32px; }
-
-    .detail-header-flex {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .btn-save-fav {
-      background: #E0F2FE;
-      color: var(--primary-blue);
-      border: 2px solid var(--primary-blue);
-      padding: 12px 24px;
-      border-radius: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-
-    .btn-save-fav.is-saved {
-      background: #FEF2F2;
-      color: var(--danger-red);
-      border-color: #FCA5A5;
-    }
-
-    .info-section {
-      margin-bottom: 20px;
-      padding: 18px;
-      border-radius: 16px;
-      background: rgba(248, 250, 252, 0.8);
-      border: 1px solid var(--border-color);
-    }
-
-    .info-section-title {
-      font-weight: 600;
-      color: var(--dark-navy);
-      margin-bottom: 6px;
-    }
-
-    .budget-table {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 10px;
-      text-align: center;
-    }
-
-    .budget-box-item {
-      background: #FFFFFF;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-    }
-
-    .budget-box-item span { font-size: 0.8rem; color: var(--text-sub); display: block; }
-    .budget-box-item strong { font-size: 1rem; color: var(--primary-blue); }
-
-    @media (max-width: 600px) {
-      .detail-hero-img { height: 240px; }
-      .detail-body { padding: 20px; }
-      .detail-header-flex { flex-direction: column; }
-      .btn-save-fav { width: 100%; }
-      .budget-table { grid-template-columns: 1fr; }
-    }
+    /* Profile Page Style */
+    .profile-card { background: white; border-radius: 20px; padding: 24px; text-align: center; border: 1px solid var(--border-color); }
+    .profile-avatar { width: 90px; height: 90px; border-radius: 50%; background: #E0F2FE; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 12px; }
   </style>
 </head>
 <body>
 
-  <!-- แถบเมนูด้านบน -->
-  <header>
-    <div class="brand-logo" onclick="showPage('search-page')">
-      🧭 East Travel Guide
+  <!-- 1. LANDING PAGE -->
+  <section id="landing-page" class="page-section active">
+    <div class="landing-card">
+      <div style="font-size: 3.5rem; margin-bottom: 12px;">📦✨</div>
+      <h1>ยินดีต้อนรับเข้าสู่ทริป Box<br>ภาคตะวันออก</h1>
+      <p>จัดทริปเที่ยว คำนวณวันพัก ค้นหาคาเฟ่ ทะเล ภูเขา<br>และแชร์ทริปในแบบของคุณให้เพื่อนๆ ได้ง่ายๆ</p>
+      <button class="btn-enter" onclick="enterApp()">🚀 เริ่มต้นจัดทริปเลย</button>
     </div>
-    <div class="nav-links">
-      <button class="nav-btn" onclick="showPage('search-page')">🔍 ค้นหา</button>
-      <button class="nav-btn" onclick="showSavedPage()">❤️️ บันทึกไว้</button>
-    </div>
-  </header>
+  </section>
 
-  <main>
-    <!-- Page 1: หน้าแรกค้นหา -->
-    <section id="search-page" class="page-section active">
-      
-      <!-- ข้อความยินดีต้อนรับและฝากใจ -->
-      <div class="welcome-banner">
-        <h1 class="welcome-title">✨ ยินดีต้อนรับสู่ East Travel Guide ✨</h1>
-        <p class="welcome-subtitle">"ฝากใจไปพักผ่อนกับท้องทะเล ภูเขา คาเฟ่ และเสน่ห์ภาคตะวันออก รวบรวมที่เที่ยวจุใจกว่า 100+ แห่ง!"</p>
+  <!-- 2. MAIN APP CONTAINER -->
+  <div id="main-app" style="display: none;">
+    <header>
+      <div class="logo" onclick="showPage('search-page')">📦 ทริป Box ภาคตะวันออก</div>
+      <div class="nav-btns">
+        <button class="nav-btn" onclick="showPage('search-page')">🔍 จัดทริป</button>
+        <button class="nav-btn" onclick="showSavedPage()">❤️ บันทึกไว้</button>
+        <button class="nav-btn" onclick="showPage('profile-page')">👤 โปรไฟล์</button>
       </div>
+    </header>
 
-      <div class="search-container">
-        
-        <!-- เลือกจังหวัด -->
-        <div class="form-group">
-          <div class="form-title">📍 1. เลือกจังหวัดในภาคตะวันออก</div>
-          <div class="chip-grid" id="province-chips">
-            <button class="chip-btn active" data-prov="all">ทุกจังหวัด</button>
-            <button class="chip-btn" data-prov="ชลบุรี">ชลบุรี</button>
-            <button class="chip-btn" data-prov="ระยอง">ระยอง</button>
-            <button class="chip-btn" data-prov="จันทบุรี">จันทบุรี</button>
-            <button class="chip-btn" data-prov="ตราด">ตราด</button>
-            <button class="chip-btn" data-prov="นครนายก">นครนายก</button>
-            <button class="chip-btn" data-prov="ฉะเชิงเทรา">ฉะเชิงเทรา</button>
-            <button class="chip-btn" data-prov="ปราจีนบุรี">ปราจีนบุรี</button>
-            <button class="chip-btn" data-prov="สระแก้ว">สระแก้ว</button>
-          </div>
-        </div>
-
-        <!-- เลือกไลฟ์สไตล์ -->
-        <div class="form-group">
-          <div class="form-title">✨ 2. เลือกสไตล์สถานที่ที่ชอบ</div>
-          <div class="chip-grid" id="type-chips">
-            <button class="chip-btn active" data-type="all">🌈 รวมทุกหมวด</button>
-            <button class="chip-btn" data-type="sea">🏖️ ทะเล & เกาะ (20+)</button>
-            <button class="chip-btn" data-type="nature">🌿 ภูเขา & น้ำตก (20+)</button>
-            <button class="chip-btn" data-type="cafe">☕ คาเฟ่ & จุดถ่ายรูป (20+)</button>
-            <button class="chip-btn" data-type="culture">🛕 วัด & วัฒนธรรม (20+)</button>
-          </div>
-        </div>
-
-        <button class="btn-search-main" onclick="executeSearch()">🔍 ดึงรายการสถานที่ทั้งหมด</button>
-      </div>
-    </section>
-
-    <!-- Page 2: หน้ารวมผลลัพธ์ -->
-    <section id="results-page" class="page-section">
-      <button class="btn-back" onclick="showPage('search-page')">‹ กลับไปหน้าค้นหา</button>
-      <h2 style="font-family:'Kanit'; margin-bottom: 20px; color:var(--dark-navy);" id="results-title">รายการสถานที่ท่องเที่ยว</h2>
-      <div class="places-grid" id="places-grid-container"></div>
-    </section>
-
-    <!-- Page 3: หน้ารายละเอียดสถานที่ -->
-    <section id="detail-page" class="page-section">
-      <button class="btn-back" onclick="goBackToResults()">‹ ย้อนกลับไปรายการสถานที่</button>
-      
-      <div class="detail-card">
-        <img id="dt-img" class="detail-hero-img" src="" alt="สถานที่ท่องเที่ยว">
-        
-        <div class="detail-body">
-          <div class="detail-header-flex">
-            <div>
-              <h1 id="dt-title" style="font-family:'Kanit'; color:var(--dark-navy);">ชื่อสถานที่</h1>
-              <div id="dt-prov" style="color:var(--primary-blue); font-weight:600; margin-top: 4px;">📍 จังหวัด</div>
-              <div id="dt-rating" style="color:var(--star-gold); font-weight:600; margin-top: 4px;">★ 0.0 / 5.0</div>
+    <main>
+      <!-- หน้าจัดทริป / ค้นหา -->
+      <section id="search-page" class="page-section active">
+        <div class="filter-box">
+          <h2 style="font-family:'Kanit'; margin-bottom: 16px;">🎯 เลือกรูปแบบทริปของคุณ</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>📍 เลือกจังหวัด</label>
+              <select id="sel-province">
+                <option value="all">ทุกจังหวัด</option>
+                <option value="ชลบุรี">ชลบุรี</option>
+                <option value="ระยอง">ระยอง</option>
+                <option value="จันทบุรี">จันทบุรี</option>
+                <option value="ตราด">ตราด</option>
+                <option value="นครนายก">นครนายก</option>
+              </select>
             </div>
-            <button id="btn-save-fav" class="btn-save-fav" onclick="toggleSaveCurrent()">❤️ บันทึกสถานที่นี้</button>
-          </div>
-
-          <div class="info-section">
-            <div class="info-section-title">📝 รายละเอียดสถานที่:</div>
-            <p id="dt-desc" style="line-height:1.6; color:var(--text-sub);"></p>
-          </div>
-
-          <div class="info-section">
-            <div class="info-section-title">🚗 การเดินทางไป-กลับ:</div>
-            <p id="dt-travel" style="line-height:1.6; color:var(--text-sub);"></p>
-          </div>
-
-          <div class="info-section" style="background:#F0F9FF; border-color:#BAE6FD;">
-            <div class="info-section-title" style="color:var(--primary-blue);">💵 ประเมินค่าใช้จ่ายคร่าวๆ (ต่อคน):</div>
-            <div class="budget-table">
-              <div class="budget-box-item">
-                <span>1 วัน (ไป-กลับ)</span>
-                <strong id="dt-b1">฿0</strong>
-              </div>
-              <div class="budget-box-item">
-                <span>2 วัน 1 คืน</span>
-                <strong id="dt-b2">฿0</strong>
-              </div>
-              <div class="budget-box-item">
-                <span>3 วัน 2 คืน</span>
-                <strong id="dt-b3">฿0</strong>
-              </div>
+            <div class="form-group">
+              <label>🏝️ เลือกแนวสถานที่</label>
+              <select id="sel-style">
+                <option value="all">รวมทุกแนว</option>
+                <option value="sea">ทะเล & เกาะ</option>
+                <option value="nature">ภูเขา & น้ำตก</option>
+                <option value="cafe">คาเฟ่ & ชิลๆ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>👥 จำนวนคนเดินทาง</label>
+              <select id="sel-people">
+                <option value="1">1 คน (ลุยเดี่ยว)</option>
+                <option value="2">2 คน (ทริปคู่รัก/เพื่อนซี้)</option>
+                <option value="4">3-5 คน (แก๊งเพื่อน/ครอบครัว)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>🌙 จำนวนวันพักผ่อน</label>
+              <select id="sel-days">
+                <option value="1">1 วัน (ไป-กลับ)</option>
+                <option value="2">2 วัน 1 คืน (ค้างคืน)</option>
+                <option value="3">3 วัน 2 คืน (ค้างคืน)</option>
+              </select>
             </div>
           </div>
+          <button class="btn-search" onclick="searchTrips()">🔍 ค้นหาทริปที่ใช่เลย!</button>
+        </div>
 
-          <div class="info-section" style="background:#FEFCE8; border-color:#FEF08A;">
-            <div class="info-section-title" style="color:#854D0E;">🏨 โซนที่พักแนะนำใกล้เคียง:</div>
-            <p id="dt-hotel" style="line-height:1.6; color:#854D0E;"></p>
+        <h3 style="font-family:'Kanit'; margin-bottom: 16px;" id="result-head">สถานที่ท่องเที่ยวแนะนำ</h3>
+        <div class="grid-container" id="cards-container"></div>
+      </section>
+
+      <!-- หน้าบันทึกไว้ -->
+      <section id="saved-page" class="page-section">
+        <h2 style="font-family:'Kanit'; margin-bottom: 16px;">❤️ รายการทริปที่บันทึกไว้</h2>
+        <div class="grid-container" id="saved-container"></div>
+      </section>
+
+      <!-- หน้าโปรไฟล์ -->
+      <section id="profile-page" class="page-section">
+        <div class="profile-card">
+          <div class="profile-avatar">😎</div>
+          <h2 style="font-family:'Kanit';">คุณนักเดินทาง (My Profile)</h2>
+          <p style="color:var(--text-sub); margin-bottom: 16px;">สมาชิกทริป Box ภาคตะวันออก</p>
+          <div style="background:#F1F5F9; padding:12px; border-radius:12px; display:inline-block; text-align:left; font-size:0.9rem;">
+            📌 ทริปที่บันทึกไว้: <strong id="profile-saved-count">0</strong> แห่ง<br>
+            👥 เพื่อนที่เชื่อมต่อ: <strong>3 คน</strong>
           </div>
         </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL / POPUP แสดงรายละเอียดสถานที่ -->
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <img id="m-img" class="modal-img" src="" alt="">
+      <h2 id="m-title" style="font-family:'Kanit'; color:var(--text-dark);"></h2>
+      <div id="m-prov" style="color:var(--primary); font-weight:600; margin-bottom: 8px;"></div>
+      <p id="m-desc" style="color:var(--text-sub); line-height:1.6; margin-bottom: 12px;"></p>
+
+      <!-- แผนที่จำลอง -->
+      <div class="map-box" id="m-map">
+        📍 แผนที่จำลอง Google Maps (พิกัดปักหมุดตำแหน่งสถานที่)
       </div>
-    </section>
 
-    <!-- Page 4: หน้าบันทึกไว้ -->
-    <section id="saved-page" class="page-section">
-      <button class="btn-back" onclick="showPage('search-page')">‹ กลับไปหน้าแรก</button>
-      <h2 style="font-family:'Kanit'; margin-bottom: 20px; color:var(--dark-navy);">❤️ สถานที่ท่องเที่ยวที่คุณบันทึกไว้</h2>
-      <div class="places-grid" id="saved-grid-container"></div>
-    </section>
+      <!-- รายละเอียดการพัก & ค้างคืนตามจำนวนคนที่เลือก -->
+      <div class="detail-box">
+        <h4 style="color:var(--primary-dark); margin-bottom:6px;">📋 แผนการพักผ่อน & ประเมินค่าใช้จ่าย:</h4>
+        <p id="m-stay-plan" style="font-size:0.95rem; color:var(--text-dark);"></p>
+      </div>
 
-  </main>
+      <!-- สถานที่แนะนำเพิ่มเติมใกล้เคียง -->
+      <div>
+        <h4 style="font-family:'Kanit'; margin-bottom:8px;">💡 สถานที่แนะนำเพิ่มเติมใกล้เคียง:</h4>
+        <div id="m-recommendations"></div>
+      </div>
+
+      <!-- ฟังก์ชันแชร์ทริปกับเพื่อน -->
+      <div class="share-section">
+        <h4 style="font-family:'Kanit';">🔗 แชร์ทริปนี้ให้เพื่อน:</h4>
+        <div class="share-input-group">
+          <input type="text" id="share-friend-name" placeholder="ระบุชื่อเพื่อน (เช่น สมชาย)...">
+          <button onclick="shareToFriend()">ส่งทริป</button>
+        </div>
+        <div id="share-status" style="font-size:0.85rem; color:#10B981; margin-top:6px; display:none;"></div>
+      </div>
+
+      <div style="margin-top: 20px; display:flex; gap:10px;">
+        <button id="btn-save-modal" style="flex:1; padding:12px; border-radius:12px; border:none; background:var(--primary); color:white; font-weight:600; cursor:pointer;" onclick="toggleSaveModal()">❤️ บันทึกไว้ในโปรไฟล์</button>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // ฐานข้อมูลสถานที่ท่องเที่ยวภาคตะวันออก
-    const placesDatabase = [
-      // === หมวดทะเล & เกาะ ===
-      { id: 1, title: "หาดบางแสน & หาดวอนนภา", province: "ชลบุรี", type: "sea", rating: "★ 4.7 / 5.0", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", desc: "ชายหาดยอดนิยมใกล้กรุงเทพฯ นั่งชิลรับลมทะเล ชิมอาหารทะเลสดๆ และคาเฟ่เลียบหาดวอนนภา", travel: "ขับรถจากกรุงเทพฯ ผ่านทางด่วนบูรพาวิถี 1.5 ชม.", b1: "฿600", b2: "฿1,800", b3: "฿3,200", hotel: "โรงแรมริมหาดวอนนภา หรือ ถนนลงหาดบางแสน" },
-      { id: 2, title: "เกาะล้าน (หาดตาแหวน)", province: "ชลบุรี", type: "sea", rating: "★ 4.8 / 5.0", img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80", desc: "น้ำใสทะเลสวยใกล้พัทยา มีกิจกรรมทางน้ำครบครัน ดำน้ำ ขี่สกู๊ตเตอร์ และจุดชมวิวรอบเกาะ", travel: "นั่งเรือข้ามฟากจากแหลมบาลีฮายพัทยา 30 นาที", b1: "฿800", b2: "฿2,500", b3: "฿4,000", hotel: "รีสอร์ตสไตล์มินิมอลบนเกาะล้าน" },
-      { id: 3, title: "เกาะเสม็ด (หาดทรายแก้ว)", province: "ระยอง", type: "sea", rating: "★ 4.8 / 5.0", img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=800&q=80", desc: "หาดทรายขาวละเอียดดุจแป้ง ชมควงกระบองไฟริมหาดยามค่ำคืน บรรยากาศสุดคึกคัก", travel: "นั่งเรือสปีดโบ๊ทจากท่าเรือบ้านเพ ระยอง 15 นาที", b1: "฿1,200", b2: "฿2,800", b3: "฿4,500", hotel: "รีสอร์ตติดชายหาดทรายแก้ว/อ่าววงเดือน" },
-      { id: 4, title: "เกาะช้าง (หาดคลองพร้าว)", province: "ตราด", type: "sea", rating: "★ 4.9 / 5.0", img: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80", desc: "เกาะขนาดใหญ่สมบูรณ์ด้วยธรรมชาติต้นไม้และทะเล เหมาะแก่การพักผ่อนยาวๆ ดำน้ำชมรังปะการัง", travel: "ขับรถนำรถลงเรือเฟอร์รี่ที่ท่าเรืออ่าวธรรมชาติ ตราด", b1: "฿1,500", b2: "฿3,500", b3: "฿6,000", hotel: "โรงแรมริมหาดคลองพร้าว หรือ หาดไก่แบ้" },
-      { id: 5, title: "เกาะกูด (หาดคลองเจ้า)", province: "ตราด", type: "sea", rating: "★ 4.9 / 5.0", img: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80", desc: "อัญมณีแห่งทะเลตะวันออก น้ำใสราวกับกระจก บรรยากาศเงียบสงบเหมาะกับการปลีกวิเวกพักผ่อน", travel: "นั่งสปีดโบ๊ทจากท่าเรือแหลมศอก จ.ตราด 1 ชม.", b1: "฿2,000", b2: "฿4,500", b3: "฿7,500", hotel: "รีสอร์ตริมหาดคลองเจ้า หรือ อ่าวบางเบ้า" },
-
-      // === หมวดภูเขา & น้ำตก ===
-      { id: 6, title: "น้ำตกสาริกา & เขื่อนขุนด่าน", province: "นครนายก", type: "nature", rating: "★ 4.9 / 5.0", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80", desc: "สัมผัสความยิ่งใหญ่ของเขื่อนคอนกรีตบดอัดยาวที่สุดในโลก พร้อมแวะเล่นน้ำตกสาริกาฉ่ำๆ", travel: "ขับรถสายรังสิต-นครนายก ประมาณ 2 ชั่วโมง", b1: "฿700", b2: "฿2,200", b3: "฿3,800", hotel: "รีสอร์ตติดริมน้ำนครนายก" },
-      { id: 7, title: "เขาใหญ่ (ฝั่งปราจีนบุรี)", province: "ปราจีนบุรี", type: "nature", rating: "★ 4.8 / 5.0", img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80", desc: "สูดอากาศบริสุทธิ์ป่ามรดกโลก ชมน้ำตกเหวนร้อย ชมกวางป่า และเส้นทางเดินป่าธรรมชาติ", travel: "ขึ้นทางด่านเนินหอม จ.ปราจีนบุรี ขับสบายถนนดี", b1: "฿800", b2: "฿2,500", b3: "฿4,200", hotel: "รีสอร์ตและลานกางเต็นท์ใกล็ด่านเนินหอม" },
-      { id: 8, title: "น้ำตกพลิ้ว", province: "จันทบุรี", type: "nature", rating: "★ 4.7 / 5.0", img: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80", desc: "น้ำตกสวยใสมีน้ำตลอดปี โดดเด่นด้วยฝูงปลาพลวงหินนับพันตัว และพีระมิดแห่งความรักพระนางเจ้าสุนันทาฯ", travel: "ขับรถจากตัวเมืองจันทบุรีประมาณ 20 นาที", b1: "฿600", b2: "฿2,000", b3: "฿3,500", hotel: "โฮมสเตย์ใกล้อุทยานแห่งชาติน้ำตกพลิ้ว" },
-      { id: 9, title: "ปางสีดา & จุดชมวิวผาเก็บตะวัน", province: "สระแก้ว", type: "nature", rating: "★ 4.6 / 5.0", img: "https://images.unsplash.com/photo-1511497584788-876761c11969?auto=format&fit=crop&w=800&q=80", desc: "เมืองผีเสื้อแห่งภาคตะวันออก ชมผีเสื้อป่านับแสนตัวช่วงหน้าฝน และลานกางเต็นท์ชมทะเลหมอก", travel: "ขับรถจากตัวเมืองสระแก้วขึ้นไปประมาณ 40 นาที", b1: "฿500", b2: "฿1,500", b3: "฿2,800", hotel: "ลานกางเต็นท์อุทยานแห่งชาติปางสีดา" },
-
-      // === หมวดคาเฟ่ & จุดถ่ายรูป ===
-      { id: 10, title: "ทุ่งโปรงทอง & ปากน้ำประแส", province: "ระยอง", type: "cafe", rating: "★ 4.7 / 5.0", img: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80", desc: "เดินบนสะพานไม้กลางป่าชายเลนต้นโปรงทองสีเหลืองอร่าม พร้อมจิบกาแฟสดริมน้ำประแส", travel: "ปักหมุด อ.แกลง จ.ระยอง ต่อรถพ่วงข้างชุมชน", b1: "฿500", b2: "฿1,800", b3: "฿3,000", hotel: "โฮมสเตย์เรือนไม้ริมน้ำประแส" },
-      { id: 11, title: "จุดชมวิวเนินนางพญา & คาเฟ่ริมทะเล", province: "จันทบุรี", type: "cafe", rating: "★ 4.9 / 5.0", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", desc: "ถนนเลียบชายหาดที่สวยที่สุดในภาคตะวันออก ถ่ายรูปโค้งคุ้งวิมาน และจิบกาแฟชมวิวทะเลแบบ 180 องศา", travel: "ใช้เส้นทางถนนเฉลิมบูรพาชลทิต จันทบุรี", b1: "฿700", b2: "฿2,200", b3: "฿3,800", hotel: "รีสอร์ตริมหาดคุ้งวิมาน หรือ หาดแหลมสิงห์" },
-
-      // === หมวดวัด & วัฒนธรรม ===
-      { id: 12, title: "วัดโสธรวรารามวรวิหาร", province: "ฉะเชิงเทรา", type: "culture", rating: "★ 4.9 / 5.0", img: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80", desc: "กราบขอพรหลวงพ่อโสธรสิ่งศักดิ์สิทธิ์คู่บ้านคู่เมือง เพื่อความเป็นสิริมงคล โบสถ์สวยงามอลังการ", travel: "ขับรถจากกรุงเทพฯ ผ่านสุวินทวงศ์ 1 ชั่วโมง", b1: "฿400", b2: "฿1,500", b3: "฿2,500", hotel: "โรงแรมในตัวเมืองฉะเชิงเทรา ริมแม่น้ำบางปะกง" },
-      { id: 13, title: "วัดสมานรัตนาราม (พระพิฆเนศองค์ใหญ่)", province: "ฉะเชิงเทรา", type: "culture", rating: "★ 4.8 / 5.0", img: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=800&q=80", desc: "ขอพรพระพิฆเนศปางนอนเสวยสุของค์ใหญ่ที่สุดในไทย กระซิบหูหนูมุสิกะให้ช่วยส่งคำอธิษฐาน", travel: "จากตัวเมืองฉะเชิงเทราไปตามทางหลวงหมายเลข 365", b1: "฿500", b2: "฿1,600", b3: "฿2,800", hotel: "รีสอร์ตริมแม่น้ำบางปะกง" },
-      { id: 14, title: "ชุมชนริมน้ำจันทบูร & อาสนวิหาร", province: "จันทบุรี", type: "culture", rating: "★ 4.8 / 5.0", img: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80", desc: "ชมโบสถ์คริสต์สไตล์โกธิคที่สวยที่สุดในไทย และเดินชิมขนมโบราณในชุมชนวิถีชีวิตชาวจันทบูร", travel: "ตั้งอยู่ใจกลางอำเภอเมืองจันทบุรี", b1: "฿700", b2: "฿2,200", b3: "฿3,800", hotel: "บูทีคโฮสเทลในชุมชนริมน้ำจันทบูร" }
+    // ฐานข้อมูลสถานที่
+    const db = [
+      { id: 1, title: "หาดบางแสน & หาดวอนนภา", province: "ชลบุรี", type: "sea", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800", desc: "ชายหาดยอดนิยม มีร้านอาหารทะเล คาเฟ่สวยๆ เลียบชายหาดมากมาย", recIds: [2, 6] },
+      { id: 2, title: "เกาะล้าน (หาดตาแหวน)", province: "ชลบุรี", type: "sea", img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800", desc: "เกาะน้ำใสใกล้กรุงเทพฯ กิจกรรมทางน้ำครบครัน นั่งเรือข้ามฟากเพียง 30 นาที", recIds: [1, 3] },
+      { id: 3, title: "เกาะเสม็ด (หาดทรายแก้ว)", province: "ระยอง", type: "sea", img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800", desc: "หาดทรายขาวละเอียด บรรยากาศคึกคักยามค่ำคืน มีโชว์ควงกระบองไฟริมหาด", recIds: [2, 4] },
+      { id: 4, title: "เขื่อนขุนด่านปราการชล", province: "นครนายก", type: "nature", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800", desc: "สัมผัสอากาศบริสุทธิ์ ล่องเรือชมน้ำตกหลังเขื่อน ล่องแก่งสนุกสนาน", recIds: [5, 6] },
+      { id: 5, title: "ทุ่งโปรงทอง ปากน้ำประแส", province: "ระยอง", type: "cafe", img: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800", desc: "สะพานเดินชมป่าชายเลนต้นโปรงทองสีเหลืองทอง พร้อมจุดถ่ายรูปและคาเฟ่ชิลๆ", recIds: [3, 1] },
+      { id: 6, title: "เกาะช้าง", province: "ตราด", type: "sea", img: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800", desc: "เกาะใหญ่กลางทะเลตราด ธรรมชาติสมบูรณ์ เหมาะกับการพักผ่อนแบบค้างคืนยาวๆ", recIds: [3, 2] }
     ];
 
-    let savedIds = [1];
-    let currentDetailPlace = null;
-    let selectedProvince = 'all';
-    let selectedType = 'all';
+    let savedList = [];
+    let currentPlace = null;
 
-    // จัดการ Event ปุ่มชิปเลือกเงื่อนไข
-    document.querySelectorAll('#province-chips .chip-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#province-chips .chip-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        selectedProvince = btn.dataset.prov;
-      });
-    });
-
-    document.querySelectorAll('#type-chips .chip-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#type-chips .chip-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        selectedType = btn.dataset.type;
-      });
-    });
+    function enterApp() {
+      document.getElementById('landing-page').style.display = 'none';
+      document.getElementById('main-app').style.display = 'block';
+      searchTrips();
+    }
 
     function showPage(pageId) {
-      document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
+      document.querySelectorAll('#main-app .page-section').forEach(p => p.classList.remove('active'));
       document.getElementById(pageId).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ค้นหาสถานที่ที่ไม่สุ่ม ดึงตามกรอกจริง
-    function executeSearch() {
-      const filtered = placesDatabase.filter(p => {
-        const matchProv = (selectedProvince === 'all' || p.province === selectedProvince);
-        const matchType = (selectedType === 'all' || p.type === selectedType);
-        return matchProv && matchType;
+    function searchTrips() {
+      const prov = document.getElementById('sel-province').value;
+      const style = document.getElementById('sel-style').value;
+      
+      const filtered = db.filter(item => {
+        const mProv = (prov === 'all' || item.province === prov);
+        const mStyle = (style === 'all' || item.type === style);
+        return mProv && mStyle;
       });
 
-      const container = document.getElementById('places-grid-container');
+      renderCards(filtered, 'cards-container');
+    }
+
+    function renderCards(list, containerId) {
+      const container = document.getElementById(containerId);
       container.innerHTML = '';
 
-      if (filtered.length === 0) {
-        container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:50px; color:var(--text-sub);">ไม่พบสถานที่ตรงตามเงื่อนไขที่คุณเลือก ลองเปลี่ยนเงื่อนไขคัดกรองดูน้า!</div>';
-      } else {
-        filtered.forEach(place => {
-          container.appendChild(createPlaceCard(place));
-        });
+      if(list.length === 0) {
+        container.innerHTML = '<p style="color:var(--text-sub); text-align:center; grid-column:1/-1;">ไม่พบรายการที่ค้นหา ลองเปลี่ยนตัวเลือกดูนะครับ</p>';
+        return;
       }
 
-      document.getElementById('results-title').textContent = `รายการสถานที่ค้นพบทั้งหมด (${filtered.length} แห่ง)`;
-      showPage('results-page');
-    }
-
-    function createPlaceCard(place) {
-      const card = document.createElement('div');
-      card.className = 'place-card';
-      card.onclick = () => openDetailPage(place);
-      card.innerHTML = `
-        <div class="card-img-wrapper">
-          <img src="${place.img}" alt="${place.title}">
-        </div>
-        <div class="card-content">
-          <div>
-            <div class="card-prov">📍 จ.${place.province}</div>
-            <div class="card-title">${place.title}</div>
+      list.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'place-card';
+        card.onclick = () => openModal(item);
+        card.innerHTML = `
+          <img src="${item.img}" alt="${item.title}">
+          <div class="place-card-body">
+            <div class="place-card-sub">📍 จ.${item.province}</div>
+            <div class="place-card-title">${item.title}</div>
+            <p style="font-size:0.85rem; color:var(--text-sub);">${item.desc.substring(0, 45)}...</p>
           </div>
-          <div class="card-rating">${place.rating}</div>
-        </div>
-      `;
-      return card;
+        `;
+        container.appendChild(card);
+      });
     }
 
-    function openDetailPage(place) {
-      currentDetailPlace = place;
-      document.getElementById('dt-img').src = place.img;
-      document.getElementById('dt-title').textContent = place.title;
-      document.getElementById('dt-prov').textContent = '📍 จ.' + place.province;
-      document.getElementById('dt-rating').textContent = place.rating;
-      document.getElementById('dt-desc').textContent = place.desc;
-      document.getElementById('dt-travel').textContent = place.travel;
-      document.getElementById('dt-b1').textContent = place.b1;
-      document.getElementById('dt-b2').textContent = place.b2;
-      document.getElementById('dt-b3').textContent = place.b3;
-      document.getElementById('dt-hotel').textContent = place.hotel;
+    function openModal(place) {
+      currentPlace = place;
+      const people = document.getElementById('sel-people').value;
+      const days = document.getElementById('sel-days').value;
 
-      updateSaveButtonUI();
-      showPage('detail-page');
-    }
+      document.getElementById('m-img').src = place.img;
+      document.getElementById('m-title').textContent = place.title;
+      document.getElementById('m-prov').textContent = '📍 จังหวัด' + place.province;
+      document.getElementById('m-desc').textContent = place.desc;
+      document.getElementById('m-map').textContent = `📍 แผนที่นำทางไป ${place.title} (จังหวัด${place.province})`;
 
-    function goBackToResults() {
-      showPage('results-page');
-    }
-
-    function toggleSaveCurrent() {
-      if (!currentDetailPlace) return;
-      const idx = savedIds.indexOf(currentDetailPlace.id);
-      if (idx > -1) {
-        savedIds.splice(idx, 1);
+      // คำนวณแผนการค้างคืน & ราคาตามวันและจำนวนคน
+      let planText = "";
+      let estCost = (days * 1200) * people;
+      if (days === "1") {
+        planText = `ทริปไป-กลับ 1 วัน สำหรับ ${people} คน (ไม่ต้องค้างคืน) | ประเมินงบเดินทางรวมประมาณ ฿${estCost.toLocaleString()} บาท`;
+      } else if (days === "2") {
+        planText = `ทริปค้างคืน 2 วัน 1 คืน สำหรับ ${people} คน (พักโรงแรม/รีสอร์ต 1 คืน) | ประเมินงบประมาณรวม ฿${estCost.toLocaleString()} บาท`;
       } else {
-        savedIds.push(currentDetailPlace.id);
+        planText = `ทริปพักผ่อนชิลๆ 3 วัน 2 คืน สำหรับ ${people} คน (พักผ่อนยาวค้างคืน 2 คืน) | ประเมินงบประมาณรวม ฿${estCost.toLocaleString()} บาท`;
       }
-      updateSaveButtonUI();
+      document.getElementById('m-stay-plan').textContent = planText;
+
+      // โหลดสถานที่แนะนำเพิ่มเติม
+      const recContainer = document.getElementById('m-recommendations');
+      recContainer.innerHTML = '';
+      place.recIds.forEach(id => {
+        const recItem = db.find(x => x.id === id);
+        if(recItem) {
+          const div = document.createElement('div');
+          div.className = 'rec-item';
+          div.onclick = () => openModal(recItem);
+          div.innerHTML = `
+            <img src="${recItem.img}">
+            <div>
+              <strong style="font-size:0.9rem;">${recItem.title}</strong>
+              <div style="font-size:0.8rem; color:var(--text-sub);">📍 ${recItem.province}</div>
+            </div>
+          `;
+          recContainer.appendChild(div);
+        }
+      });
+
+      // รีเซ็ตฟิลด์แชร์
+      document.getElementById('share-friend-name').value = '';
+      document.getElementById('share-status').style.display = 'none';
+
+      updateSaveBtnModal();
+      document.getElementById('detail-modal').classList.add('active');
     }
 
-    function updateSaveButtonUI() {
-      const btn = document.getElementById('btn-save-fav');
-      if (savedIds.includes(currentDetailPlace.id)) {
-        btn.textContent = '💔 ลบออกจากรายการบันทึก';
-        btn.classList.add('is-saved');
+    function closeModal() {
+      document.getElementById('detail-modal').classList.remove('active');
+    }
+
+    function toggleSaveModal() {
+      if(!currentPlace) return;
+      const index = savedList.findIndex(x => x.id === currentPlace.id);
+      if(index > -1) {
+        savedList.splice(index, 1);
       } else {
-        btn.textContent = '❤️ บันทึกสถานที่นี้';
-        btn.classList.remove('is-saved');
+        savedList.push(currentPlace);
+      }
+      updateSaveBtnModal();
+      document.getElementById('profile-saved-count').textContent = savedList.length;
+    }
+
+    function updateSaveBtnModal() {
+      const btn = document.getElementById('btn-save-modal');
+      const isSaved = savedList.some(x => x.id === currentPlace.id);
+      if(isSaved) {
+        btn.textContent = '💔 ลบออกจากรายการบันทึก';
+        btn.style.background = '#EF4444';
+      } else {
+        btn.textContent = '❤️ บันทึกไว้ในโปรไฟล์';
+        btn.style.background = 'var(--primary)';
       }
     }
 
     function showSavedPage() {
-      const container = document.getElementById('saved-grid-container');
-      container.innerHTML = '';
-
-      const savedPlaces = placesDatabase.filter(p => savedIds.includes(p.id));
-
-      if (savedPlaces.length === 0) {
-        container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:50px; color:var(--text-sub);">ยังไม่มีสถานที่ที่ถูกบันทึกไว้ในรายการ ❤️</div>';
-      } else {
-        savedPlaces.forEach(place => {
-          container.appendChild(createPlaceCard(place));
-        });
-      }
-
+      renderCards(savedList, 'saved-container');
       showPage('saved-page');
+    }
+
+    function shareToFriend() {
+      const name = document.getElementById('share-friend-name').value.trim();
+      const status = document.getElementById('share-status');
+      if(name) {
+        status.style.display = 'block';
+        status.textContent = `✅ ส่งทริป "${currentPlace.title}" ให้คุณ "${name}" เรียบร้อยแล้ว! (เพื่อนจะเห็นทริปนี้เหมือนกัน)`;
+      } else {
+        alert('กรุณากรอกชื่อเพื่อนก่อนส่งครับ');
+      }
     }
   </script>
 </body>
 </html>
+

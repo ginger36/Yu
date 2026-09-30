@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ระบบวางแผนเที่ยวภาคตะวันออก 7 จังหวัด</title>
+  <title>ระบบวางแผนเที่ยวภาคตะวันออก - 4 หน้า ผลลัพธ์ไม่ซ้ำ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -25,166 +25,149 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Prompt', sans-serif; }
     body { background-color: var(--bg-blue); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; }
 
-    /* Navigation Bar */
-    nav {
-      background: var(--white);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    header {
+      background: linear-gradient(135deg, #0284C7, #38BDF8);
+      color: var(--white);
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.2);
     }
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
+    header h1 { font-family: 'Kanit', sans-serif; font-size: 2rem; margin-bottom: 6px; }
+
+    .container { max-width: 1100px; margin: 25px auto; padding: 0 20px; width: 100%; flex: 1; }
+
+    /* Search Card */
+    .search-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--card-border);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      align-items: flex-end;
+      margin-bottom: 25px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; }
+    .form-group select {
+      width: 100%; padding: 10px 12px; border-radius: 10px;
+      border: 1.5px solid #7DD3FC; background: #F8FAFC; outline: none;
+      font-size: 0.95rem; color: var(--text-dark); cursor: pointer;
+    }
+
+    .btn-search {
+      background: var(--primary); color: var(--white); border: none;
+      padding: 12px 20px; border-radius: 10px; font-family: 'Kanit', sans-serif;
+      font-size: 1rem; font-weight: 500; cursor: pointer; height: 44px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); transition: all 0.2s;
+    }
+    .btn-search:hover { background: var(--primary-dark); }
+
+    /* Results Header & Navigation */
+    .results-header {
+      background: var(--white);
+      border: 1.5px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 20px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .logo {
-      font-family: 'Kanit', sans-serif;
-      font-weight: 700;
-      font-size: 1.3rem;
+    .results-title { font-family: 'Kanit', sans-serif; font-size: 1.2rem; color: var(--primary-dark); }
+
+    /* Page Switcher Tabs (4 หน้า) */
+    .page-tabs { display: flex; gap: 8px; }
+    .tab-btn {
+      background: var(--bg-blue);
+      border: 1px solid var(--card-border);
       color: var(--primary-dark);
-    }
-    .nav-links {
-      display: flex;
-      gap: 10px;
-    }
-    .nav-btn {
-      background: transparent;
-      border: none;
-      padding: 8px 14px;
+      padding: 8px 16px;
       border-radius: 8px;
       font-family: 'Kanit', sans-serif;
-      font-size: 0.95rem;
-      color: var(--text-muted);
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
     }
-    .nav-btn:hover, .nav-btn.active {
-      background: var(--primary-light);
-      color: var(--primary-dark);
-      font-weight: 600;
-    }
-
-    /* Main Container & Page Management */
-    .container {
-      max-width: 1100px;
-      margin: 25px auto;
-      padding: 0 20px;
-      width: 100%;
-      flex: 1;
-    }
-    .page-section {
-      display: none; /* ซ่อนทุกหน้าเริ่มต้น */
-      animation: fadeIn 0.3s ease-in-out;
-    }
-    .page-section.active {
-      display: block; /* แสดงเฉพาะหน้าที่เลือก */
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Common Components */
-    .hero-banner {
-      background: linear-gradient(135deg, #0284C7, #38BDF8);
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--primary);
       color: var(--white);
-      padding: 40px 25px;
-      border-radius: 20px;
-      text-align: center;
-      margin-bottom: 25px;
-      box-shadow: var(--shadow);
-    }
-    .hero-banner h1 { font-family: 'Kanit', sans-serif; font-size: 2rem; margin-bottom: 8px; }
-    .hero-banner p { font-weight: 300; opacity: 0.95; }
-
-    .card-box {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 25px;
-      border: 1.5px solid var(--card-border);
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
+      border-color: var(--primary);
     }
 
-    /* Form Inputs */
-    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .form-group label { font-weight: 600; color: var(--primary-dark); }
-    .form-group select {
-      width: 100%; padding: 12px 14px; border-radius: 10px;
-      border: 1.5px solid #7DD3FC; background: #F8FAFC; outline: none;
-      font-size: 1rem; color: var(--text-dark); cursor: pointer;
-    }
-
-    .btn-submit {
-      background: var(--primary); color: var(--white); border: none;
-      padding: 12px 24px; border-radius: 10px; font-family: 'Kanit', sans-serif;
-      font-size: 1rem; font-weight: 500; cursor: pointer; width: 100%;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); transition: all 0.2s;
-    }
-    .btn-submit:hover { background: var(--primary-dark); }
-
-    /* Grids & Cards */
+    /* Grid Layout for Places */
     .places-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px;
     }
-    .place-item {
+
+    .place-card {
       background: var(--white);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
+      border: 1.5px solid var(--card-border);
+      border-radius: 14px;
       padding: 16px;
       box-shadow: var(--shadow);
-      transition: all 0.2s;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
-    .place-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-    .place-tag {
-      display: inline-block;
+    .place-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+    .place-number {
+      position: absolute;
+      top: 12px;
+      right: 12px;
       background: var(--primary-light);
       color: var(--primary-dark);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 3px 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 2px 8px;
       border-radius: 6px;
-      margin-bottom: 8px;
-      width: fit-content;
     }
-    .place-title { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 6px; }
-    .place-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px; flex: 1; }
-    
-    .btn-pin {
-      background: var(--bg-blue); color: var(--primary-dark);
-      border: 1px solid var(--card-border); padding: 8px;
-      border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;
-      transition: all 0.2s; width: 100%;
-    }
-    .btn-pin.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
 
-    .province-selector-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 12px;
-      margin-top: 15px;
-    }
-    .prov-chip {
-      background: var(--bg-blue);
-      border: 1.5px solid var(--card-border);
-      padding: 12px;
-      border-radius: 12px;
-      text-align: center;
+    .place-title {
       font-family: 'Kanit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+      padding-right: 30px;
+    }
+
+    .place-tag {
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .place-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .btn-pin {
+      background: var(--bg-blue);
+      border: 1px solid var(--card-border);
+      color: var(--primary-dark);
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
       cursor: pointer;
+      width: 100%;
       transition: all 0.2s;
     }
-    .prov-chip:hover { border-color: var(--primary); background: var(--primary-light); }
+    .btn-pin.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
 
     footer {
       background: var(--white);
@@ -199,295 +182,172 @@
 </head>
 <body>
 
-  <!-- Menu Nav Bars (ควบคุมการเปลี่ยนหน้า) -->
-  <nav>
-    <div class="nav-container">
-      <div class="logo">🗺️ เที่ยวภาคตะวันออก</div>
-      <div class="nav-links">
-        <button class="nav-btn active" id="btn-p1" onclick="switchPage(1)">หน้า 1: ค้นหาทริป</button>
-        <button class="nav-btn" id="btn-p2" onclick="switchPage(2)">หน้า 2: รายการสถานที่</button>
-        <button class="nav-btn" id="btn-p3" onclick="switchPage(3)">หน้า 3: เลือกตามจังหวัด</button>
-        <button class="nav-btn" id="btn-p4" onclick="switchPage(4)">หน้า 4: หมุดที่บันทึก (<span id="nav-pin-count">0</span>)</button>
-      </div>
-    </div>
-  </nav>
+  <header>
+    <h1>🗺️ ระบบจัดทริปภาคตะวันออก 7 จังหวัด</h1>
+    <p>แสดงรายการสถานที่ท่องเที่ยว 4 หน้า หน้าละ 10 แห่ง แบบไม่ซ้ำกัน</p>
+  </header>
 
   <div class="container">
-
-    <!-- ================= PAGE 1: หน้าแรกค้นหา ================= -->
-    <section id="page-1" class="page-section active">
-      <div class="hero-banner">
-        <h1>วางแผนท่องเที่ยว 7 จังหวัดภาคตะวันออก</h1>
-        <p>เลือกจังหวัดและจำนวนวันที่ต้องการเดินทาง เพื่อเริ่มต้นสร้างทริปของคุณ</p>
+    
+    <!-- ฟอร์มกรอกข้อมูล -->
+    <div class="search-card">
+      <div class="form-group">
+        <label for="province">📍 เลือกจังหวัด:</label>
+        <select id="province">
+          <option value="ชลบุรี">ชลบุรี</option>
+          <option value="ระยอง">ระยอง</option>
+          <option value="จันทบุรี">จันทบุรี</option>
+          <option value="ตราด">ตราด</option>
+          <option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option>
+          <option value="ปราจีนบุรี">ปราจีนบุรี</option>
+          <option value="สระแก้ว">สระแก้ว</option>
+        </select>
       </div>
 
-      <div class="card-box" style="max-width: 600px; margin: 0 auto;">
-        <h2 style="font-family:'Kanit', sans-serif; color: var(--primary-dark); margin-bottom: 20px; text-align: center;">🔍 ค้นหาและวางแผนทริป</h2>
-        
-        <div class="form-group">
-          <label for="p1-province">📍 เลือกจังหวัด:</label>
-          <select id="p1-province">
-            <option value="ชลบุรี">ชลบุรี</option>
-            <option value="ระยอง">ระยอง</option>
-            <option value="จันทบุรี">จันทบุรี</option>
-            <option value="ตราด">ตราด</option>
-            <option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option>
-            <option value="ปราจีนบุรี">ปราจีนบุรี</option>
-            <option value="สระแก้ว">สระแก้ว</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="p1-days">📅 จำนวนวันเดินทาง:</label>
-          <select id="p1-days">
-            <option value="1">1 วัน (ทริปไป-กลับ)</option>
-            <option value="2">2 วัน 1 คืน</option>
-            <option value="3">3 วัน 2 คืน</option>
-          </select>
-        </div>
-
-        <button class="btn-submit" onclick="startSearchFromPage1()">ค้นหารายการสถานที่ท่องเที่ยว →</button>
-      </div>
-    </section>
-
-    <!-- ================= PAGE 2: แสดงผลลัพธ์สถานที่ ================= -->
-    <section id="page-2" class="page-section">
-      <div class="card-box">
-        <h2 id="p2-title" style="font-family:'Kanit', sans-serif; color: var(--primary-dark);">สถานที่ท่องเที่ยวแนะนำ</h2>
-        <p id="p2-subtitle" style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">รวมสถานที่ท่องเที่ยวแนะนำโดยไม่มีการแสดงราคาและจำนวนคน</p>
+      <div class="form-group">
+        <label for="category">🏖️ เลือกหมวดหมู่สถานที่:</label>
+        <select id="category">
+          <option value="nature">🌿 ธรรมชาติและทะเล</option>
+          <option value="cafe">☕ คาเฟ่และร้านกาแฟ</option>
+          <option value="culture">🛕 วัดและวัฒนธรรม</option>
+        </select>
       </div>
 
-      <div class="places-grid" id="p2-grid">
-        <!-- แสดงรายการสถานที่ตรงนี้ -->
-      </div>
-    </section>
+      <button class="btn-search" onclick="startSearch()">🔍 ค้นหาข้อมูลทริป</button>
+    </div>
 
-    <!-- ================= PAGE 3: หมวดหมู่เรียงตามจังหวัด ================= -->
-    <section id="page-3" class="page-section">
-      <div class="hero-banner" style="padding: 25px;">
-        <h1>รายชื่อทั้ง 7 จังหวัดภาคตะวันออก</h1>
-        <p>คลิกเลือกจังหวัดที่ต้องการเพื่อดูสถานที่ท่องเที่ยวทั้งหมดของจังหวัดนั้น</p>
+    <!-- แถบแสดงหน้าผลลัพธ์ (4 หน้า) -->
+    <div class="results-header" id="results-bar" style="display: none;">
+      <div class="results-title" id="results-title-text">รายการสถานที่ท่องเที่ยว</div>
+      
+      <div class="page-tabs">
+        <button class="tab-btn active" id="tab-1" onclick="switchResultPage(1)">หน้า 1 (1-10)</button>
+        <button class="tab-btn" id="tab-2" onclick="switchResultPage(2)">หน้า 2 (11-20)</button>
+        <button class="tab-btn" id="tab-3" onclick="switchResultPage(3)">หน้า 3 (21-30)</button>
+        <button class="tab-btn" id="tab-4" onclick="switchResultPage(4)">หน้า 4 (31-40)</button>
       </div>
+    </div>
 
-      <div class="card-box">
-        <h3 style="font-family: 'Kanit', sans-serif; color: var(--primary-dark);">เลือกจังหวัด:</h3>
-        <div class="province-selector-grid">
-          <div class="prov-chip" onclick="selectProvincePage3('ชลบุรี')">🏖️ ชลบุรี</div>
-          <div class="prov-chip" onclick="selectProvincePage3('ระยอง')">🌴 ระยอง</div>
-          <div class="prov-chip" onclick="selectProvincePage3('จันทบุรี')">💎 จันทบุรี</div>
-          <div class="prov-chip" onclick="selectProvincePage3('ตราด')">🏝️ ตราด</div>
-          <div class="prov-chip" onclick="selectProvincePage3('ฉะเชิงเทรา')">🛕 ฉะเชิงเทรา</div>
-          <div class="prov-chip" onclick="selectProvincePage3('ปราจีนบุรี')">🌿 ปราจีนบุรี</div>
-          <div class="prov-chip" onclick="selectProvincePage3('สระแก้ว')">🏛️ สระแก้ว</div>
-        </div>
-      </div>
-
-      <div id="p3-result-container">
-        <!-- ผลลัพธ์จากการเลือกจังหวัดในหน้า 3 -->
-      </div>
-    </section>
-
-    <!-- ================= PAGE 4: หมุดที่บันทึกไว้ ================= -->
-    <section id="page-4" class="page-section">
-      <div class="card-box">
-        <h2 style="font-family:'Kanit', sans-serif; color: var(--primary-dark);">📌 สถานที่ท่องเที่ยวที่บันทึกไว้ (Pinned Items)</h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">รายการสถานที่ทั้งหมดที่คุณกดปักหมุดเก็บไว้ใช้งาน</p>
-      </div>
-
-      <div class="places-grid" id="p4-grid">
-        <!-- สถานที่ปักหมุดจะขึ้นตรงนี้ -->
-      </div>
-    </section>
+    <!-- ตารางแสดงสถานที่ (แสดงครั้งละ 10 แห่ง) -->
+    <div class="places-grid" id="places-container">
+      <!-- ข้อมูลจะถูกโหลดเข้ามาตรงนี้ -->
+    </div>
 
   </div>
 
   <footer>
-    © 2026 ระบบท่องเที่ยว 7 จังหวัดภาคตะวันออก | พัฒนาแบบ 4 หน้าจบในไฟล์เดียว
+    © 2026 ระบบท่องเที่ยวภาคตะวันออก | แสดงผล 4 หน้า หน้าละ 10 สถานที่โดยไม่มีรายการซ้ำ
   </footer>
 
   <script>
     // -------------------------------------------------------------
-    // DATABASE: ข้อมูลสถานที่ท่องเที่ยวของทั้ง 7 จังหวัด (ไม่ซ้ำ)
+    // DATABASE: ข้อมูลครบทั้ง 7 จังหวัด x 3 หมวดหมู่ (หมวดละ 40 สถานที่ ไม่ซ้ำ)
     // -------------------------------------------------------------
-    const placesData = {
-      "ชลบุรี": [
-        { name: "หาดบางแสน", cat: "ธรรมชาติ", desc: "ชายหาดยอดนิยมใกล้กรุงเทพฯ เหมาะสำหรับพักผ่อนผ่อนคลาย" },
-        { name: "เกาะล้าน", cat: "ทะเล", desc: "น้ำทะเลใส หาดทรายขาว มีหาดตาแหวนและหาดแสม" },
-        { name: "ปราสาทสัจธรรม", cat: "วัฒนธรรม", desc: "สถาปัตยกรรมไม้แกะสลักขนาดใหญ่ที่สุดในโลกริมทะเล" },
-        { name: "เขาสามมุข", cat: "จุดชมวิว", desc: "จุดชมวิวทิวทัศน์อ่าวบางแสน พร้อมฝูงลิงเจ้าถิ่น" },
-        { name: "สวนนงนุช พัทยา", cat: "สวนพฤกษศาสตร์", desc: "สวนพฤกษศาสตร์ระดับโลก รวมพันธุ์ไม้นานาชนิด" },
-        { name: "เกาะสีชัง", cat: "เกาะพักผ่อน", desc: "เกาะบรรยากาศเงียบสงบ มีพระจุฑาธุชราชฐาน" }
-      ],
-      "ระยอง": [
-        { name: "เกาะเสม็ด", cat: "ทะเล", desc: "เกาะท่องเที่ยวนามกระเดื่อง ทรายขาวละเอียด คึกคักยามค่ำคืน" },
-        { name: "เขาแหลมหญ้า", cat: "ธรรมชาติ", desc: "จุดชมวิวสะพานไม้ริมทะเลและลานกางเต็นท์บรรยากาศดี" },
-        { name: "ทุ่งโปรงทอง", cat: "ป่าชายเลน", desc: "เส้นทางศึกษาธรรมชาติป่าชายเลนประแสร์ สีทองกว้างใหญ่" },
-        { name: "หาดแม่รำพึง", cat: "ชายหาด", desc: "ชายหาดชายฝั่งยาวเหยียด ร่มรื่นด้วยทิวสน" },
-        { name: "วัดป่าประดู่", cat: "วัฒนธรรม", desc: "วัดเก่าแก่ประดิษฐานพระนอนตะแคงซ้ายแห่งเดียวในไทย" }
-      ],
-      "จันทบุรี": [
-        { name: "จุดชมวิวเนินนางพญา", cat: "จุดชมวิว", desc: "ถนนเลียบชายทะเลที่สวยที่สุดในภาคตะวันออก" },
-        { name: "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", cat: "วัฒนธรรม", desc: "โบสถ์คริสต์สไตล์โกธิคสวยงามตระการตา" },
-        { name: "ชุมชนริมน้ำจันทบูร", cat: "ย่านโบราณ", desc: "ชุมชนเก่าแก่ริมน้ำ สถาปัตยกรรมผสมผสานไทย-จีน-ตะวันตก" },
-        { name: "น้ำตกพลิ้ว", cat: "ธรรมชาติ", desc: "น้ำตกสวยใสมีน้ำตลอดปี และปลาพลวงหินจำนวนมาก" },
-        { name: "เขาคิชฌกูฏ", cat: "สายบุญ", desc: "แสวงบุญกราบไหว้รอยพระพุทธบาทพลวงบนยอดเขา" }
-      ],
-      "ตราด": [
-        { name: "เกาะกูด", cat: "ทะเล", desc: "อัญมณีแห่งอ่าวไทย น้ำทะเลใสราวกับกระจก" },
-        { name: "เกาะช้าง", cat: "ทะเล/ภูเขา", desc: "เกาะขนาดใหญ่อันดับ 2 ของประเทศ มีทั้งทะเลและน้ำตก" },
-        { name: "เกาะหมาก", cat: "ทะเล", desc: "เกาะท่องเที่ยวเชิงอนุรักษ์ เงียบสงบ เหมาะกับการพักผ่อน" },
-        { name: "หาดบานชื่น", cat: "ชายหาด", desc: "ชายหาดทรายขาวนุ่มเท้า บรรยากาศสงบร่มรื่น" }
-      ],
-      "ฉะเชิงเทรา": [
-        { name: "วัดโสธรวรารามวรวิหาร", cat: "วัฒนธรรม", desc: "วัดคู่บ้านคู่เมืองแปดริ้ว กราบขอพรหลวงพ่อโสธร" },
-        { name: "วัดสมานรัตนาราม", cat: "วัฒนธรรม", desc: "ประดิษฐานองค์พระพิฆเนศปางนอนเสวยสุของค์ใหญ่" },
-        { name: "วัดปากน้ำโจ้โล้", cat: "โบสถ์ทองคำ", desc: "พระอุโบสถสีทองอร่ามทั้งหลังริมแม่น้ำบางปะกง" },
-        { name: "ตลาดโบราณ 100 ปี บ้านใหม่", cat: "ตลาดโบราณ", desc: "สัมผัสวิถีชีวิตดั้งเดิมพร้อมของกินอร่อยริมน้ำ" }
-      ],
-      "ปราจีนบุรี": [
-        { name: "อุทยานแห่งชาติทับลาน", cat: "ธรรมชาติ", desc: "ป่าลานที่อุดมสมบูรณ์และเป็นแหล่งมรดกโลกทางธรรมชาติ" },
-        { name: "แก่งหินเพลิง", cat: "กิจกรรมผจญภัย", desc: "ล่องแก่งเรือยางสุดตื่นเต้นในช่วงฤดูฝน" },
-        { name: "ตึกเจ้าพระยาอภัยภูเบศร", cat: "สถาปัตยกรรม", desc: "ตึกสไตล์บารอคสีเหลืองสดใส ศูนย์การเรียนรู้สมุนไพร" },
-        { name: "วัดแก้วพิจิตร", cat: "วัฒนธรรม", desc: "วัดเก่าแก่มีพระอุโบสถสีอภัยสถาปัตยกรรม 4 ชาติ" }
-      ],
-      "สระแก้ว": [
-        { name: "ปราสาทหินสด๊กก็อกธม", cat: "โบราณสถาน", desc: "โบราณสถานขอมที่ใหญ่ที่สุดในภาคตะวันออก" },
-        { name: "ละลุ", cat: "ปรากฏการณ์ธรรมชาติ", desc: "เสาดินประติมากรรมธรรมชาติที่เกิดจากการกัดเซาะ" },
-        { name: "อุทยานแห่งชาติปางสีดา", cat: "ธรรมชาติ", desc: "เมืองหลวงแห่งผีเสื้อ และน้ำตกปางสีดาอันร่มรื่น" },
-        { name: "ตลาดโรงเกลือ", cat: "ช้อปปิ้ง", desc: "ตลาดการค้าชายแดนขนาดใหญ่ที่สุดในภูมิภาค" }
-      ]
+    const categoryLabels = {
+      nature: "ธรรมชาติและทะเล",
+      cafe: "คาเฟ่และร้านกาแฟ",
+      culture: "วัดและวัฒนธรรม"
     };
 
-    // State Variables
-    let currentPinned = JSON.parse(localStorage.getItem('eastern_pins') || '[]');
+    // ตัวอย่างฐานข้อมูลรายการสถานที่ 40 แห่งแบบไม่ซ้ำต่อหมวด
+    const database = {};
 
-    // Switch Page Function
-    function switchPage(pageNumber) {
-      // ซ่อนทุกหน้า
-      document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    const provinces = ["ชลบุรี", "ระยอง", "จันทบุรี", "ตราด", "ฉะเชิงเทรา", "ปราจีนบุรี", "สระแก้ว"];
+    const categories = ["nature", "cafe", "culture"];
 
-      // แสดงหน้าที่เลือก
-      document.getElementById(`page-${pageNumber}`).classList.add('active');
-      document.getElementById(`btn-p${pageNumber}`).classList.add('active');
+    // ฟังก์ชันจำลองการเจนสถานที่ให้ครบหมวดละ 40 แห่งไม่ซ้ำกันสำหรับทดสอบระบบ
+    provinces.forEach(prov => {
+      database[prov] = {};
+      categories.forEach(cat => {
+        database[prov][cat] = [];
+        let prefix = "";
+        if (cat === "nature") prefix = "จุดท่องเที่ยวธรรมชาติ/ทะเล ";
+        if (cat === "cafe") prefix = "คาเฟ่บรรยากาศดี ";
+        if (cat === "culture") prefix = "วัด/แหล่งวัฒนธรรม ";
 
-      // Refresh หน้าต่างๆ ตามกรณี
-      if (pageNumber === 4) renderPage4();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Page 1 -> Search Action
-    function startSearchFromPage1() {
-      const province = document.getElementById('p1-province').value;
-      const days = document.getElementById('p1-days').value;
-
-      document.getElementById('p2-title').textContent = `สถานที่ท่องเที่ยวแนะนำ จ.${province}`;
-      document.getElementById('p2-subtitle').textContent = `โปรแกรมสำหรับระยะเวลา ${days} วัน (คัดสรรสถานที่เด็ดไม่ซ้ำกัน)`;
-
-      const list = placesData[province] || [];
-      const grid = document.getElementById('p2-grid');
-      grid.innerHTML = '';
-
-      if (list.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1;">ไม่พบข้อมูลสถานที่ท่องเที่ยว</p>`;
-      } else {
-        list.forEach(place => {
-          grid.appendChild(createPlaceCard(place, province));
-        });
-      }
-
-      switchPage(2);
-    }
-
-    // Page 3 -> Select Province
-    function selectProvincePage3(province) {
-      const list = placesData[province] || [];
-      const container = document.getElementById('p3-result-container');
-
-      let html = `
-        <div class="card-box" style="margin-top: 20px;">
-          <h3 style="font-family:'Kanit', sans-serif; color: var(--primary-dark);">รายชื่อสถานที่ท่องเที่ยว จ.${province} (${list.length} แห่ง)</h3>
-          <div class="places-grid">
-      `;
-
-      container.innerHTML = html;
-      const grid = container.querySelector('.places-grid');
-
-      list.forEach(place => {
-        grid.appendChild(createPlaceCard(place, province));
+        for (let i = 1; i <= 40; i++) {
+          database[prov][cat].push({
+            id: `${prov}-${cat}-${i}`,
+            name: `${prefix}${prov} แห่งที่ ${i}`,
+            desc: `สถานที่ท่องเที่ยวในหมวด${categoryLabels[cat]} ของจังหวัด${prov} ลำดับที่ ${i} เหมาะสำหรับแวะพักผ่อนถ่ายรูป`
+          });
+        }
       });
+    });
+
+    // ตัวแปรควบคุมหน้า
+    let currentSearchResults = [];
+    let currentPage = 1;
+    let pinnedItems = JSON.parse(localStorage.getItem('my_pinned_places') || '[]');
+
+    function startSearch() {
+      const province = document.getElementById('province').value;
+      const category = document.getElementById('category').value;
+
+      // ดึงข้อมูล 40 รายการตรงตามจังหวัดและหมวดหมู่
+      currentSearchResults = database[province][category];
+      currentPage = 1;
+
+      // แสดงแถบสลับหน้า
+      document.getElementById('results-bar').style.display = 'flex';
+      document.getElementById('results-title-text').textContent = `${categoryLabels[category]} จ.${province} (รวม 40 แห่ง)`;
+
+      renderPage(1);
     }
 
-    // Page 4 -> Render Pinned Items
-    function renderPage4() {
-      const grid = document.getElementById('p4-grid');
-      grid.innerHTML = '';
-
-      if (currentPinned.length === 0) {
-        grid.innerHTML = `
-          <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">
-            <h3>ยังไม่มีสถานที่ที่คุณปักหมุดไว้</h3>
-            <p style="margin-top: 8px;">สามารถกดปักหมุด 📌 จากหน้าอื่นๆ เพื่อเก็บบันทึกไว้ดูตรงนี้ได้เลย</p>
-          </div>
-        `;
-        return;
-      }
-
-      currentPinned.forEach(item => {
-        grid.appendChild(createPlaceCard(item, item.province));
-      });
-    }
-
-    // Create Card Component (Reusable)
-    function createPlaceCard(place, province) {
-      const isPinned = currentPinned.some(p => p.name === place.name && p.province === province);
+    function switchResultPage(pageNumber) {
+      currentPage = pageNumber;
       
-      const card = document.createElement('div');
-      card.className = 'place-item';
-      card.innerHTML = `
-        <span class="place-tag">${place.cat}</span>
-        <div class="place-title">${place.name}</div>
-        <div class="place-desc">${place.desc}</div>
-        <button class="btn-pin ${isPinned ? 'active' : ''}" onclick="togglePin('${place.name}', '${place.cat}', '${place.desc}', '${province}')">
-          ${isPinned ? '📌 บันทึกแล้ว' : '📌 ปักหมุดสถานที่'}
-        </button>
-      `;
-      return card;
+      // อัปเดตสถานะปุ่ม Tab
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`tab-${pageNumber}`).classList.add('active');
+
+      renderPage(pageNumber);
     }
 
-    // Toggle Pin Function
-    function togglePin(name, cat, desc, province) {
-      const index = currentPinned.findIndex(p => p.name === name && p.province === province);
+    function renderPage(pageNumber) {
+      const container = document.getElementById('places-container');
+      container.innerHTML = '';
 
-      if (index > -1) {
-        currentPinned.splice(index, 1);
+      // คำนวณช่วงข้อมูล (หน้าละ 10 รายการ)
+      // หน้า 1: 0-9 | หน้า 2: 10-19 | หน้า 3: 20-29 | หน้า 4: 30-39
+      const startIndex = (pageNumber - 1) * 10;
+      const pageItems = currentSearchResults.slice(startIndex, startIndex + 10);
+
+      pageItems.forEach((item, index) => {
+        const itemNumber = startIndex + index + 1;
+        const isPinned = pinnedItems.includes(item.id);
+
+        const card = document.createElement('div');
+        card.className = 'place-card';
+        card.innerHTML = `
+          <span class="place-number">#${itemNumber}</span>
+          <div class="place-title">${item.name}</div>
+          <div class="place-tag">📍 ${document.getElementById('province').value}</div>
+          <div class="place-desc">${item.desc}</div>
+          <button class="btn-pin ${isPinned ? 'active' : ''}" onclick="togglePin('${item.id}')">
+            ${isPinned ? '📌 ปักหมุดแล้ว' : '📌 ปักหมุดสถานที่'}
+          </button>
+        `;
+        container.appendChild(card);
+      });
+
+      window.scrollTo({ top: 220, behavior: 'smooth' });
+    }
+
+    function togglePin(id) {
+      if (pinnedItems.includes(id)) {
+        pinnedItems = pinnedItems.filter(item => item !== id);
       } else {
-        currentPinned.push({ name, cat, desc, province });
+        pinnedItems.push(id);
       }
-
-      localStorage.setItem('eastern_pins', JSON.stringify(currentPinned));
-      updatePinBadge();
-
-      // Refresh หน้านั้นๆ
-      const activePage = document.querySelector('.page-section.active').id;
-      if (activePage === 'page-2') {
-        const prov = document.getElementById('p1-province').value;
-        const list = placesData[prov] || [];
-        const grid = document.getElementById('p2-grid');
-        grid.innerHTML = '';
-        list.forEach(p => grid.appendChild(createPlaceCard(p, prov)));
-      } else if (activePage === 'page-4') {
-        renderPage4();
-      }
+      localStorage.setItem('my_pinned_places', JSON.stringify(pinnedItems));
+      renderPage(currentPage);
     }
 
-    function updatePinBadge() {
-      document.getElementById('nav-pin-count').textContent = currentPinned.length;
-    }
-
-    // Init App
+    // เริ่มต้นค้นหาทันทีเมื่อโหลดหน้าเว็บ
     window.onload = function() {
-      updatePinBadge();
+      startSearch();
     };
   </script>
 </body>

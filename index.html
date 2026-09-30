@@ -154,7 +154,6 @@
     }
     .btn-search:hover { background: var(--primary-dark); transform: translateY(-2px); }
 
-    /* Budget Result Display Box */
     .budget-summary-box {
       background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
       border: 1.5px solid #A5D6A7;
@@ -190,11 +189,11 @@
     }
     .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
     .card-img-container { position: relative; width: 100%; height: 190px; background: #E2E8F0; }
-    .card-img { width: 100%; height: 100%; object-fit: cover; }
+    .card-img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .card-category-tag {
       position: absolute; top: 12px; left: 12px; background: rgba(46, 125, 50, 0.85);
       backdrop-filter: blur(4px); color: var(--white); padding: 4px 10px;
-      border-radius: 12px; font-size: 0.75rem; font-weight: 500;
+      border-radius: 12px; font-size: 0.75rem; font-weight: 500; z-index: 2;
     }
     .card-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
     .card-title { font-family: 'Kanit', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 6px; }
@@ -204,10 +203,23 @@
     .btn-detail, .btn-pin {
       padding: 8px 12px; border-radius: 8px; border: 1px solid var(--card-border);
       background: var(--bg-nature); color: var(--primary-dark); cursor: pointer;
-      font-size: 0.85rem; font-weight: 600; transition: all 0.2s;
+      font-size: 0.85rem; font-weight: 600; transition: all 0.2s; text-decoration: none; text-align: center;
     }
-    .btn-detail { flex: 1; }
+    .btn-detail { flex: 1; display: flex; align-items: center; justify-content: center; }
     .btn-pin.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+    .place-fallback {
+      height: 190px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 15px;
+      background: #f3f3f3;
+      color: #666;
+      font-size: 0.85rem;
+    }
 
     .pagination { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 35px 0 20px; }
     .page-btn {
@@ -252,7 +264,7 @@
     <header>
       <button class="btn-logout" onclick="navigateTo('welcome-page')">🚪 ออกจากระบบ</button>
       <h1>🗺 TripBlog 7 จังหวัดภาคตะวันออก</h1>
-      <p>ฐานข้อมูลสถานที่ท่องเที่ยว 24 แห่งต่อหมวดหมู่ แสดงผล 4 หน้า หน้าละ 6 สถานที่พร้อมรูปจริง</p>
+      <p>ฐานข้อมูลสถานที่ท่องเที่ยว 24 แห่งต่อหมวดหมู่ แสดงผล 4 หน้า หน้าละ 6 สถานที่พร้อมดึงรูปจาก Wikimedia Commons อัตโนมัติ (ชลบุรี 72 แห่ง)</p>
     </header>
 
     <div class="container">
@@ -271,7 +283,7 @@
         </div>
 
         <div class="form-group">
-          <label for="category">🏖️️ เลือกหมวดหมู่การเที่ยว:</label>
+          <label for="category">🏖 เลือกหมวดหมู่การเที่ยว:</label>
           <select id="category">
             <option value="nature">🌿 ธรรมชาติและทะเล (4 หน้า • หน้าละ 6 สถานที่)</option>
             <option value="cafe">☕ คาเฟ่และร้านกาแฟ (4 หน้า • หน้าละ 6 สถานที่)</option>
@@ -484,7 +496,6 @@
       }
     };
 
-    // ภาพคุณภาพสูงสำหรับสถานที่ท่องเที่ยวจริง
     const fallbackCategoryImages = {
       nature: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
       cafe: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
@@ -500,9 +511,38 @@
     let database = [];
     let pinnedIds = JSON.parse(localStorage.getItem('eastern_pinned_ids') || '[]');
     let currentPage = 1;
-    const itemsPerPage = 6; // 6 รายการต่อหน้า (24 / 6 = 4 หน้า)
+    const itemsPerPage = 6; 
     let showingPinnedOnly = false;
     let currentFilteredList = [];
+
+    // ฟังก์ชันสร้าง Google Maps URL
+    function mapsURL(name, province) {
+      return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name + " " + province);
+    }
+
+    // ฟังก์ชันค้นหารูปภาพจริงจาก Wikimedia Commons (เฉพาะจังหวัดชลบุรี) หรือสำรองด้วย Unsplash สำหรับจังหวัดอื่น
+    async function getWikiImage(placeName, province) {
+      if (province !== "ชลบุรี") {
+        return null; // ให้ใช้รูปสำรองสำหรับจังหวัดอื่น
+      }
+
+      const searchText = placeName + " Chonburi Thailand";
+      const api = "https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=" + encodeURIComponent(searchText) + "&gsrnamespace=6&gsrlimit=1&prop=imageinfo&iiprop=url&iiurlwidth=800&format=json&origin=*";
+
+      try {
+        const response = await fetch(api);
+        const data = await response.json();
+        if (data.query && data.query.pages) {
+          const pages = Object.values(data.query.pages);
+          if (pages.length && pages[0].imageinfo && pages[0].imageinfo[0]) {
+            return pages[0].imageinfo[0].thumburl || pages[0].imageinfo[0].url;
+          }
+        }
+      } catch (error) {
+        console.log("ไม่สามารถโหลดรูปจาก Wiki:", placeName);
+      }
+      return null;
+    }
 
     // เปลี่ยนหน้า Landing -> Main Dashboard
     function navigateTo(pageId) {
@@ -529,8 +569,6 @@
               category: category,
               name: name,
               district: `อ.เมือง${province}`,
-              // ใช้รูปภาพจำลองสถานท่องเที่ยวจริงแบบสุ่มสไตล์ Unsplash
-              img: `https://source.unsplash.com/featured/600x400/?${encodeURIComponent(name)},thailand`,
               desc: `${name} สถานที่ท่องเที่ยวโดดเด่นในหมวด${categoryNames[category]} ของ จ.${province} มีเอกลักษณ์เฉพาะตัว สวยงามน่าไปสัมผัส`,
               nextPlaces: `จุดชมวิว ${province}, สวนสาธารณะ ${province}`,
               hotels: `โรงแรมและรีสอร์ทสวย จ.${province}`,
@@ -547,25 +585,18 @@
     function calculateBudget() {
       const days = parseInt(document.getElementById('duration').value) || 1;
       const people = parseInt(document.getElementById('travelers').value) || 1;
-
-      let costPerPersonPerDay = 1200; // ค่าพื้นฐานต่อคนต่อวัน (อาหาร + น้ำมัน + ค่าเข้าชม)
-      let accommodationCostPerNight = 1200; // ค่าที่พักต่อห้อง (หาร 2 คนได้)
-
+      let accommodationCostPerNight = 1200;
       let totalCostPerPerson = 0;
 
       if (days === 1) {
-        // ทริป 1 วัน ไม่มีค่าที่พัก
         totalCostPerPerson = 1200;
       } else if (days === 2) {
-        // ทริป 2 วัน 1 คืน
-        totalCostPerPerson = (1200 * 2) + (accommodationCostPerNight / 2); // 3,000 บาท/คน
+        totalCostPerPerson = (1200 * 2) + (accommodationCostPerNight / 2);
       } else if (days === 3) {
-        // ทริป 3 วัน 2 คืน
-        totalCostPerPerson = (1200 * 3) + ((accommodationCostPerNight * 2) / 2); // 4,800 บาท/คน
+        totalCostPerPerson = (1200 * 3) + ((accommodationCostPerNight * 2) / 2);
       }
 
       const totalGroupCost = totalCostPerPerson * people;
-
       document.getElementById('total-budget').textContent = `${totalGroupCost.toLocaleString()} บาท`;
       document.getElementById('budget-detail').textContent = 
         `ประมาณการเฉลี่ยคนละ ${totalCostPerPerson.toLocaleString()} บาท/ทริป (สำหรับผู้เดินทาง ${people} คน • ระยะเวลา ${days} วัน)`;
@@ -605,7 +636,8 @@
       renderGrid();
     }
 
-    function renderGrid() {
+    // แสดงผลกริดพร้อมโหลดภาพแบบ Asynchronous (รองรับ Wikimedia สำหรับชลบุรี)
+    async function renderGrid() {
       const grid = document.getElementById('places-grid');
       grid.innerHTML = '';
 
@@ -626,16 +658,22 @@
       const startIndex = (currentPage - 1) * itemsPerPage;
       const paginatedItems = currentFilteredList.slice(startIndex, startIndex + itemsPerPage);
 
-      paginatedItems.forEach(item => {
+      for (const item of paginatedItems) {
         const isPinned = pinnedIds.includes(item.id);
-        const defaultImg = fallbackCategoryImages[item.category];
-
         const card = document.createElement('div');
         card.className = 'card';
+
+        // ดึงรูปภาพ Wikimedia (ถ้าเป็นชลบุรี)
+        let imgUrl = await getWikiImage(item.name, item.province);
+        if (!imgUrl) {
+          imgUrl = fallbackCategoryImages[item.category];
+        }
+
         card.innerHTML = `
           <div class="card-img-container">
-            <img class="card-img" src="${item.img}" alt="${item.name}" loading="lazy" 
-                 onerror="this.onerror=null; this.src='${defaultImg}';">
+            <a href="${mapsURL(item.name, item.province)}" target="_blank" rel="noopener">
+              <img class="card-img" src="${imgUrl}" alt="${item.name}" loading="lazy">
+            </a>
             <span class="card-category-tag">${categoryNames[item.category]}</span>
           </div>
           <div class="card-body">
@@ -643,7 +681,7 @@
             <div class="card-location">📍 ${item.district} จ.${item.province}</div>
             <div class="card-desc">${item.desc}</div>
             <div class="card-actions">
-              <button class="btn-detail" onclick="openModal(${item.id})">รายละเอียด & แผนที่</button>
+              <button class="btn-detail" onclick="openModal(${item.id}, '${imgUrl}')">รายละเอียด & แผนที่</button>
               <button class="btn-pin ${isPinned ? 'active' : ''}" onclick="togglePin(${item.id})">
                 ${isPinned ? '📌 ติดกาวแล้ว' : '📌 ติดกาว'}
               </button>
@@ -651,7 +689,7 @@
           </div>
         `;
         grid.appendChild(card);
-      });
+      }
 
       renderPagination(totalPages);
     }
@@ -695,17 +733,12 @@
       document.getElementById('pin-count').textContent = pinnedIds.length;
     }
 
-    function openModal(id) {
+    function openModal(id, imgUrl) {
       const place = database.find(p => p.id === id);
       const budgetInfo = calculateBudget();
-      const defaultImg = fallbackCategoryImages[place.category];
 
       const modalImg = document.getElementById('modal-img');
-      modalImg.src = place.img;
-      modalImg.onerror = function() {
-        this.onerror = null;
-        this.src = defaultImg;
-      };
+      modalImg.src = imgUrl;
 
       document.getElementById('modal-title').textContent = place.name;
       document.getElementById('modal-location').textContent = `📍 ${place.district} จ.${place.province}`;

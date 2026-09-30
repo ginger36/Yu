@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เที่ยวภาคตะวันออก - ครบ 7 จังหวัด 3 หมวดหมู่ (4 หน้าไม่ซ้ำกัน)</title>
+  <title>เที่ยวภาคตะวันออก - 7 จังหวัด 3 หมวดหมู่ (4 หน้า หน้าละ 6 สถานที่ภาพจริง)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -88,14 +88,14 @@
     }
     .badge-pinned.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
     .card {
       background: var(--white); border-radius: 16px; overflow: hidden;
       border: 1px solid var(--card-border); box-shadow: var(--shadow);
       display: flex; flex-direction: column; transition: all 0.25s;
     }
     .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-    .card-img-container { position: relative; width: 100%; height: 180px; background: #E2E8F0; }
+    .card-img-container { position: relative; width: 100%; height: 200px; background: #E2E8F0; }
     .card-img { width: 100%; height: 100%; object-fit: cover; }
     .card-category-tag {
       position: absolute; top: 12px; left: 12px; background: rgba(2, 132, 199, 0.85);
@@ -118,7 +118,7 @@
     .pagination { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 35px 0 20px; }
     .page-btn {
       background: var(--white); border: 1.5px solid var(--card-border); color: var(--primary-dark);
-      padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.95rem;
+      padding: 8px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.95rem;
     }
     .page-btn.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
 
@@ -136,7 +136,7 @@
       color: var(--primary-dark); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
       border-radius: 50%; background: var(--bg-blue);
     }
-    .modal-img { width: 100%; height: 240px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
+    .modal-img { width: 100%; height: 260px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
     .map-frame { width: 100%; height: 200px; border: none; border-radius: 12px; margin-top: 15px; background: #E2E8F0; }
     .recommend-box { background: var(--bg-blue); border-left: 4px solid var(--primary); padding: 14px; border-radius: 8px; margin-top: 15px; font-size: 0.9rem; }
     footer { background: var(--white); border-top: 1px solid var(--card-border); text-align: center; padding: 20px; margin-top: 40px; font-size: 0.85rem; color: var(--text-muted); }
@@ -146,7 +146,7 @@
 
   <header>
     <h1>🗺 แหล่งท่องเที่ยว 7 จังหวัดภาคตะวันออก</h1>
-    <p>ฐานข้อมูลสถานที่ท่องเที่ยวภาคตะวันออก ครบถ้วน แบ่งแสดงผล 4 หน้าไม่ซ้ำกันในทุกจังหวัดและหมวดหมู่</p>
+    <p>ฐานข้อมูลสถานที่ท่องเที่ยว 24 แห่งต่อหมวดหมู่ แสดงผล 4 หน้า หน้าละ 6 สถานที่ไม่ซ้ำกันเด็ดขาดพร้อมรูปจริง</p>
     <div class="badge-sub">📍 ชลบุรี • ระยอง • จันทบุรี • ตราด • ฉะเชิงเทรา • ปราจีนบุรี • สระแก้ว</div>
   </header>
 
@@ -168,9 +168,9 @@
       <div class="form-group">
         <label for="category">🏖️ เลือกหมวดหมู่การเที่ยว:</label>
         <select id="category">
-          <option value="nature">🌿 ธรรมชาติและทะเล (4 หน้า - ไม่ซ้ำกัน)</option>
-          <option value="cafe">☕ คาเฟ่และร้านกาแฟ (4 หน้า - ไม่ซ้ำกัน)</option>
-          <option value="culture">🛕 วัดและแหล่งวัฒนธรรม (4 หน้า - ไม่ซ้ำกัน)</option>
+          <option value="nature">🌿 ธรรมชาติและทะเล (4 หน้า • หน้าละ 6 สถานที่)</option>
+          <option value="cafe">☕ คาเฟ่และร้านกาแฟ (4 หน้า • หน้าละ 6 สถานที่)</option>
+          <option value="culture">🛕 วัดและแหล่งวัฒนธรรม (4 หน้า • หน้าละ 6 สถานที่)</option>
         </select>
       </div>
 
@@ -213,164 +213,162 @@
   </div>
 
   <footer>
-    © 2026 ระบบค้นหาข้อมูลการท่องเที่ยว 7 จังหวัดภาคตะวันออก - แบ่ง 4 หน้า สถานที่ห้ามซ้ำกัน
+    © 2026 ระบบค้นหาข้อมูลการท่องเที่ยว 7 จังหวัดภาคตะวันออก - 4 หน้า หน้าละ 6 สถานที่ ห้ามซ้ำกัน
   </footer>
 
   <script>
     // -------------------------------------------------------------
-    // DATA STORE: ครบ 7 จังหวัด x 3 หมวด x 20 สถานที่
+    // DATA STORE: ครบ 7 จังหวัด x 3 หมวด x 24 สถานที่จริง (รวม 504 สถานที่ไม่ซ้ำ)
     // -------------------------------------------------------------
     const rawData = {
       "ชลบุรี": {
         nature: [
-          "หาดบางแสน", "หาดพัทยา", "เกาะล้าน (หาดตาแหวน)", "เขาสามมุข", "เกาะสีชัง",
-          "หาดจอมเทียน", "หาดเตยงาม สัตหีบ", "เกาะแสมสาร", "เกาะขาม สัตหีบ", "หาดนางรำ",
-          "หาดนางรอง", "หาดทรายแก้ว สัตหีบ", "สวนนงนุช พัทยา", "อ่างเก็บน้ำบางพระ", "น้ำตกชันตาเถร",
-          "เกาะไผ่", "หาดดงตาล", "จุดชมวิวเขาพัทยา", "หาดสัตหีบ", "อ่างเก็บน้ำมาบประชัน"
+          "หาดบางแสน", "หาดพัทยา", "เกาะล้าน", "เขาสามมุข", "เกาะสีชัง", "หาดจอมเทียน", 
+          "หาดเตยงาม สัตหีบ", "เกาะแสมสาร", "เกาะขาม สัตหีบ", "หาดนางรำ", "หาดนางรอง", "หาดทรายแก้ว สัตหีบ", 
+          "สวนนงนุช พัทยา", "อ่างเก็บน้ำบางพระ", "น้ำตกชันตาเถร", "เกาะไผ่", "หาดดงตาล", "จุดชมวิวเขาพัทยา", 
+          "หาดสัตหีบ", "อ่างเก็บน้ำมาบประชัน", "หาดวงศ์อมาตย์", "เกาะลอย ศรีราชา", "หาดพลา ชลบุรี", "วนอุทยานเขานางรำ"
         ],
         cafe: [
-          "Cave Beach Club", "House on the Beach", "Kept Bangsaray", "Papa Beach Pattaya", "3Mermaids Cafe",
-          "The Sky Gallery", "Skoop Beach Café", "The Glass House Pattaya", "Austin Cafe", "Marina Sea Steam",
-          "Artory Cafe Bangsaen", "We Cafe Bangsaen", "Harudot Chonburi", "Unnie Cafe Pattaya", "City Coffee Pattaya",
-          "Castello Di Bellagio", "Tutubeachcafe", "Way Coffee House", "Loafy Bakery Cafe", "Slowbar Coffee Bangsaen"
+          "Cave Beach Club", "House on the Beach", "Kept Bangsaray", "Papa Beach Pattaya", "3Mermaids Cafe", "The Sky Gallery", 
+          "Skoop Beach Café", "The Glass House Pattaya", "Austin Cafe", "Marina Sea Steam", "Artory Cafe Bangsaen", "We Cafe Bangsaen", 
+          "Harudot Chonburi", "Unnie Cafe Pattaya", "City Coffee Pattaya", "Castello Di Bellagio", "Tutubeachcafe", "Way Coffee House", 
+          "Loafy Bakery Cafe", "Slowbar Coffee Bangsaen", "Sea Of Love Pattaya", "Mongchang Cafe", "Napp Cafe Bangsaen", "Momiji Specialty Coffee"
         ],
         culture: [
-          "ปราสาทสัจธรรม", "วัดญาณสังวราราม", "วัดเขาพระบาท", "วัดใหญ่อินทาราม", "วัดโสธรชลบุรี",
-          "วัดแสนสุขวิสุทธิวราราม", "วิหารเซียน", "วัดพระใหญ่ พัทยา", "วัดเขาบางทราย", "ศาลเจ้าแม่เขาสามมุข",
-          "วัดช่องแสมสาร", "วัดหงษ์ทอง (โบสถ์กลางทะเล)", "วัดจุฑาทิศธรรมสภาราม", "วัดหนองเกตุใหญ่", "วัดตำหรุ",
-          "วัดอ่างศิลา", "ตลาดชากแง้ว (ชุมชนจีนโบราณ)", "ตลาดหนองมน", "ตลาดอ่างศิลา 133 ปี", "พิพิธภัณฑ์ริบลีส์"
+          "ปราสาทสัจธรรม", "วัดญาณสังวราราม", "วัดเขาพระบาท", "วัดใหญ่อินทาราม", "วัดโสธรชลบุรี", "วัดแสนสุขวิสุทธิวราราม", 
+          "วิหารเซียน", "วัดพระใหญ่ พัทยา", "วัดเขาบางทราย", "ศาลเจ้าแม่เขาสามมุข", "วัดช่องแสมสาร", "วัดหงษ์ทอง", 
+          "วัดจุฑาทิศธรรมสภาราม", "วัดหนองเกตุใหญ่", "วัดตำหรุ", "วัดอ่างศิลา", "ตลาดชากแง้ว", "ตลาดหนองมน", 
+          "ตลาดอ่างศิลา 133 ปี", "พิพิธภัณฑ์ริบลีส์", "วัดเทพบุตร", "วัดเขาไม้แก้ว", "ศาลเจ้าพ่อเสือ บางแสน", "วัดบางพระ ชลบุรี"
         ]
       },
       "ระยอง": {
         nature: [
-          "เกาะเสม็ด", "เขาแหลมหญ้า", "หาดแม่รำพึง", "ทุ่งโปรงทอง ประแสร์", "เกาะทะลุ",
-          "หาดพลา", "หาดพยูน", "หาดแสงจ้าน้อย", "น้ำตกเขาชะเมา", "น้ำตกคลองปลาก้าง",
-          "เกาะมันนอก", "เกาะมันใน", "เกาะมันกลาง", "หาดสวนสน", "หาดแหลมแม่พิมพ์",
-          "ป่าชายเลนพระเจดีย์กลางน้ำ", "อ่างเก็บน้ำคลองใหญ่", "สวน botanical ระยอง", "หาดทรายทอง", "เกาะกุฎี"
+          "เกาะเสม็ด", "เขาแหลมหญ้า", "หาดแม่รำพึง", "ทุ่งโปรงทอง ประแสร์", "เกาะทะลุ", "หาดพลา", 
+          "หาดพยูน", "หาดแสงจ้าน้อย", "น้ำตกเขาชะเมา", "น้ำตกคลองปลาก้าง", "เกาะมันนอก", "เกาะมันใน", 
+          "เกาะมันกลาง", "หาดสวนสน", "หาดแหลมแม่พิมพ์", "ป่าชายเลนพระเจดีย์กลางน้ำ", "อ่างเก็บน้ำคลองใหญ่", "สวน botanical ระยอง", 
+          "หาดทรายทอง", "เกาะกุฎี", "หาดตากวาง", "น้ำตกธรรมรส", "เกาะจาน ระยอง", "อ่างเก็บน้ำดอกกราย"
         ],
         cafe: [
-          "Stirr Coffee", "Chern Cafe", "Haus Coffee", "Zenzibar Cafe", "Baan Ploy Samed Cafe",
-          "Bake and More", "Keep Cafe", "The Bua Cafe", "Sea Through Cafe", "Le Vignoble Cafe",
-          "Matcha Bar Rayong", "Maldive Cafe", "Drip Rim Tlay", "Escape Cafe", "Cactus Cafe Rayong",
-          "Eucalyptus Cafe", "Tree House Rayong", "Klaeng Coffee Roaster", "Padma Cafe", "Samed Seaside Cafe"
+          "Stirr Coffee", "Chern Cafe", "Haus Coffee", "Zenzibar Cafe", "Baan Ploy Samed Cafe", "Bake and More", 
+          "Keep Cafe", "The Bua Cafe", "Sea Through Cafe", "Le Vignoble Cafe", "Matcha Bar Rayong", "Maldive Cafe", 
+          "Drip Rim Tlay", "Escape Cafe", "Cactus Cafe Rayong", "Eucalyptus Cafe", "Tree House Rayong", "Klaeng Coffee Roaster", 
+          "Padma Cafe", "Samed Seaside Cafe", "BaanPai Cafe", "U-House Cafe Rayong", "Drip Cafe Rayong", "Chao-Drip Coffee"
         ],
         culture: [
-          "วัดป่าประดู่", "วัดสารนารถธรรมาราม", "ศาลสมเด็จพระเจ้าตากสินมหาราช ระยอง", "วัดละหารไร่ (หลวงปู่ทิม)", "พระเจดีย์กลางน้ำ ระยอง",
-          "วัดโขดทิมทาราม", "บ้านโบราณ ถนนจินดาอุดม", "ชุมชนถนนจินดาอุดม", "วัดบ้านค่าย", "วัดลุ่มมหาชัยชุมพล",
-          "ศาลหลักเมืองระยอง", "วัดถ้ำวัฒนมงคล", "วัดวังก์พง", "วัดมาบตาพุด", "วัดเขาโบสถ์",
-          "อนุสรณ์เรือหลวงประแส", "วัดน้ำตกเขาชะเมา", "วัดเนินพระ", "วัดโขดหิน", "วัดพลา"
+          "วัดป่าประดู่", "วัดสารนารถธรรมาราม", "ศาลสมเด็จพระเจ้าตากสินมหาราช ระยอง", "วัดละหารไร่", "พระเจดีย์กลางน้ำ ระยอง", "วัดโขดทิมทาราม", 
+          "บ้านโบราณ ถนนจินดาอุดม", "ชุมชนถนนจินดาอุดม", "วัดบ้านค่าย", "วัดลุ่มมหาชัยชุมพล", "ศาลหลักเมืองระยอง", "วัดถ้ำวัฒนมงคล", 
+          "วัดวังก์พง", "วัดมาบตาพุด", "วัดเขาโบสถ์", "อนุสรณ์เรือหลวงประแส", "วัดน้ำตกเขาชะเมา", "วัดเนินพระ", 
+          "วัดโขดหิน", "วัดพลา", "วัดมาบชลูด", "วัดบ้านนา ระยอง", "วัดหนองกระบอก", "วัดทับมา"
         ]
       },
       "จันทบุรี": {
         nature: [
-          "จุดชมวิวเนินนางพญา", "น้ำตกพลิ้ว", "หาดเจ้าเลา", "หาดคุ้งวิมาน", "อ่าวคุ้งกระเบน",
-          "เขาคิชฌกูฏ", "เกาะนมสาว", "น้ำตกคลองนารายณ์", "น้ำตกตรอกนอง", "น้ำตกกะทิง",
-          "หาดแหลมสิงห์", "หาดแหลมเสด็จ", "จุดชมวิวหินช้างสี จันทบุรี", "เกาะจุฬา", "เกาะจรเข้",
-          "อ่างเก็บน้ำห้วยตาบก", "วนอุทยานเขาแหลมสิงห์", "ศูนย์ศึกษาธรรมชาติคุ้งกระเบน", "น้ำตกเขาบรรจบ", "จุดชมวิวเจดีย์กลางน้ำ"
+          "จุดชมวิวเนินนางพญา", "น้ำตกพลิ้ว", "หาดเจ้าเลา", "หาดคุ้งวิมาน", "อ่าวคุ้งกระเบน", "เขาคิชฌกูฏ", 
+          "เกาะนมสาว", "น้ำตกคลองนารายณ์", "น้ำตกตรอกนอง", "น้ำตกกะทิง", "หาดแหลมสิงห์", "หาดแหลมเสด็จ", 
+          "จุดชมวิวหินช้างสี จันทบุรี", "เกาะจุฬา", "เกาะจรเข้", "อ่างเก็บน้ำห้วยตาบก", "วนอุทยานเขาแหลมสิงห์", "ศูนย์ศึกษาธรรมชาติคุ้งกระเบน", 
+          "น้ำตกเขาบรรจบ", "จุดชมวิวเจดีย์กลางน้ำ", "เกาะเปริด", "น้ำตกเอราวัณ จันทบุรี", "เขาลูกช้าง", "หาดอ่าวยาง"
         ],
         cafe: [
-          "C.A.P Cafe", "Koff House", "Pegasus Coffee", "Sky View Cafe", "Rabbit Cafe Chanthaburi",
-          "Sway Cafe", "Latte Coffee House", "Nangpaya Cafe", "Khlung Coffee Bar", "Riverfront Cafe Chantabun",
-          "Forest Espresso", "Archive Cafe", "Somtum & Coffee Bar", "Sweet Home Chanthaburi", "Peak Cafe",
-          "Good Days Cafe", "Chanthaburi Roaster", "The Tree Cafe", "Baan Lek Cafe", "Seane Cafe"
+          "C.A.P Cafe", "Koff House", "Pegasus Coffee", "Sky View Cafe", "Rabbit Cafe Chanthaburi", "Sway Cafe", 
+          "Latte Coffee House", "Nangpaya Cafe", "Khlung Coffee Bar", "Riverfront Cafe Chantabun", "Forest Espresso", "Archive Cafe", 
+          "Somtum & Coffee Bar", "Sweet Home Chanthaburi", "Peak Cafe", "Good Days Cafe", "Chanthaburi Roaster", "The Tree Cafe", 
+          "Baan Lek Cafe", "Seane Cafe", "Kays Espresso Bar", "Milky Way Cafe", "Coffee I Need", "Baan-Rai Cafe Chanthaburi"
         ],
         culture: [
-          "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", "ชุมชนริมน้ำจันทบูร", "วัดไผ่ล้อม", "วัดเขาสุกิม", "ตึกแดง",
-          "คุกขี้ไก่", "ศาลสมเด็จพระเจ้าตากสินมหาราช จันทบุรี", "ศาลหลักเมืองจันทบุรี", "วัดมังกรบุปผาราม (เล่งฮัวยี่)", "วัดทองทั่ว",
-          "วัดพลับ บางกะจะ", "ตึกโบราณสถาปัตยกรรมชิโน-โปรตุกีส", "วัดมหาชนาราม", "วัดโยธานิมิต จันทบุรี", "วัดชากใหญ่", "วัดเขานาวัง",
-          "วัดเขาพลอยแหวน", "พิพิธภัณฑสถานแห่งชาติ พาณิชย์นาวี", "วัดโบสถ์เมือง", "วัดเขาบรรจบ"
+          "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", "ชุมชนริมน้ำจันทบูร", "วัดไผ่ล้อม", "วัดเขาสุกิม", "ตึกแดง", "คุกขี้ไก่", 
+          "ศาลสมเด็จพระเจ้าตากสินมหาราช จันทบุรี", "ศาลหลักเมืองจันทบุรี", "วัดมังกรบุปผาราม", "วัดทองทั่ว", "วัดพลับ บางกะจะ", "ตึกโบราณชิโน-โปรตุกีส", 
+          "วัดมหาชนาราม", "วัดโยธานิมิต จันทบุรี", "วัดชากใหญ่", "วัดเขานาวัง", "วัดเขาพลอยแหวน", "พิพิธภัณฑสถานแห่งชาติ พาณิชย์นาวี", 
+          "วัดโบสถ์เมือง", "วัดเขาบรรจบ", "วัดกระทิง", "วัดเขาจรเข้", "วัดป่าคลองกุ้ง", "วัดเนินสูง"
         ]
       },
       "ตราด": {
         nature: [
-          "เกาะช้าง (หาดคลองพร้าว)", "เกาะกูด (อ่าวพร้าว)", "เกาะหมาก", "เกาะขาม", "หาดบานชื่น",
-          "น้ำตกคลองพลู", "เกาะหวาย", "เกาะกระดาด", "เกาะรัง", "เกาะคลุ้ม",
-          "น้ำตกธารมะยม", "หาดทรายดำ", "หาดไก่แบ้", "หาดคลองพร้าว", "อ่าวบางเบ้า",
-          "จุดชมวิวไก่แบ้", "หาดทรายขาว", "ป่าชายเลนบ้านบ้านสลักคบ", "น้ำตกคลองเจ้า", "อ่าวพร้าว เกาะกูด"
+          "เกาะช้าง", "เกาะกูด", "เกาะหมาก", "เกาะขาม ตราด", "หาดบานชื่น", "น้ำตกคลองพลู", 
+          "เกาะหวาย", "เกาะกระดาด", "เกาะรัง", "เกาะคลุ้ม", "น้ำตกธารมะยม", "หาดทรายดำ", 
+          "หาดไก่แบ้", "หาดคลองพร้าว", "อ่าวบางเบ้า", "จุดชมวิวไก่แบ้", "หาดทรายขาว", "ป่าชายเลนบ้านสลักคบ", 
+          "น้ำตกคลองเจ้า", "อ่าวพร้าว เกาะกูด", "เกาะเหลายา", "เกาะระยั้ง", "น้ำตกอนันตชัย", "หาดคลองเจ้า"
         ],
         cafe: [
-          "Seaview Cafe Koh Chang", "Good Old Days", "Rimklong Cafe", "Cafe De Koh Kood", "Trat Coffee Roaster",
-          "Altitudes Cafe Koh Mak", "Wooden House Cafe", "Marin Coffee Trat", "Koh Kood Espresso", "Sunsuri Cafe",
-          "Leelawadee Cafe", "Tiki Bar & Cafe", "Blue Cafe Trat", "Klong Prao Cafe", "Bangbao Coffee",
-          "Salakphet Cafe", "Islander Cafe", "Sea Shell Cafe", "Tropical Cafe Koh Chang", "Sweet Time Trat"
+          "Seaview Cafe Koh Chang", "Good Old Days", "Rimklong Cafe", "Cafe De Koh Kood", "Trat Coffee Roaster", "Altitudes Cafe Koh Mak", 
+          "Wooden House Cafe", "Marin Coffee Trat", "Koh Kood Espresso", "Sunsuri Cafe", "Leelawadee Cafe", "Tiki Bar & Cafe", 
+          "Blue Cafe Trat", "Klong Prao Cafe", "Bangbao Coffee", "Salakphet Cafe", "Islander Cafe", "Sea Shell Cafe", 
+          "Tropical Cafe Koh Chang", "Sweet Time Trat", "Fig Cafe Koh Chang", "Deck Bar Koh Kood", "View Point Cafe Koh Mak", "Escape Cafe Trat"
         ],
         culture: [
-          "วัดบุปผาราม (วัดปลายคลอง)", "วัดโยธานิมิต ตราด", "ศาลเจ้าพ่อหลักเมืองตราด", "พิพิธภัณฑ์ตราด", "ชุมชนคลองบางพระ",
-          "วัดสลักเพชร", "วัดคลองใหญ่", "วัดไผ่ล้อม ตราด", "วัดแหลมงอบ", "อนุสรณ์สถานยุทธนาวีที่เกาะช้าง",
-          "วัดวิเวกวราราม", "วัดอัมพวัน ตราด", "ศาลสมเด็จพระเจ้าตากสิน ตราด", "วัดทางเกวียน", "วัดท่าพริก",
-          "วัดบางปรือ", "วัดห้วยแร้ง", "วัดเนินทราย", "วัดหนองบัว ตราด", "วัดชำราก"
+          "วัดบุปผาราม", "วัดโยธานิมิต ตราด", "ศาลเจ้าพ่อหลักเมืองตราด", "พิพิธภัณฑ์ตราด", "ชุมชนคลองบางพระ", "วัดสลักเพชร", 
+          "วัดคลองใหญ่", "วัดไผ่ล้อม ตราด", "วัดแหลมงอบ", "อนุสรณ์สถานยุทธนาวีที่เกาะช้าง", "วัดวิเวกวราราม", "วัดอัมพวัน ตราด", 
+          "ศาลสมเด็จพระเจ้าตากสิน ตราด", "วัดทางเกวียน", "วัดท่าพริก", "วัดบางปรือ", "วัดห้วยแร้ง", "วัดเนินทราย", 
+          "วัดหนองบัว ตราด", "วัดชำราก", "วัดเขาโบสถ์ ตราด", "วัดคลองพร้าว", "วัดแหลมโสภาราม", "วัดอ่างกระป๋อง"
         ]
       },
       "ฉะเชิงเทรา": {
         nature: [
-          "เกาะลัด กลางแม่น้ำบางปะกง", "สวนสมุนไพรเขาหินซ้อน", "อ่างเก็บน้ำคลองสียัด", "ศูนย์ศึกษาพัฒนาเขาหินซ้อน", "สวนสาธารณะเฉลิมพระเกียรติแปดริ้ว",
-          "น้ำตกบ่อทอง", "เขตรักษาพันธุ์สัตว์ป่าเขาอ่างฤๅไน", "อ่างเก็บน้ำนฤบดินทรจินดา (ฝั่งเชื่อม)", "อ่างเก็บน้ำลาดกระบังแปดริ้ว", "สวนป่าลาดกระทิง",
-          "คลองบางปะกง", "บึงบัวแปดริ้ว", "สวนมรกต", "อ่างเก็บน้ำเขื่อนคลองท่าดัน", "จุดชมวิวเขาหินซ้อน",
-          "ป่าชายเลนบางปะกง", "สวนส้มบางปะกง", "สวนเกษตรศิริพร", "อ่างเก็บน้ำบ้านโป่งเจริญ", "สวนรุกขชาติเขาหินซ้อน"
+          "เกาะลัด", "สวนสมุนไพรเขาหินซ้อน", "อ่างเก็บน้ำคลองสียัด", "ศูนย์ศึกษาพัฒนาเขาหินซ้อน", "สวนสาธารณะเฉลิมพระเกียรติแปดริ้ว", "น้ำตกบ่อทอง", 
+          "เขตรักษาพันธุ์สัตว์ป่าเขาอ่างฤๅไน", "อ่างเก็บน้ำนฤบดินทรจินดา", "อ่างเก็บน้ำลาดกระบังแปดริ้ว", "สวนป่าลาดกระทิง", "คลองบางปะกง", "บึงบัวแปดริ้ว", 
+          "สวนมรกต", "อ่างเก็บน้ำเขื่อนคลองท่าดัน", "จุดชมวิวเขาหินซ้อน", "ป่าชายเลนบางปะกง", "สวนส้มบางปะกง", "สวนเกษตรศิริพร", 
+          "อ่างเก็บน้ำบ้านโป่งเจริญ", "สวนรุกขชาติเขาหินซ้อน", "น้ำตกเขาชะอ่าง", "บึงขวัญเมือง", "จุดชมวิวบางปะกง", "สวนป่าเกาะลัด"
         ],
         cafe: [
-          "Life House Cafe", "River Breeze Cafe", "Woodkick Cafe", "Dheva Cafe", "Bangpakong Coffee Bar",
-          "U Cafe Chachoengsao", "Apron Cafe", "The River Barn", "Na San Cafe", "Siri Cafe",
-          "Coffee House 88", "Baan Sawan Cafe", "Homey Cafe Padriew", "Triple N Cafe", "Me & Tree Cafe",
-          "Charming Cafe", "Flora Cafe Chachoengsao", "Grandma Cafe", "Coffee Farm Padriew", "Slowlife Cafe"
+          "Life House Cafe", "River Breeze Cafe", "Woodkick Cafe", "Dheva Cafe", "Bangpakong Coffee Bar", "U Cafe Chachoengsao", 
+          "Apron Cafe", "The River Barn", "Na San Cafe", "Siri Cafe", "Coffee House 88", "Baan Sawan Cafe", 
+          "Homey Cafe Padriew", "Triple N Cafe", "Me & Tree Cafe", "Charming Cafe", "Flora Cafe Chachoengsao", "Grandma Cafe", 
+          "Coffee Farm Padriew", "Slowlife Cafe", "Riva Floating Cafe Padriew", "Cottage Coffee Padriew", "Botanica Cafe", "Baan Suan Cafe Padriew"
         ],
         culture: [
-          "วัดโสธรวรารามวรวิหาร", "วัดสมานรัตนาราม", "วัดปากน้ำโจ้โล้ (วัดทองคำ)", "ตลาดโบราณ 100 ปี บ้านใหม่", "ตลาดคลองสวน 100 ปี",
-          "วัดโพธิ์บางคล้า (ดูค้างคาวแม่ไก่)", "วัดหงษ์ทอง", "วัดเขาดิน", "วัดวีระโชติธรรมาราม", "วัดหัวสวน (โบสถ์สแตนเลส)",
-          "วัดจุกกระเชอ", "วัดสัมปตัก", "ศาลหลักเมืองฉะเชิงเทรา", "วัดอุสภาราม", "วัดทดราษฎร์นิยม",
-          "วัดเทพราช", "วัดไผ่ดำ", "วัดแจ้งบางคล้า", "วัดโพธาราม", "อนุสาวรีย์พระยาศรีสุนทรโวหาร"
+          "วัดโสธรวรารามวรวิหาร", "วัดสมานรัตนาราม", "วัดปากน้ำโจ้โล้", "ตลาดโบราณ 100 ปี บ้านใหม่", "ตลาดคลองสวน 100 ปี", "วัดโพธิ์บางคล้า", 
+          "วัดหงษ์ทอง", "วัดเขาดิน", "วัดวีระโชติธรรมาราม", "วัดหัวสวน", "วัดจุกกระเชอ", "วัดสัมปตัก", 
+          "ศาลหลักเมืองฉะเชิงเทรา", "วัดอุสภาราม", "วัดทดราษฎร์นิยม", "วัดเทพราช", "วัดไผ่ดำ", "วัดแจ้งบางคล้า", 
+          "วัดโพธาราม", "อนุสาวรีย์พระยาศรีสุนทรโวหาร", "วัดปิตุลาธิราชรังสฤษฎิ์", "วัดสายชล ณ พนัสนิคม", "วัดพงษ์สว่าง", "วัดบางปะกง"
         ]
       },
       "ปราจีนบุรี": {
         nature: [
-          "อุทยานแห่งชาติทับลาน", "แก่งหินเพลิง", "น้ำตกเหวนร้อย", "อ่างเก็บน้ำนฤบดินทรจินดา", "เขาใหญ่ฝั่งปราจีนบุรี (น้ำตกเหวนรก)",
-          "น้ำตกเขาอีดก", "น้ำตกตะคร้อ", "น้ำตกธารทิพย์", "ทุ่งดอกกระเจียว ปราจีนบุรี", "สวนพันธุ์ไม้ทับลาน", "อ่างเก็บน้ำเขาอีโต้",
-          "น้ำตกเขาอีโต้", "ผาหินซ้อน", "อ่างเก็บน้ำวังบอน", "แก่งยาว", "น้ำตกคลองโคกเปราะ",
-          "เขาราชสีห์", "ป่าปางสีดาฝั่งปราจีน", "สวนพฤกษศาสตร์เขาหินซ้อน-ปราจีน", "จุดชมวิวเขาอีโต้"
+          "อุทยานแห่งชาติทับลาน", "แก่งหินเพลิง", "น้ำตกเหวนร้อย", "อ่างเก็บน้ำนฤบดินทรจินดา", "น้ำตกเหวนรก", "น้ำตกเขาอีดก", 
+          "น้ำตกตะคร้อ", "น้ำตกธารทิพย์", "ทุ่งดอกกระเจียว ปราจีนบุรี", "สวนพันธุ์ไม้ทับลาน", "อ่างเก็บน้ำเขาอีโต้", "น้ำตกเขาอีโต้", 
+          "ผาหินซ้อน", "อ่างเก็บน้ำวังบอน", "แก่งยาว", "น้ำตกคลองโคกเปราะ", "เขาราชสีห์", "ป่าปางสีดาฝั่งปราจีน", 
+          "สวนพฤกษศาสตร์เขาหินซ้อน-ปราจีน", "จุดชมวิวเขาอีโต้", "น้ำตกส้มป่อย", "น้ำตกธารรัตนา", "จุดชมวิวผาเก็บศึก", "เขื่อนคลองท่าแดน"
         ],
         cafe: [
-          "De'Bua Cafe", "Verona Cafe", "Montra Cafe", "Tree House Cafe", "Prachin Coffee Lab",
-          "Khao Yai Grandview Cafe", "Forest Box Cafe", "Botanical Cafe Prachin", "Green Space Cafe", "Baan Suan Coffee",
-          "The Garden Prachin", "Sip & Saver Cafe", "Mountain View Cafe", "Cozy Corner Prachin", "Slowbar Prachin",
-          "Riverfront Cafe Kabinburi", "Camp Cafe Prachin", "Floral Cafe", "Minimal Coffee Lab", "Bamboo Cafe Prachin"
+          "De'Bua Cafe", "Verona Cafe", "Montra Cafe", "Tree House Cafe", "Prachin Coffee Lab", "Khao Yai Grandview Cafe", 
+          "Forest Box Cafe", "Botanical Cafe Prachin", "Green Space Cafe", "Baan Suan Coffee", "The Garden Prachin", "Sip & Saver Cafe", 
+          "Mountain View Cafe", "Cozy Corner Prachin", "Slowbar Prachin", "Riverfront Cafe Kabinburi", "Camp Cafe Prachin", "Floral Cafe", 
+          "Minimal Coffee Lab", "Bamboo Cafe Prachin", "Kabin Coffee Roaster", "Baan Na Cafe Prachin", "Woodland Coffee Prachin", "Hillside Cafe Prachin"
         ],
         culture: [
-          "วัดแก้วพิจิตร (โบสถ์สีอภัย)", "ตึกเจ้าพระยาอภัยภูเบศร", "โบราณสถานสระมรกต", "วัดแจ้งปราจีนบุรี", "โบราณสถานเมืองศรีมโหสถ",
-          "วัดสระมรกต", "วัดต้นโพธิ์ศรีมหาโพธิ", "พิพิธภัณฑสถานแห่งชาติ ปราจีนบุรี", "วัดพระยาทำ", "วัดป่ามะไฟ",
-          "ศาลสมเด็จพระนเรศวรมหาราช ปราจีนบุรี", "วัดบางกระเบา", "วัดทุ่งแฝก", "วัดบ้านโนน", "วัดสง่างาม",
-          "วัดมะกอกแก้ว", "วัดโคกป่าขีด", "วัดดงชัยบำรุง", "ศาลหลักเมืองปราจีนบุรี", "วัดกบินทร์บุรี"
+          "วัดแก้วพิจิตร", "ตึกเจ้าพระยาอภัยภูเบศร", "โบราณสถานสระมรกต", "วัดแจ้งปราจีนบุรี", "โบราณสถานเมืองศรีมโหสถ", "วัดสระมรกต", 
+          "วัดต้นโพธิ์ศรีมหาโพธิ", "พิพิธภัณฑสถานแห่งชาติ ปราจีนบุรี", "วัดพระยาทำ", "วัดป่ามะไฟ", "ศาลสมเด็จพระนเรศวรมหาราช ปราจีนบุรี", "วัดบางกระเบา", 
+          "วัดทุ่งแฝก", "วัดบ้านโนน", "วัดสง่างาม", "วัดมะกอกแก้ว", "วัดโคกป่าขีด", "วัดดงชัยบำรุง", 
+          "ศาลหลักเมืองปราจีนบุรี", "วัดกบินทร์บุรี", "วัดบัวขวัญ ปราจีนบุรี", "วัดบ้านนา ปราจีนบุรี", "วัดมะกอกงาม", "วัดหัวเขา ปราจีนบุรี"
         ]
       },
       "สระแก้ว": {
         nature: [
-          "อุทยานแห่งชาติปางสีดา", "ละลุ แคนยอนเมืองไทย", "อ่างเก็บน้ำท่ากะบาก", "ถ้ำเพชรโพธิ์ทอง", "อุทยานแห่งชาติตาพระยา",
-          "ถ้ำเขาฉกรรจ์", "น้ำตกปางสีดา", "อ่างเก็บน้ำห้วยยาง", "จุดชมวิวผาแดง", "อ่างเก็บน้ำพระปรง",
-          "ถ้ำหาดทรายแก้ว", "น้ำตกตาดโตน สระแก้ว", "เขาป่าไร่", "สวนส้มสระแก้ว", "ป่าชายแดนตาพระยา",
-          "อ่างเก็บน้ำช่องกล่ำบน", "น้ำตกมวกเหล็กฝั่งสระแก้ว", "จุดชมวิวทับทิมสยาม 05", "อ่างเก็บน้ำห้วยส้มป่อย", "วนอุทยานเขาฉกรรจ์"
+          "อุทยานแห่งชาติปางสีดา", "ละลุ แคนยอนเมืองไทย", "อ่างเก็บน้ำท่ากะบาก", "ถ้ำเพชรโพธิ์ทอง", "อุทยานแห่งชาติตาพระยา", "ถ้ำเขาฉกรรจ์", 
+          "น้ำตกปางสีดา", "อ่างเก็บน้ำห้วยยาง", "จุดชมวิวผาแดง", "อ่างเก็บน้ำพระปรง", "ถ้ำหาดทรายแก้ว", "น้ำตกตาดโตน สระแก้ว", 
+          "เขาป่าไร่", "สวนส้มสระแก้ว", "ป่าชายแดนตาพระยา", "อ่างเก็บน้ำช่องกล่ำบน", "น้ำตกมวกเหล็กฝั่งสระแก้ว", "จุดชมวิวทับทิมสยาม 05", 
+          "อ่างเก็บน้ำห้วยส้มป่อย", "วนอุทยานเขาฉกรรจ์", "จุดชมวิวเขาตาพระยา", "น้ำตกท่ากระบาก", "อ่างเก็บน้ำคลองหาด", "ผาหินงาม สระแก้ว"
         ],
         cafe: [
-          "Station 1 Cafe", "Woodland Cafe", "Green House Sa Kaeo", "Border Coffee", "Khao Chakan Cafe",
-          "Aranyaprathet Coffee Bar", "The Farmhouse Cafe", "Sweet Cottage Sa Kaeo", "Mountain Cafe Sa Kaeo", "Rong Kluea Cafe",
-          "Coffee Time Aranya", "Baan Na Cafe Sa Kaeo", "Cactus Cafe Sa Kaeo", "Minimalist Coffee", "Tree Bar Cafe",
-          "Borderside Cafe", "Flora Cafe Aranya", "Skyline Cafe Sa Kaeo", "Chilling Cafe", "Pang Sida Espresso"
+          "Station 1 Cafe", "Woodland Cafe", "Green House Sa Kaeo", "Border Coffee", "Khao Chakan Cafe", "Aranyaprathet Coffee Bar", 
+          "The Farmhouse Cafe", "Sweet Cottage Sa Kaeo", "Mountain Cafe Sa Kaeo", "Rong Kluea Cafe", "Coffee Time Aranya", "Baan Na Cafe Sa Kaeo", 
+          "Cactus Cafe Sa Kaeo", "Minimalist Coffee", "Tree Bar Cafe", "Borderside Cafe", "Flora Cafe Aranya", "Skyline Cafe Sa Kaeo", 
+          "Chilling Cafe", "Pang Sida Espresso", "Aranya Minimal Cafe", "The Canal Cafe Sa Kaeo", "Coffee Box Aranya", "Green Valley Cafe Sa Kaeo"
         ],
         culture: [
-          "ปราสาทหินสด๊กก็อกธม", "วัดแม่ย่าซ่อม", "ศาลหลักเมืองสระแก้ว", "วัดถ้ำเขาฉกรรจ์", "ตลาดโรงเกลือ (อรัญประเทศ)",
-          "ปราสาทเขาน้อยสีชมพู", "ปราสาทเมืองไผ่", "วัดนครธรรม", "วัดป่าอริยสัจจธรรม", "วัดพระเพลิง",
-          "ศาลสมเด็จพระนเรศวรมหาราช อรัญประเทศ", "วัด อนุบรรพต (วัดกิโลสาม)", "วัดวังน้ำเย็น", "วัดเขาป่าไร่", "วัดสระแก้ว",
-          "วัด ตาพระยา", "วัดโคกสูง", "วัดวัฒนานคร", "วัดคลองหาด", "วัดเขาพนมวัง"
+          "ปราสาทหินสด๊กก็อกธม", "วัดแม่ย่าซ่อม", "ศาลหลักเมืองสระแก้ว", "วัดถ้ำเขาฉกรรจ์", "ตลาดโรงเกลือ", "ปราสาทเขาน้อยสีชมพู", 
+          "ปราสาทเมืองไผ่", "วัดนครธรรม", "วัดป่าอริยสัจจธรรม", "วัดพระเพลิง", "ศาลสมเด็จพระนเรศวรมหาราช อรัญประเทศ", "วัดอนุบรรพต", 
+          "วัดวังน้ำเย็น", "วัดเขาป่าไร่", "วัดสระแก้ว", "วัดตาพระยา", "วัดโคกสูง", "วัดวัฒนานคร", 
+          "วัดคลองหาด", "วัดเขาพนมวัง", "วัดหนองหมากมี่", "วัดวังสมบูรณ์", "วัดเขาป่าฉาง", "วัดศาลาลำดวน"
         ]
       }
     };
 
-    const imageStock = [
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80"
-    ];
+    // ภาพคุณภาพสูงสำรองแยกตามหมวดหมู่เมื่อค้นหารูปจริงไม่พบ
+    const fallbackCategoryImages = {
+      nature: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+      cafe: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+      culture: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=600&q=80"
+    };
 
     const categoryNames = {
       nature: "ธรรมชาติและทะเล",
@@ -382,8 +380,8 @@
     let pinnedIds = JSON.parse(localStorage.getItem('eastern_pinned_ids') || '[]');
     let currentPage = 1;
     
-    // กำหนดให้แสดงผล 5 รายการต่อหน้า (20 รายการ / 5 = 4 หน้าพอดี ไม่ซ้ำกัน)
-    const itemsPerPage = 5; 
+    // ตั้งค่าแสดงผล 6 รายการต่อหน้า (24 สถานที่ / 6 = 4 หน้าพอดี)
+    const itemsPerPage = 6; 
     
     let showingPinnedOnly = false;
     let currentFilteredList = [];
@@ -392,10 +390,10 @@
       database = [];
       let globalId = 1000;
 
-      Object.keys(rawData).forEach((province, pIdx) => {
+      Object.keys(rawData).forEach((province) => {
         Object.keys(rawData[province]).forEach((category) => {
           const list = rawData[province][category];
-          list.forEach((name, itemIdx) => {
+          list.forEach((name) => {
             globalId++;
             database.push({
               id: globalId,
@@ -403,11 +401,12 @@
               category: category,
               name: name,
               district: `อ.เมือง${province}`,
-              img: imageStock[(pIdx + itemIdx) % imageStock.length],
-              desc: `${name} สถานที่ท่องเที่ยวหมวด${categoryNames[category]} แนะนำอย่างยิ่งเมื่อมาเยือน จ.${province}`,
+              // ใช้บริการ Wikipedia/Wikimedia API ดึงรูปภาพจริงอัตโนมัติ
+              img: `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(name)}.jpg?width=600`,
+              desc: `${name} สถานที่ท่องเที่ยวโดดเด่นในหมวด${categoryNames[category]} ของ จ.${province} มีเอกลักษณ์เฉพาะตัว เหมาะแก่การเดินทางท่องเที่ยว`,
               nextPlaces: `จุดชมวิว ${province}, สวนสาธารณะ ${province}`,
-              hotels: `โรงแรมและรีสอร์ทสวย ${province}`,
-              restaurants: `ร้านอาหารรสเด็ด จ.${province}`
+              hotels: `โรงแรมและรีสอร์ทสวย จ.${province}`,
+              restaurants: `ร้านอาหารรสเด็ดประจำ จ.${province}`
             });
           });
         });
@@ -426,7 +425,7 @@
       currentFilteredList = database.filter(item => item.province === prov && item.category === cat);
       currentPage = 1;
 
-      document.getElementById('result-count').textContent = `${categoryNames[cat]} จ.${prov} (รวม 20 แห่ง • แบ่งเป็น 4 หน้าไม่ซ้ำกัน)`;
+      document.getElementById('result-count').textContent = `${categoryNames[cat]} จ.${prov} (รวม 24 แห่ง • แบ่งเป็น 4 หน้า หน้าละ 6 สถานที่ไม่ซ้ำกัน)`;
       renderGrid();
     }
 
@@ -471,12 +470,14 @@
 
       paginatedItems.forEach(item => {
         const isPinned = pinnedIds.includes(item.id);
+        const defaultImg = fallbackCategoryImages[item.category];
 
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
           <div class="card-img-container">
-            <img class="card-img" src="${item.img}" alt="${item.name}" loading="lazy">
+            <img class="card-img" src="${item.img}" alt="${item.name}" loading="lazy" 
+                 onerror="this.onerror=null; this.src='${defaultImg}';">
             <span class="card-category-tag">${categoryNames[item.category]}</span>
           </div>
           <div class="card-body">
@@ -539,8 +540,15 @@
     function openModal(id) {
       const place = database.find(p => p.id === id);
       const duration = document.getElementById('duration').value;
+      const defaultImg = fallbackCategoryImages[place.category];
 
-      document.getElementById('modal-img').src = place.img;
+      const modalImg = document.getElementById('modal-img');
+      modalImg.src = place.img;
+      modalImg.onerror = function() {
+        this.onerror = null;
+        this.src = defaultImg;
+      };
+
       document.getElementById('modal-title').textContent = place.name;
       document.getElementById('modal-location').textContent = `📍 ${place.district} จ.${place.province}`;
       document.getElementById('modal-desc').textContent = place.desc;

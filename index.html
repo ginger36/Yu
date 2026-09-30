@@ -3,49 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เที่ยวภาคตะวันออก - 7 จังหวัด (รูปถ่ายสถานที่จริง หน้าละ 6 สถานที่)</title>
+  <title>TripBlog - แหล่งท่องเที่ยว 7 จังหวัดภาคตะวันออก</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary: #0284C7;
-      --primary-dark: #0369A1;
-      --primary-light: #E0F2FE;
-      --bg-blue: #F0F9FF;
-      --card-border: #BAE6FD;
-      --text-dark: #0C4A6E;
-      --text-muted: #475569;
+      --primary: #2E7D32;
+      --primary-dark: #1B5E20;
+      --primary-light: #E8F5E9;
+      --bg-nature: #F1F8E9;
+      --card-border: #A5D6A7;
+      --text-dark: #1B4332;
+      --text-muted: #4A5568;
       --white: #FFFFFF;
-      --shadow: 0 4px 15px rgba(2, 132, 199, 0.08);
-      --shadow-hover: 0 10px 25px rgba(2, 132, 199, 0.18);
+      --shadow: 0 4px 15px rgba(46, 125, 50, 0.1);
+      --shadow-hover: 0 10px 25px rgba(46, 125, 50, 0.2);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Prompt', sans-serif; }
-    body { background-color: var(--bg-blue); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; }
+    
+    body { 
+      background: linear-gradient(rgba(18, 38, 22, 0.55), rgba(18, 38, 22, 0.55)), 
+                  url('https://images.unsplash.com/photo-1511497584788-876761c119ee?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-dark); 
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+    }
+
+    /* ---------------- PAGE SWITCHING SYSTEM ---------------- */
+    .page-section { display: none; min-height: 100vh; width: 100%; }
+    .page-section.active { display: flex; flex-direction: column; }
+
+    /* ---------------- PAGE 1: WELCOME LANDING PAGE ---------------- */
+    #welcome-page {
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .welcome-card {
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(12px);
+      padding: 50px 40px;
+      border-radius: 28px;
+      text-align: center;
+      max-width: 580px;
+      width: 100%;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .welcome-card h1 {
+      font-family: 'Kanit', sans-serif;
+      color: var(--primary-dark);
+      font-size: 2.3rem;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .welcome-card p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .btn-login {
+      background: linear-gradient(135deg, #4CAF50, #2E7D32);
+      color: var(--white);
+      border: none;
+      padding: 16px 45px;
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    }
+
+    .btn-login:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(76, 175, 80, 0.6);
+      background: linear-gradient(135deg, #66BB6A, #1B5E20);
+    }
+
+    /* ---------------- PAGE 2: MAIN DASHBOARD ---------------- */
+    #main-page {
+      background-color: var(--bg-nature);
+    }
 
     header {
-      background: linear-gradient(135deg, #0284C7, #38BDF8);
+      background: linear-gradient(135deg, #2E7D32, #66BB6A);
       color: var(--white);
-      padding: 35px 20px;
+      padding: 30px 20px;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.25);
+      box-shadow: 0 4px 20px rgba(46, 125, 50, 0.25);
+      position: relative;
     }
 
-    header h1 { font-family: 'Kanit', sans-serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }
-    header p { font-size: 1.05rem; opacity: 0.95; font-weight: 300; }
+    header h1 { font-family: 'Kanit', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
+    header p { font-size: 1rem; opacity: 0.95; font-weight: 300; }
 
-    .badge-sub {
-      display: inline-block;
+    .btn-logout {
+      position: absolute;
+      top: 20px; right: 20px;
       background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(5px);
-      padding: 4px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      padding: 8px 18px;
       border-radius: 20px;
+      cursor: pointer;
       font-size: 0.85rem;
-      margin-top: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(4px);
     }
+    .btn-logout:hover { background: rgba(255, 255, 255, 0.35); }
 
     .container { max-width: 1200px; margin: 25px auto; padding: 0 20px; width: 100%; flex: 1; }
 
@@ -56,30 +132,48 @@
       box-shadow: var(--shadow);
       border: 2px solid var(--card-border);
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
       align-items: flex-end;
     }
 
     .form-group { display: flex; flex-direction: column; gap: 8px; }
-    .form-group label { font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; }
-    .form-group select {
-      width: 100%; padding: 12px 14px; border-radius: 12px;
-      border: 1.5px solid #7DD3FC; background: #F8FAFC; outline: none;
-      font-size: 0.98rem; color: var(--text-dark); cursor: pointer;
+    .form-group label { font-weight: 600; color: var(--primary-dark); font-size: 0.92rem; }
+    .form-group select, .form-group input {
+      width: 100%; padding: 11px 14px; border-radius: 12px;
+      border: 1.5px solid #A5D6A7; background: #F1F8E9; outline: none;
+      font-size: 0.95rem; color: var(--text-dark); cursor: pointer;
     }
 
     .btn-search {
       background: var(--primary); color: var(--white); border: none;
       padding: 12px 24px; border-radius: 12px; font-family: 'Kanit', sans-serif;
-      font-size: 1.05rem; font-weight: 500; cursor: pointer; height: 48px;
+      font-size: 1.05rem; font-weight: 500; cursor: pointer; height: 46px;
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3); transition: all 0.2s;
     }
     .btn-search:hover { background: var(--primary-dark); transform: translateY(-2px); }
 
+    /* Budget Result Display Box */
+    .budget-summary-box {
+      background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+      border: 1.5px solid #A5D6A7;
+      border-radius: 16px;
+      padding: 18px 24px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+    .budget-text h4 { color: var(--primary-dark); font-size: 1.1rem; }
+    .budget-text p { color: var(--text-muted); font-size: 0.88rem; }
+    .budget-amount { font-family: 'Kanit', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--primary-dark); }
+
     .result-bar { display: flex; justify-content: space-between; align-items: center; margin: 25px 0 15px; flex-wrap: wrap; gap: 12px; }
-    .result-title { font-family: 'Kanit', sans-serif; font-size: 1.3rem; color: var(--primary-dark); }
+    .result-title { font-family: 'Kanit', sans-serif; font-size: 1.25rem; color: var(--primary-dark); }
 
     .badge-pinned {
       background: var(--white); color: var(--primary-dark); border: 1.5px solid var(--primary-light);
@@ -88,28 +182,28 @@
     }
     .badge-pinned.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 22px; }
     .card {
       background: var(--white); border-radius: 16px; overflow: hidden;
       border: 1px solid var(--card-border); box-shadow: var(--shadow);
       display: flex; flex-direction: column; transition: all 0.25s;
     }
     .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-    .card-img-container { position: relative; width: 100%; height: 210px; background: #CBD5E1; }
-    .card-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-img-container { position: relative; width: 100%; height: 190px; background: #E2E8F0; }
+    .card-img { width: 100%; height: 100%; object-fit: cover; }
     .card-category-tag {
-      position: absolute; top: 12px; left: 12px; background: rgba(2, 132, 199, 0.88);
+      position: absolute; top: 12px; left: 12px; background: rgba(46, 125, 50, 0.85);
       backdrop-filter: blur(4px); color: var(--white); padding: 4px 10px;
       border-radius: 12px; font-size: 0.75rem; font-weight: 500;
     }
     .card-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
-    .card-title { font-family: 'Kanit', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 6px; }
-    .card-location { font-size: 0.85rem; color: var(--primary); margin-bottom: 10px; font-weight: 500; }
-    .card-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.45; flex: 1; }
+    .card-title { font-family: 'Kanit', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 6px; }
+    .card-location { font-size: 0.85rem; color: var(--primary); margin-bottom: 10px; }
+    .card-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4; flex: 1; }
     .card-actions { display: flex; gap: 8px; margin-top: auto; }
     .btn-detail, .btn-pin {
-      padding: 9px 12px; border-radius: 8px; border: 1px solid var(--card-border);
-      background: var(--bg-blue); color: var(--primary-dark); cursor: pointer;
+      padding: 8px 12px; border-radius: 8px; border: 1px solid var(--card-border);
+      background: var(--bg-nature); color: var(--primary-dark); cursor: pointer;
       font-size: 0.85rem; font-weight: 600; transition: all 0.2s;
     }
     .btn-detail { flex: 1; }
@@ -124,7 +218,7 @@
 
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(12, 74, 110, 0.65); backdrop-filter: blur(4px);
+      background: rgba(27, 67, 50, 0.65); backdrop-filter: blur(4px);
       display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px;
     }
     .modal-content {
@@ -134,76 +228,107 @@
     .modal-close {
       position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer;
       color: var(--primary-dark); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
-      border-radius: 50%; background: var(--bg-blue);
+      border-radius: 50%; background: var(--bg-nature);
     }
     .modal-img { width: 100%; height: 260px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
     .map-frame { width: 100%; height: 200px; border: none; border-radius: 12px; margin-top: 15px; background: #E2E8F0; }
-    .recommend-box { background: var(--bg-blue); border-left: 4px solid var(--primary); padding: 14px; border-radius: 8px; margin-top: 15px; font-size: 0.9rem; }
+    .recommend-box { background: var(--bg-nature); border-left: 4px solid var(--primary); padding: 14px; border-radius: 8px; margin-top: 15px; font-size: 0.9rem; }
     footer { background: var(--white); border-top: 1px solid var(--card-border); text-align: center; padding: 20px; margin-top: 40px; font-size: 0.85rem; color: var(--text-muted); }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>🗺 แหล่งท่องเที่ยว 7 จังหวัดภาคตะวันออก</h1>
-    <p>แสดงผลหน้าละ 6 สถานที่ (4 หน้า = 24 สถานที่ต่อหมวด) พร้อมรูปถ่ายสถานที่จริง</p>
-    <div class="badge-sub">📍 ชลบุรี • ระยอง • จันทบุรี • ตราด • ฉะเชิงเทรา • ปราจีนบุรี • สระแก้ว</div>
-  </header>
-
-  <div class="container">
-    <div class="filter-card">
-      <div class="form-group">
-        <label for="province">📍 เลือกจังหวัด:</label>
-        <select id="province">
-          <option value="ชลบุรี">ชลบุรี</option>
-          <option value="ระยอง">ระยอง</option>
-          <option value="จันทบุรี">จันทบุรี</option>
-          <option value="ตราด">ตราด</option>
-          <option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option>
-          <option value="ปราจีนบุรี">ปราจีนบุรี</option>
-          <option value="สระแก้ว">สระแก้ว</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="category">🏖️ เลือกหมวดหมู่การเที่ยว:</label>
-        <select id="category">
-          <option value="nature">🌿 ธรรมชาติและทะเล (4 หน้า • หน้าละ 6 สถานที่)</option>
-          <option value="cafe">☕ คาเฟ่และร้านกาแฟ (4 หน้า • หน้าละ 6 สถานที่)</option>
-          <option value="culture">🛕 วัดและแหล่งวัฒนธรรม (4 หน้า • หน้าละ 6 สถานที่)</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="duration">📅 ระยะเวลาการเดินทาง:</label>
-        <select id="duration">
-          <option value="1">1 วัน (ทริปไป-กลับ)</option>
-          <option value="2">2 วัน 1 คืน (พักค้างคืน)</option>
-          <option value="3">3 วัน 2 คืน (ทริปยาวพักผ่อน)</option>
-        </select>
-      </div>
-
-      <button class="btn-search" onclick="searchPlaces()">🔍 ค้นหาข้อมูล</button>
+  <!-- 🌿 PAGE 1: WELCOME LANDING PAGE -->
+  <div id="welcome-page" class="page-section active">
+    <div class="welcome-card">
+      <h1>🌿 ยินดีต้อนรับเข้าสู่ TripBlog<br>ในภาคตะวันออก</h1>
+      <p>ค้นพบแหล่งท่องเที่ยวทางธรรมชาติ คาเฟ่สุดชิค และวัดวาอาราม 7 จังหวัดภาคตะวันออก พร้อมระบบวางแผนและคำนวณงบประมาณการเดินทางแบบเรียลไทม์</p>
+      <button class="btn-login" onclick="navigateTo('main-page')">เข้าสู่ระบบ / เริ่มต้นใช้งาน</button>
     </div>
-
-    <div class="result-bar">
-      <div class="result-title">
-        <span id="result-icon">🌿</span>
-        <span id="result-count">รายการสถานที่ท่องเที่ยว</span>
-      </div>
-      <button class="badge-pinned" id="btn-pinned" onclick="togglePinnedView()">
-        📌 ดูสถานที่ติดกาวไว้ (<span id="pin-count">0</span>)
-      </button>
-    </div>
-
-    <div class="grid" id="places-grid"></div>
-    <div class="pagination" id="pagination"></div>
   </div>
 
+  <!-- 🗺️ PAGE 2: MAIN DASHBOARD & SYSTEM -->
+  <div id="main-page" class="page-section">
+    <header>
+      <button class="btn-logout" onclick="navigateTo('welcome-page')">🚪 ออกจากระบบ</button>
+      <h1>🗺 TripBlog 7 จังหวัดภาคตะวันออก</h1>
+      <p>ฐานข้อมูลสถานที่ท่องเที่ยว 24 แห่งต่อหมวดหมู่ แสดงผล 4 หน้า หน้าละ 6 สถานที่พร้อมรูปจริง</p>
+    </header>
+
+    <div class="container">
+      <div class="filter-card">
+        <div class="form-group">
+          <label for="province">📍 เลือกจังหวัด:</label>
+          <select id="province" onchange="calculateBudget()">
+            <option value="ชลบุรี">ชลบุรี</option>
+            <option value="ระยอง">ระยอง</option>
+            <option value="จันทบุรี">จันทบุรี</option>
+            <option value="ตราด">ตราด</option>
+            <option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option>
+            <option value="ปราจีนบุรี">ปราจีนบุรี</option>
+            <option value="สระแก้ว">สระแก้ว</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="category">🏖️️ เลือกหมวดหมู่การเที่ยว:</label>
+          <select id="category">
+            <option value="nature">🌿 ธรรมชาติและทะเล (4 หน้า • หน้าละ 6 สถานที่)</option>
+            <option value="cafe">☕ คาเฟ่และร้านกาแฟ (4 หน้า • หน้าละ 6 สถานที่)</option>
+            <option value="culture">🛕 วัดและแหล่งวัฒนธรรม (4 หน้า • หน้าละ 6 สถานที่)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="duration">📅 ระยะเวลาการเดินทาง:</label>
+          <select id="duration" onchange="calculateBudget()">
+            <option value="1">1 วัน (One-Day Trip)</option>
+            <option value="2">2 วัน 1 คืน</option>
+            <option value="3">3 วัน 2 คืน (ทริปยาวพักผ่อน)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="travelers">👥 จำนวนผู้เดินทาง (คน):</label>
+          <input type="number" id="travelers" value="1" min="1" max="20" onchange="calculateBudget()" oninput="calculateBudget()">
+        </div>
+
+        <button class="btn-search" onclick="searchPlaces()">🔍 ค้นหาข้อมูล</button>
+      </div>
+
+      <!-- Budget Calculator Display Box -->
+      <div class="budget-summary-box">
+        <div class="budget-text">
+          <h4>💰 ประมาณการงบประมาณการเดินทางรวม</h4>
+          <p id="budget-detail">คิดคำนวณจากค่าเดินทาง, ที่พัก, อาหาร และค่าเข้าชมสถานที่โดยประมาณ</p>
+        </div>
+        <div class="budget-amount" id="total-budget">1,200 บาท</div>
+      </div>
+
+      <div class="result-bar">
+        <div class="result-title">
+          <span id="result-icon">🌿</span>
+          <span id="result-count">รายการสถานที่ท่องเที่ยว</span>
+        </div>
+        <button class="badge-pinned" id="btn-pinned" onclick="togglePinnedView()">
+          📌 ดูสถานที่ติดกาวไว้ (<span id="pin-count">0</span>)
+        </button>
+      </div>
+
+      <div class="grid" id="places-grid"></div>
+      <div class="pagination" id="pagination"></div>
+    </div>
+
+    <footer>
+      © 2026 TripBlog ระบบค้นหาข้อมูลการท่องเที่ยว 7 จังหวัดภาคตะวันออก
+    </footer>
+  </div>
+
+  <!-- MODAL DETAIL & MAP -->
   <div class="modal-overlay" id="modal">
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal()">&times;</span>
-      <img id="modal-img" class="modal-img" src="" alt="รูปสถานที่จริง">
+      <img id="modal-img" class="modal-img" src="" alt="รูปสถานที่">
       <h2 id="modal-title" style="font-family:'Kanit', sans-serif; color: var(--primary-dark);"></h2>
       <p id="modal-location" style="color: var(--primary); font-weight: 600; margin: 4px 0 10px; font-size: 0.9rem;"></p>
       <p id="modal-desc" style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;"></p>
@@ -212,188 +337,159 @@
     </div>
   </div>
 
-  <footer>
-    © 2026 ระบบค้นหาข้อมูลการท่องเที่ยว 7 จังหวัดภาคตะวันออก - รูปถ่ายจริง แสดงผล 6 สถานที่ต่อหน้า
-  </footer>
-
   <script>
     // -------------------------------------------------------------
-    // DATA STORE: พร้อมภาพถ่ายจริงของสถานที่สำคัญจาก Wikimedia Commons
+    // DATA STORE: 7 จังหวัด x 3 หมวด x 24 สถานที่จริง (รวม 504 สถานที่)
     // -------------------------------------------------------------
     const rawData = {
       "ชลบุรี": {
         nature: [
-          { name: "หาดบางแสน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Bang_Saen_Beach_Chonburi.jpg/800px-Bang_Saen_Beach_Chonburi.jpg" },
-          { name: "หาดพัทยา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Pattaya_Beach_Road.jpg/800px-Pattaya_Beach_Road.jpg" },
-          { name: "เกาะล้าน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Koh_Larn_Tawaen_Beach.jpg/800px-Koh_Larn_Tawaen_Beach.jpg" },
-          { name: "เขาสามมุข", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Khao_Sam_Muk_Viewpoint.jpg/800px-Khao_Sam_Muk_Viewpoint.jpg" },
-          { name: "เกาะสีชัง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Ko_Sichang_Chonburi.jpg/800px-Ko_Sichang_Chonburi.jpg" },
-          { name: "หาดจอมเทียน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Jomtien_Beach_Pattaya.jpg/800px-Jomtien_Beach_Pattaya.jpg" },
-          { name: "หาดเตยงาม สัตหีบ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Toey_Ngam_Beach_Sattahip.jpg/800px-Toey_Ngam_Beach_Sattahip.jpg" },
-          { name: "เกาะแสมสาร", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Samaesan_Island_Chonburi.jpg/800px-Samaesan_Island_Chonburi.jpg" },
-          { name: "เกาะขาม สัตหีบ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Koh_Kham_Sattahip.jpg/800px-Koh_Kham_Sattahip.jpg" },
-          { name: "หาดนางรำ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Nang_Ram_Beach_Sattahip.jpg/800px-Nang_Ram_Beach_Sattahip.jpg" },
-          { name: "หาดนางรอง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Nang_Rong_Beach_Sattahip.jpg/800px-Nang_Rong_Beach_Sattahip.jpg" },
-          { name: "หาดทรายแก้ว สัตหีบ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Sai_Kaew_Beach_Sattahip.jpg/800px-Sai_Kaew_Beach_Sattahip.jpg" },
-          { name: "สวนนงนุช พัทยา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Nong_Nooch_Tropical_Garden_Pattaya.jpg/800px-Nong_Nooch_Tropical_Garden_Pattaya.jpg" },
-          { name: "อ่างเก็บน้ำบางพระ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bang_Pra_Reservoir.jpg/800px-Bang_Pra_Reservoir.jpg" },
-          { name: "น้ำตกชันตาเถร", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Chanta_Then_Waterfall.jpg/800px-Chanta_Then_Waterfall.jpg" },
-          { name: "เกาะไผ่", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Koh_Pai_Pattaya.jpg/800px-Koh_Pai_Pattaya.jpg" },
-          { name: "หาดดงตาล", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Dongtan_Beach_Pattaya.jpg/800px-Dongtan_Beach_Pattaya.jpg" },
-          { name: "จุดชมวิวเขาพัทยา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Pattaya_Viewpoint_Khao_Pattaya.jpg/800px-Pattaya_Viewpoint_Khao_Pattaya.jpg" },
-          { name: "หาดสัตหีบ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Sattahip_Bay.jpg/800px-Sattahip_Bay.jpg" },
-          { name: "อ่างเก็บน้ำมาบประชัน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Map_Prachan_Reservoir.jpg/800px-Map_Prachan_Reservoir.jpg" },
-          { name: "หาดวงศ์อมาตย์", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Wongamat_Beach_Pattaya.jpg/800px-Wongamat_Beach_Pattaya.jpg" },
-          { name: "เกาะลอย ศรีราชา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Koh_Loy_Sriracha.jpg/800px-Koh_Loy_Sriracha.jpg" },
-          { name: "หาดพลา ชลบุรี", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Phla_Beach.jpg/800px-Phla_Beach.jpg" },
-          { name: "วนอุทยานเขานางรำ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Khao_Nang_Ram.jpg/800px-Khao_Nang_Ram.jpg" }
+          "หาดบางแสน", "หาดพัทยา", "เกาะล้าน", "เขาสามมุข", "เกาะสีชัง", "หาดจอมเทียน", 
+          "หาดเตยงาม สัตหีบ", "เกาะแสมสาร", "เกาะขาม สัตหีบ", "หาดนางรำ", "หาดนางรอง", "หาดทรายแก้ว สัตหีบ", 
+          "สวนนงนุช พัทยา", "อ่างเก็บน้ำบางพระ", "น้ำตกชันตาเถร", "เกาะไผ่", "หาดดงตาล", "จุดชมวิวเขาพัทยา", 
+          "หาดสัตหีบ", "อ่างเก็บน้ำมาบประชัน", "หาดวงศ์อมาตย์", "เกาะลอย ศรีราชา", "หาดพลา ชลบุรี", "วนอุทยานเขานางรำ"
         ],
         cafe: [
-          { name: "Cave Beach Club", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Beach_Cafe_Pattaya.jpg/800px-Beach_Cafe_Pattaya.jpg" },
-          { name: "House on the Beach", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Pattaya_Seaside_Coffee.jpg/800px-Pattaya_Seaside_Coffee.jpg" },
-          { name: "Kept Bangsaray", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Bang_Saray_Resort.jpg/800px-Bang_Saray_Resort.jpg" },
-          { name: "Papa Beach Pattaya", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Pattaya_Cafe_View.jpg/800px-Pattaya_Cafe_View.jpg" },
-          { name: "3Mermaids Cafe", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Cliff_Cafe_Pattaya.jpg/800px-Cliff_Cafe_Pattaya.jpg" },
-          { name: "The Sky Gallery", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Pattaya_Bay_View_Cafe.jpg/800px-Pattaya_Bay_View_Cafe.jpg" },
-          { name: "Skoop Beach Café", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Jomtien_Cafe.jpg/800px-Jomtien_Cafe.jpg" },
-          { name: "The Glass House Pattaya", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Glass_House_Pattaya.jpg/800px-Glass_House_Pattaya.jpg" },
-          { name: "Austin Cafe", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ang_Sila_Cafe.jpg/800px-Ang_Sila_Cafe.jpg" },
-          { name: "Marina Sea Steam", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sriracha_Cafe.jpg/800px-Sriracha_Cafe.jpg" },
-          { name: "Artory Cafe Bangsaen", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Bangsaen_Beach_Cafe.jpg/800px-Bangsaen_Beach_Cafe.jpg" },
-          { name: "We Cafe Bangsaen", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Bangsaen_Coffee_Shop.jpg/800px-Bangsaen_Coffee_Shop.jpg" },
-          { name: "Harudot Chonburi", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Modern_Cafe_Chonburi.jpg/800px-Modern_Cafe_Chonburi.jpg" },
-          { name: "Unnie Cafe Pattaya", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Korean_Style_Cafe.jpg/800px-Korean_Style_Cafe.jpg" },
-          { name: "City Coffee Pattaya", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pattaya_Hill_Cafe.jpg/800px-Pattaya_Hill_Cafe.jpg" },
-          { name: "Castello Di Bellagio", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Italian_Castle_Style.jpg/800px-Italian_Castle_Style.jpg" },
-          { name: "Tutubeachcafe", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Pink_Beach_Cafe.jpg/800px-Pink_Beach_Cafe.jpg" },
-          { name: "Way Coffee House", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Bangsaen_Wooden_Cafe.jpg/800px-Bangsaen_Wooden_Cafe.jpg" },
-          { name: "Loafy Bakery Cafe", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bakery_Cafe_Chonburi.jpg/800px-Bakery_Cafe_Chonburi.jpg" },
-          { name: "Slowbar Coffee Bangsaen", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Drip_Coffee_Cafe.jpg/800px-Drip_Coffee_Cafe.jpg" },
-          { name: "Sea Of Love Pattaya", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/White_Beach_Cafe.jpg/800px-White_Beach_Cafe.jpg" },
-          { name: "Mongchang Cafe", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Elephant_Cafe_Pattaya.jpg/800px-Elephant_Cafe_Pattaya.jpg" },
-          { name: "Napp Cafe Bangsaen", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Minimal_Cafe_Bangsaen.jpg/800px-Minimal_Cafe_Bangsaen.jpg" },
-          { name: "Momiji Specialty Coffee", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Japanese_Garden_Cafe.jpg/800px-Japanese_Garden_Cafe.jpg" }
+          "Cave Beach Club", "House on the Beach", "Kept Bangsaray", "Papa Beach Pattaya", "3Mermaids Cafe", "The Sky Gallery", 
+          "Skoop Beach Café", "The Glass House Pattaya", "Austin Cafe", "Marina Sea Steam", "Artory Cafe Bangsaen", "We Cafe Bangsaen", 
+          "Harudot Chonburi", "Unnie Cafe Pattaya", "City Coffee Pattaya", "Castello Di Bellagio", "Tutubeachcafe", "Way Coffee House", 
+          "Loafy Bakery Cafe", "Slowbar Coffee Bangsaen", "Sea Of Love Pattaya", "Mongchang Cafe", "Napp Cafe Bangsaen", "Momiji Specialty Coffee"
         ],
         culture: [
-          { name: "ปราสาทสัจธรรม", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Sanctuary_of_Truth_Pattaya.jpg/800px-Sanctuary_of_Truth_Pattaya.jpg" },
-          { name: "วัดญาณสังวราราม", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Wat_Yannasangwararam_Pattaya.jpg/800px-Wat_Yannasangwararam_Pattaya.jpg" },
-          { name: "วัดเขาพระบาท", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Big_Buddha_Pattaya.jpg/800px-Big_Buddha_Pattaya.jpg" },
-          { name: "วัดใหญ่อินทาราม", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Wat_Yai_Intharam_Chonburi.jpg/800px-Wat_Yai_Intharam_Chonburi.jpg" },
-          { name: "วัดโสธรชลบุรี", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Wat_Chonburi_Temple.jpg/800px-Wat_Chonburi_Temple.jpg" },
-          { name: "วัดแสนสุขวิสุทธิวราราม", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Wat_Saen_Suk_Bangsaen.jpg/800px-Wat_Saen_Suk_Bangsaen.jpg" },
-          { name: "วิหารเซียน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Viharn_Sien_Pattaya.jpg/800px-Viharn_Sien_Pattaya.jpg" },
-          { name: "วัดพระใหญ่ พัทยา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Wat_Phra_Yai_Pattaya.jpg/800px-Wat_Phra_Yai_Pattaya.jpg" },
-          { name: "วัดเขาบางทราย", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Wat_Khao_Bang_Tsay.jpg/800px-Wat_Khao_Bang_Tsay.jpg" },
-          { name: "ศาลเจ้าแม่เขาสามมุข", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Chao_Mae_Khao_Sam_Muk_Shrine.jpg/800px-Chao_Mae_Khao_Sam_Muk_Shrine.jpg" },
-          { name: "วัดช่องแสมสาร", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Wat_Chong_Samaesarn.jpg/800px-Wat_Chong_Samaesarn.jpg" },
-          { name: "วัดหงษ์ทอง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wat_Hong_Thong_Sea_Temple.jpg/800px-Wat_Hong_Thong_Sea_Temple.jpg" },
-          { name: "วัดจุฑาทิศธรรมสภาราม", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Wat_Chudhadhuj_Ko_Sichang.jpg/800px-Wat_Chudhadhuj_Ko_Sichang.jpg" },
-          { name: "วัดหนองเกตุใหญ่", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Thai_Temple_Pattaya.jpg/800px-Thai_Temple_Pattaya.jpg" },
-          { name: "วัดตำหรุ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Wat_Tamru_Chonburi.jpg/800px-Wat_Tamru_Chonburi.jpg" },
-          { name: "วัดอ่างศิลา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Wat_Ang_Sila.jpg/800px-Wat_Ang_Sila.jpg" },
-          { name: "ตลาดชากแง้ว", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Chak_Ngew_Chinese_Market.jpg/800px-Chak_Ngew_Chinese_Market.jpg" },
-          { name: "ตลาดหนองมน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Nong_Mon_Market.jpg/800px-Nong_Mon_Market.jpg" },
-          { name: "ตลาดอ่างศิลา 133 ปี", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Ang_Sila_Old_Market.jpg/800px-Ang_Sila_Old_Market.jpg" },
-          { name: "พิพิธภัณฑ์ริบลีส์", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Ripley%27s_Believe_It_or_Not_Pattaya.jpg/800px-Ripley%27s_Believe_It_or_Not_Pattaya.jpg" },
-          { name: "วัดเทพบุตร", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Wat_Theppabut_Pattaya.jpg/800px-Wat_Theppabut_Pattaya.jpg" },
-          { name: "วัดเขาไม้แก้ว", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Wat_Khao_Mai_Kaew.jpg/800px-Wat_Khao_Mai_Kaew.jpg" },
-          { name: "ศาลเจ้าพ่อเสือ บางแสน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Tiger_God_Shrine_Bangsaen.jpg/800px-Tiger_God_Shrine_Bangsaen.jpg" },
-          { name: "วัดบางพระ ชลบุรี", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Wat_Bang_Phra_Chonburi.jpg/800px-Wat_Bang_Phra_Chonburi.jpg" }
+          "ปราสาทสัจธรรม", "วัดญาณสังวราราม", "วัดเขาพระบาท", "วัดใหญ่อินทาราม", "วัดโสธรชลบุรี", "วัดแสนสุขวิสุทธิวราราม", 
+          "วิหารเซียน", "วัดพระใหญ่ พัทยา", "วัดเขาบางทราย", "ศาลเจ้าแม่เขาสามมุข", "วัดช่องแสมสาร", "วัดหงษ์ทอง", 
+          "วัดจุฑาทิศธรรมสภาราม", "วัดหนองเกตุใหญ่", "วัดตำหรุ", "วัดอ่างศิลา", "ตลาดชากแง้ว", "ตลาดหนองมน", 
+          "ตลาดอ่างศิลา 133 ปี", "พิพิธภัณฑ์ริบลีส์", "วัดเทพบุตร", "วัดเขาไม้แก้ว", "ศาลเจ้าพ่อเสือ บางแสน", "วัดบางพระ ชลบุรี"
         ]
       },
       "ระยอง": {
         nature: [
-          { name: "เกาะเสม็ด", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Ko_Samed_Beach.jpg/800px-Ko_Samed_Beach.jpg" },
-          { name: "เขาแหลมหญ้า", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Khao_Laem_Ya_National_Park.jpg/800px-Khao_Laem_Ya_National_Park.jpg" },
-          { name: "หาดแม่รำพึง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Mae_Ramphueng_Beach_Rayong.jpg/800px-Mae_Ramphueng_Beach_Rayong.jpg" },
-          { name: "ทุ่งโปรงทอง ประแสร์", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Thung_Prong_Thong_Mangrove.jpg/800px-Thung_Prong_Thong_Mangrove.jpg" },
-          { name: "เกาะทะลุ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Koh_Talu_Rayong.jpg/800px-Koh_Talu_Rayong.jpg" },
-          { name: "หาดพลา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Phla_Beach.jpg/800px-Phla_Beach.jpg" },
-          { name: "หาดพยูน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Phayoon_Beach_Rayong.jpg/800px-Phayoon_Beach_Rayong.jpg" },
-          { name: "หาดแสงจ้าน้อย", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Saeng_Chan_Beach_Rayong.jpg/800px-Saeng_Chan_Beach_Rayong.jpg" },
-          { name: "น้ำตกเขาชะเมา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Khao_Chamaeo_Waterfall.jpg/800px-Khao_Chamaeo_Waterfall.jpg" },
-          { name: "น้ำตกคลองปลาก้าง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Klong_Pla_Kang_Waterfall.jpg/800px-Klong_Pla_Kang_Waterfall.jpg" },
-          { name: "เกาะมันนอก", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Koh_Munnork_Rayong.jpg/800px-Koh_Munnork_Rayong.jpg" },
-          { name: "เกาะมันใน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Koh_Mun_Nai_Rayong.jpg/800px-Koh_Mun_Nai_Rayong.jpg" },
-          { name: "เกาะมันกลาง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Koh_Mun_Klang.jpg/800px-Koh_Mun_Klang.jpg" },
-          { name: "หาดสวนสน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Suan_Son_Beach_Rayong.jpg/800px-Suan_Son_Beach_Rayong.jpg" },
-          { name: "หาดแหลมแม่พิมพ์", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Laem_Mae_Phim_Beach.jpg/800px-Laem_Mae_Phim_Beach.jpg" },
-          { name: "ป่าชายเลนพระเจดีย์กลางน้ำ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Rayong_Mangrove_Forest.jpg/800px-Rayong_Mangrove_Forest.jpg" },
-          { name: "อ่างเก็บน้ำคลองใหญ่", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Khlong_Yai_Reservoir.jpg/800px-Khlong_Yai_Reservoir.jpg" },
-          { name: "สวน botanical ระยอง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Rayong_Botanical_Garden.jpg/800px-Rayong_Botanical_Garden.jpg" },
-          { name: "หาดทรายทอง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Sai_Thong_Beach.jpg/800px-Sai_Thong_Beach.jpg" },
-          { name: "เกาะกุฎี", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Koh_Kudi_Rayong.jpg/800px-Koh_Kudi_Rayong.jpg" },
-          { name: "หาดตากวาง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Ta_Kwang_Beach.jpg/800px-Ta_Kwang_Beach.jpg" },
-          { name: "น้ำตกธรรมรส", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Thammaros_Waterfall.jpg/800px-Thammaros_Waterfall.jpg" },
-          { name: "เกาะจาน ระยอง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Koh_Jan_Rayong.jpg/800px-Koh_Jan_Rayong.jpg" },
-          { name: "อ่างเก็บน้ำดอกกราย", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Dok_Krai_Reservoir.jpg/800px-Dok_Krai_Reservoir.jpg" }
+          "เกาะเสม็ด", "เขาแหลมหญ้า", "หาดแม่รำพึง", "ทุ่งโปรงทอง ประแสร์", "เกาะทะลุ", "หาดพลา", 
+          "หาดพยูน", "หาดแสงจ้าน้อย", "น้ำตกเขาชะเมา", "น้ำตกคลองปลาก้าง", "เกาะมันนอก", "เกาะมันใน", 
+          "เกาะมันกลาง", "หาดสวนสน", "หาดแหลมแม่พิมพ์", "ป่าชายเลนพระเจดีย์กลางน้ำ", "อ่างเก็บน้ำคลองใหญ่", "สวน botanical ระยอง", 
+          "หาดทรายทอง", "เกาะกุฎี", "หาดตากวาง", "น้ำตกธรรมรส", "เกาะจาน ระยอง", "อ่างเก็บน้ำดอกกราย"
         ],
-        cafe: generateCafeList("ระยอง"),
-        culture: generateCultureList("ระยอง")
+        cafe: [
+          "Stirr Coffee", "Chern Cafe", "Haus Coffee", "Zenzibar Cafe", "Baan Ploy Samed Cafe", "Bake and More", 
+          "Keep Cafe", "The Bua Cafe", "Sea Through Cafe", "Le Vignoble Cafe", "Matcha Bar Rayong", "Maldive Cafe", 
+          "Drip Rim Tlay", "Escape Cafe", "Cactus Cafe Rayong", "Eucalyptus Cafe", "Tree House Rayong", "Klaeng Coffee Roaster", 
+          "Padma Cafe", "Samed Seaside Cafe", "BaanPai Cafe", "U-House Cafe Rayong", "Drip Cafe Rayong", "Chao-Drip Coffee"
+        ],
+        culture: [
+          "วัดป่าประดู่", "วัดสารนารถธรรมาราม", "ศาลสมเด็จพระเจ้าตากสินมหาราช ระยอง", "วัดละหารไร่", "พระเจดีย์กลางน้ำ ระยอง", "วัดโขดทิมทาราม", 
+          "บ้านโบราณ ถนนจินดาอุดม", "ชุมชนถนนจินดาอุดม", "วัดบ้านค่าย", "วัดลุ่มมหาชัยชุมพล", "ศาลหลักเมืองระยอง", "วัดถ้ำวัฒนมงคล", 
+          "วัดวังก์พง", "วัดมาบตาพุด", "วัดเขาโบสถ์", "อนุสรณ์เรือหลวงประแส", "วัดน้ำตกเขาชะเมา", "วัดเนินพระ", 
+          "วัดโขดหิน", "วัดพลา", "วัดมาบชลูด", "วัดบ้านนา ระยอง", "วัดหนองกระบอก", "วัดทับมา"
+        ]
       },
       "จันทบุรี": {
         nature: [
-          { name: "จุดชมวิวเนินนางพญา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Noen_Nangphaya_Viewpoint.jpg/800px-Noen_Nangphaya_Viewpoint.jpg" },
-          { name: "น้ำตกพลิ้ว", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Phlio_Waterfall_Chanthaburi.jpg/800px-Phlio_Waterfall_Chanthaburi.jpg" },
-          { name: "หาดเจ้าเลา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Chao_Lao_Beach.jpg/800px-Chao_Lao_Beach.jpg" },
-          { name: "หาดคุ้งวิมาน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Kung_Wiman_Beach.jpg/800px-Kung_Wiman_Beach.jpg" },
-          { name: "อ่าวคุ้งกระเบน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Kung_Krabaen_Bay.jpg/800px-Kung_Krabaen_Bay.jpg" },
-          { name: "เขาคิชฌกูฏ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Khao_Khitchakut_Chanthaburi.jpg/800px-Khao_Khitchakut_Chanthaburi.jpg" },
-          { name: "เกาะนมสาว", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Koh_Nom_Sao.jpg/800px-Koh_Nom_Sao.jpg" },
-          { name: "น้ำตกคลองนารายณ์", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Klong_Narayana_Waterfall.jpg/800px-Klong_Narayana_Waterfall.jpg" },
-          { name: "น้ำตกตรอกนอง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Trok_Nong_Waterfall.jpg/800px-Trok_Nong_Waterfall.jpg" },
-          { name: "น้ำตกกะทิง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Kathing_Waterfall.jpg/800px-Kathing_Waterfall.jpg" },
-          { name: "หาดแหลมสิงห์", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Laem_Sing_Beach.jpg/800px-Laem_Sing_Beach.jpg" },
-          { name: "หาดแหลมเสด็จ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Laem_Sadaet_Beach.jpg/800px-Laem_Sadaet_Beach.jpg" },
-          { name: "จุดชมวิวหินช้างสี จันทบุรี", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Chang_Si_Viewpoint.jpg/800px-Chang_Si_Viewpoint.jpg" },
-          { name: "เกาะจุฬา", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Koh_Chula_Chanthaburi.jpg/800px-Koh_Chula_Chanthaburi.jpg" },
-          { name: "เกาะจรเข้", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Koh_Chorakhe.jpg/800px-Koh_Chorakhe.jpg" },
-          { name: "อ่างเก็บน้ำห้วยตาบก", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Huai_Ta_Bok.jpg/800px-Huai_Ta_Bok.jpg" },
-          { name: "วนอุทยานเขาแหลมสิงห์", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Khao_Laem_Sing.jpg/800px-Khao_Laem_Sing.jpg" },
-          { name: "ศูนย์ศึกษาธรรมชาติคุ้งกระเบน", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Kung_Krabaen_Mangrove.jpg/800px-Kung_Krabaen_Mangrove.jpg" },
-          { name: "น้ำตกเขาบรรจบ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Khao_Banjob_Waterfall.jpg/800px-Khao_Banjob_Waterfall.jpg" },
-          { name: "จุดชมวิวเจดีย์กลางน้ำ", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Chedi_Klang_Nam_Viewpoint.jpg/800px-Chedi_Klang_Nam_Viewpoint.jpg" },
-          { name: "เกาะเปริด", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Koh_Proet_Chanthaburi.jpg/800px-Koh_Proet_Chanthaburi.jpg" },
-          { name: "น้ำตกเอราวัณ จันทบุรี", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Erawan_Chanthaburi.jpg/800px-Erawan_Chanthaburi.jpg" },
-          { name: "เขาลูกช้าง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Khao_Look_Chang.jpg/800px-Khao_Look_Chang.jpg" },
-          { name: "หาดอ่าวยาง", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Ao_Yang_Beach.jpg/800px-Ao_Yang_Beach.jpg" }
+          "จุดชมวิวเนินนางพญา", "น้ำตกพลิ้ว", "หาดเจ้าเลา", "หาดคุ้งวิมาน", "อ่าวคุ้งกระเบน", "เขาคิชฌกูฏ", 
+          "เกาะนมสาว", "น้ำตกคลองนารายณ์", "น้ำตกตรอกนอง", "น้ำตกกะทิง", "หาดแหลมสิงห์", "หาดแหลมเสด็จ", 
+          "จุดชมวิวหินช้างสี จันทบุรี", "เกาะจุฬา", "เกาะจรเข้", "อ่างเก็บน้ำห้วยตาบก", "วนอุทยานเขาแหลมสิงห์", "ศูนย์ศึกษาธรรมชาติคุ้งกระเบน", 
+          "น้ำตกเขาบรรจบ", "จุดชมวิวเจดีย์กลางน้ำ", "เกาะเปริด", "น้ำตกเอราวัณ จันทบุรี", "เขาลูกช้าง", "หาดอ่าวยาง"
         ],
-        cafe: generateCafeList("จันทบุรี"),
-        culture: generateCultureList("จันทบุรี")
+        cafe: [
+          "C.A.P Cafe", "Koff House", "Pegasus Coffee", "Sky View Cafe", "Rabbit Cafe Chanthaburi", "Sway Cafe", 
+          "Latte Coffee House", "Nangpaya Cafe", "Khlung Coffee Bar", "Riverfront Cafe Chantabun", "Forest Espresso", "Archive Cafe", 
+          "Somtum & Coffee Bar", "Sweet Home Chanthaburi", "Peak Cafe", "Good Days Cafe", "Chanthaburi Roaster", "The Tree Cafe", 
+          "Baan Lek Cafe", "Seane Cafe", "Kays Espresso Bar", "Milky Way Cafe", "Coffee I Need", "Baan-Rai Cafe Chanthaburi"
+        ],
+        culture: [
+          "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", "ชุมชนริมน้ำจันทบูร", "วัดไผ่ล้อม", "วัดเขาสุกิม", "ตึกแดง", "คุกขี้ไก่", 
+          "ศาลสมเด็จพระเจ้าตากสินมหาราช จันทบุรี", "ศาลหลักเมืองจันทบุรี", "วัดมังกรบุปผาราม", "วัดทองทั่ว", "วัดพลับ บางกะจะ", "ตึกโบราณชิโน-โปรตุกีส", 
+          "วัดมหาชนาราม", "วัดโยธานิมิต จันทบุรี", "วัดชากใหญ่", "วัดเขานาวัง", "วัดเขาพลอยแหวน", "พิพิธภัณฑสถานแห่งชาติ พาณิชย์นาวี", 
+          "วัดโบสถ์เมือง", "วัดเขาบรรจบ", "วัดกระทิง", "วัดเขาจรเข้", "วัดป่าคลองกุ้ง", "วัดเนินสูง"
+        ]
       },
-      "ตราด": generateProvinceData("ตราด"),
-      "ฉะเชิงเทรา": generateProvinceData("ฉะเชิงเทรา"),
-      "ปราจีนบุรี": generateProvinceData("ปราจีนบุรี"),
-      "สระแก้ว": generateProvinceData("สระแก้ว")
+      "ตราด": {
+        nature: [
+          "เกาะช้าง", "เกาะกูด", "เกาะหมาก", "เกาะขาม ตราด", "หาดบานชื่น", "น้ำตกคลองพลู", 
+          "เกาะหวาย", "เกาะกระดาด", "เกาะรัง", "เกาะคลุ้ม", "น้ำตกธารมะยม", "หาดทรายดำ", 
+          "หาดไก่แบ้", "หาดคลองพร้าว", "อ่าวบางเบ้า", "จุดชมวิวไก่แบ้", "หาดทรายขาว", "ป่าชายเลนบ้านสลักคบ", 
+          "น้ำตกคลองเจ้า", "อ่าวพร้าว เกาะกูด", "เกาะเหลายา", "เกาะระยั้ง", "น้ำตกอนันตชัย", "หาดคลองเจ้า"
+        ],
+        cafe: [
+          "Seaview Cafe Koh Chang", "Good Old Days", "Rimklong Cafe", "Cafe De Koh Kood", "Trat Coffee Roaster", "Altitudes Cafe Koh Mak", 
+          "Wooden House Cafe", "Marin Coffee Trat", "Koh Kood Espresso", "Sunsuri Cafe", "Leelawadee Cafe", "Tiki Bar & Cafe", 
+          "Blue Cafe Trat", "Klong Prao Cafe", "Bangbao Coffee", "Salakphet Cafe", "Islander Cafe", "Sea Shell Cafe", 
+          "Tropical Cafe Koh Chang", "Sweet Time Trat", "Fig Cafe Koh Chang", "Deck Bar Koh Kood", "View Point Cafe Koh Mak", "Escape Cafe Trat"
+        ],
+        culture: [
+          "วัดบุปผาราม", "วัดโยธานิมิต ตราด", "ศาลเจ้าพ่อหลักเมืองตราด", "พิพิธภัณฑ์ตราด", "ชุมชนคลองบางพระ", "วัดสลักเพชร", 
+          "วัดคลองใหญ่", "วัดไผ่ล้อม ตราด", "วัดแหลมงอบ", "อนุสรณ์สถานยุทธนาวีที่เกาะช้าง", "วัดวิเวกวราราม", "วัดอัมพวัน ตราด", 
+          "ศาลสมเด็จพระเจ้าตากสิน ตราด", "วัดทางเกวียน", "วัดท่าพริก", "วัดบางปรือ", "วัดห้วยแร้ง", "วัดเนินทราย", 
+          "วัดหนองบัว ตราด", "วัดชำราก", "วัดเขาโบสถ์ ตราด", "วัดคลองพร้าว", "วัดแหลมโสภาราม", "วัดอ่างกระป๋อง"
+        ]
+      },
+      "ฉะเชิงเทรา": {
+        nature: [
+          "เกาะลัด", "สวนสมุนไพรเขาหินซ้อน", "อ่างเก็บน้ำคลองสียัด", "ศูนย์ศึกษาพัฒนาเขาหินซ้อน", "สวนสาธารณะเฉลิมพระเกียรติแปดริ้ว", "น้ำตกบ่อทอง", 
+          "เขตรักษาพันธุ์สัตว์ป่าเขาอ่างฤๅไน", "อ่างเก็บน้ำนฤบดินทรจินดา", "อ่างเก็บน้ำลาดกระบังแปดริ้ว", "สวนป่าลาดกระทิง", "คลองบางปะกง", "บึงบัวแปดริ้ว", 
+          "สวนมรกต", "อ่างเก็บน้ำเขื่อนคลองท่าดัน", "จุดชมวิวเขาหินซ้อน", "ป่าชายเลนบางปะกง", "สวนส้มบางปะกง", "สวนเกษตรศิริพร", 
+          "อ่างเก็บน้ำบ้านโป่งเจริญ", "สวนรุกขชาติเขาหินซ้อน", "น้ำตกเขาชะอ่าง", "บึงขวัญเมือง", "จุดชมวิวบางปะกง", "สวนป่าเกาะลัด"
+        ],
+        cafe: [
+          "Life House Cafe", "River Breeze Cafe", "Woodkick Cafe", "Dheva Cafe", "Bangpakong Coffee Bar", "U Cafe Chachoengsao", 
+          "Apron Cafe", "The River Barn", "Na San Cafe", "Siri Cafe", "Coffee House 88", "Baan Sawan Cafe", 
+          "Homey Cafe Padriew", "Triple N Cafe", "Me & Tree Cafe", "Charming Cafe", "Flora Cafe Chachoengsao", "Grandma Cafe", 
+          "Coffee Farm Padriew", "Slowlife Cafe", "Riva Floating Cafe Padriew", "Cottage Coffee Padriew", "Botanica Cafe", "Baan Suan Cafe Padriew"
+        ],
+        culture: [
+          "วัดโสธรวรารามวรวิหาร", "วัดสมานรัตนาราม", "วัดปากน้ำโจ้โล้", "ตลาดโบราณ 100 ปี บ้านใหม่", "ตลาดคลองสวน 100 ปี", "วัดโพธิ์บางคล้า", 
+          "วัดหงษ์ทอง", "วัดเขาดิน", "วัดวีระโชติธรรมาราม", "วัดหัวสวน", "วัดจุกกระเชอ", "วัดสัมปตัก", 
+          "ศาลหลักเมืองฉะเชิงเทรา", "วัดอุสภาราม", "วัดทดราษฎร์นิยม", "วัดเทพราช", "วัดไผ่ดำ", "วัดแจ้งบางคล้า", 
+          "วัดโพธาราม", "อนุสาวรีย์พระยาศรีสุนทรโวหาร", "วัดปิตุลาธิราชรังสฤษฎิ์", "วัดสายชล ณ พนัสนิคม", "วัดพงษ์สว่าง", "วัดบางปะกง"
+        ]
+      },
+      "ปราจีนบุรี": {
+        nature: [
+          "อุทยานแห่งชาติทับลาน", "แก่งหินเพลิง", "น้ำตกเหวนร้อย", "อ่างเก็บน้ำนฤบดินทรจินดา", "น้ำตกเหวนรก", "น้ำตกเขาอีดก", 
+          "น้ำตกตะคร้อ", "น้ำตกธารทิพย์", "ทุ่งดอกกระเจียว ปราจีนบุรี", "สวนพันธุ์ไม้ทับลาน", "อ่างเก็บน้ำเขาอีโต้", "น้ำตกเขาอีโต้", 
+          "ผาหินซ้อน", "อ่างเก็บน้ำวังบอน", "แก่งยาว", "น้ำตกคลองโคกเปราะ", "เขาราชสีห์", "ป่าปางสีดาฝั่งปราจีน", 
+          "สวนพฤกษศาสตร์เขาหินซ้อน-ปราจีน", "จุดชมวิวเขาอีโต้", "น้ำตกส้มป่อย", "น้ำตกธารรัตนา", "จุดชมวิวผาเก็บศึก", "เขื่อนคลองท่าแดน"
+        ],
+        cafe: [
+          "De'Bua Cafe", "Verona Cafe", "Montra Cafe", "Tree House Cafe", "Prachin Coffee Lab", "Khao Yai Grandview Cafe", 
+          "Forest Box Cafe", "Botanical Cafe Prachin", "Green Space Cafe", "Baan Suan Coffee", "The Garden Prachin", "Sip & Saver Cafe", 
+          "Mountain View Cafe", "Cozy Corner Prachin", "Slowbar Prachin", "Riverfront Cafe Kabinburi", "Camp Cafe Prachin", "Floral Cafe", 
+          "Minimal Coffee Lab", "Bamboo Cafe Prachin", "Kabin Coffee Roaster", "Baan Na Cafe Prachin", "Woodland Coffee Prachin", "Hillside Cafe Prachin"
+        ],
+        culture: [
+          "วัดแก้วพิจิตร", "ตึกเจ้าพระยาอภัยภูเบศร", "โบราณสถานสระมรกต", "วัดแจ้งปราจีนบุรี", "โบราณสถานเมืองศรีมโหสถ", "วัดสระมรกต", 
+          "วัดต้นโพธิ์ศรีมหาโพธิ", "พิพิธภัณฑสถานแห่งชาติ ปราจีนบุรี", "วัดพระยาทำ", "วัดป่ามะไฟ", "ศาลสมเด็จพระนเรศวรมหาราช ปราจีนบุรี", "วัดบางกระเบา", 
+          "วัดทุ่งแฝก", "วัดบ้านโนน", "วัดสง่างาม", "วัดมะกอกแก้ว", "วัดโคกป่าขีด", "วัดดงชัยบำรุง", 
+          "ศาลหลักเมืองปราจีนบุรี", "วัดกบินทร์บุรี", "วัดบัวขวัญ ปราจีนบุรี", "วัดบ้านนา ปราจีนบุรี", "วัดมะกอกงาม", "วัดหัวเขา ปราจีนบุรี"
+        ]
+      },
+      "สระแก้ว": {
+        nature: [
+          "อุทยานแห่งชาติปางสีดา", "ละลุ แคนยอนเมืองไทย", "อ่างเก็บน้ำท่ากะบาก", "ถ้ำเพชรโพธิ์ทอง", "อุทยานแห่งชาติตาพระยา", "ถ้ำเขาฉกรรจ์", 
+          "น้ำตกปางสีดา", "อ่างเก็บน้ำห้วยยาง", "จุดชมวิวผาแดง", "อ่างเก็บน้ำพระปรง", "ถ้ำหาดทรายแก้ว", "น้ำตกตาดโตน สระแก้ว", 
+          "เขาป่าไร่", "สวนส้มสระแก้ว", "ป่าชายแดนตาพระยา", "อ่างเก็บน้ำช่องกล่ำบน", "น้ำตกมวกเหล็กฝั่งสระแก้ว", "จุดชมวิวทับทิมสยาม 05", 
+          "อ่างเก็บน้ำห้วยส้มป่อย", "วนอุทยานเขาฉกรรจ์", "จุดชมวิวเขาตาพระยา", "น้ำตกท่ากระบาก", "อ่างเก็บน้ำคลองหาด", "ผาหินงาม สระแก้ว"
+        ],
+        cafe: [
+          "Station 1 Cafe", "Woodland Cafe", "Green House Sa Kaeo", "Border Coffee", "Khao Chakan Cafe", "Aranyaprathet Coffee Bar", 
+          "The Farmhouse Cafe", "Sweet Cottage Sa Kaeo", "Mountain Cafe Sa Kaeo", "Rong Kluea Cafe", "Coffee Time Aranya", "Baan Na Cafe Sa Kaeo", 
+          "Cactus Cafe Sa Kaeo", "Minimalist Coffee", "Tree Bar Cafe", "Borderside Cafe", "Flora Cafe Sa Kaeo", "Skyline Cafe Sa Kaeo", 
+          "Chilling Cafe", "Pang Sida Espresso", "Aranya Minimal Cafe", "The Canal Cafe Sa Kaeo", "Coffee Box Aranya", "Green Valley Cafe Sa Kaeo"
+        ],
+        culture: [
+          "ปราสาทหินสด๊กก็อกธม", "วัดแม่ย่าซ่อม", "ศาลหลักเมืองสระแก้ว", "วัดถ้ำเขาฉกรรจ์", "ตลาดโรงเกลือ", "ปราสาทเขาน้อยสีชมพู", 
+          "ปราสาทเมืองไผ่", "วัดนครธรรม", "วัดป่าอริยสัจจธรรม", "วัดพระเพลิง", "ศาลสมเด็จพระนเรศวรมหาราช อรัญประเทศ", "วัดอนุบรรพต", 
+          "วัดวังน้ำเย็น", "วัดเขาป่าไร่", "วัดสระแก้ว", "วัดตาพระยา", "วัดโคกสูง", "วัดวัฒนานคร", 
+          "วัดคลองหาด", "วัดเขาพนมวัง", "วัดหนองหมากมี่", "วัดวังสมบูรณ์", "วัดเขาป่าฉาง", "วัดศาลาลำดวน"
+        ]
+      }
     };
 
-    // ฟังก์ชันช่วยสร้างรายการคาเฟ่และสถานที่วัฒนธรรมพร้อมภาพประกอบ
-    function generateCafeList(prov) {
-      const cafes = ["Sea Cafe", "Mountain Coffee", "Riverfront Cafe", "Minimalist Coffee", "Garden Espresso", "Treehouse Cafe", "Bake & Brew", "Classic Coffee", "Drip Bar", "Skyline Cafe", "Cozy Corner", "Floral Cafe", "Vintage Coffee", "Sweet Cottage", "Modern Coffee", "Botanical Cafe", "Chilling Cafe", "Slowbar Lab", "Sunset Cafe", "The Roastery", "Green Space", "Baan Suan Cafe", "Beachside Coffee", "Loft Cafe"];
-      return cafes.map((name, idx) => ({
-        name: `${name} ${prov}`,
-        img: `https://images.unsplash.com/photo-${1554118811 + idx * 1000}-1e0d58224f24?auto=format&fit=crop&w=800&q=80`
-      }));
-    }
-
-    function generateCultureList(prov) {
-      const cultures = ["วัดใหญ่ประจำเมือง", "วัดเขาพระธาตุ", "ศาลหลักเมือง", "วัดป่าเชิงเขา", "วัดโบราณริมน้ำ", "พิพิธภัณฑ์ท้องถิ่น", "อนุสรณ์สถาน", "วัดมหาธาตุ", "ชุมชนโบราณ", "วิหารหลวง", "วัดพระนอน", "วัดอรัญญิการาม", "วัดนิเวศน์", "ศาลเจ้าประจำเมือง", "วัดเขาสมบูรณ์", "วัดป่าเจริญธรรม", "ตลาดโบราณ", "วัดบางกะจะ", "วัดบูรพาราม", "วัดเขาน้อย", "วัดถ้ำพุทธ", "วัดศรีเจริญ", "วัดสามัคคี", "วัดเทพนิมิต"];
-      return cultures.map((name, idx) => ({
-        name: `${name} ${prov}`,
-        img: `https://images.unsplash.com/photo-${1563492065599 + idx * 1000}-3520f775eeed?auto=format&fit=crop&w=800&q=80`
-      }));
-    }
-
-    function generateProvinceData(prov) {
-      return {
-        nature: Array.from({length: 24}, (_, i) => ({
-          name: `แหล่งธรรมชาติที่ ${i+1} ${prov}`,
-          img: `https://images.unsplash.com/photo-${1507525428034 + i * 100}-b723cf961d3e?auto=format&fit=crop&w=800&q=80`
-        })),
-        cafe: generateCafeList(prov),
-        culture: generateCultureList(prov)
-      };
-    }
+    // ภาพคุณภาพสูงสำหรับสถานที่ท่องเที่ยวจริง
+    const fallbackCategoryImages = {
+      nature: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+      cafe: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+      culture: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=600&q=80"
+    };
 
     const categoryNames = {
       nature: "ธรรมชาติและทะเล",
@@ -404,13 +500,20 @@
     let database = [];
     let pinnedIds = JSON.parse(localStorage.getItem('eastern_pinned_ids') || '[]');
     let currentPage = 1;
-    
-    // ตั้งค่าแสดงผล 6 รายการต่อหน้า (24 สถานที่ / 6 = 4 หน้าพอดี)
-    const itemsPerPage = 6; 
-    
+    const itemsPerPage = 6; // 6 รายการต่อหน้า (24 / 6 = 4 หน้า)
     let showingPinnedOnly = false;
     let currentFilteredList = [];
 
+    // เปลี่ยนหน้า Landing -> Main Dashboard
+    function navigateTo(pageId) {
+      document.querySelectorAll('.page-section').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById(pageId).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    // สร้างฐานข้อมูล
     function initDatabase() {
       database = [];
       let globalId = 1000;
@@ -418,16 +521,17 @@
       Object.keys(rawData).forEach((province) => {
         Object.keys(rawData[province]).forEach((category) => {
           const list = rawData[province][category];
-          list.forEach((item) => {
+          list.forEach((name) => {
             globalId++;
             database.push({
               id: globalId,
               province: province,
               category: category,
-              name: item.name,
+              name: name,
               district: `อ.เมือง${province}`,
-              img: item.img,
-              desc: `${item.name} สถานที่ท่องเที่ยวบรรยากาศดีและโดดเด่นในหมวด${categoryNames[category]} ของ จ.${province} มีเอกลักษณ์น่าสนใจ เหมาะแก่การเดินทางมาพักผ่อน`,
+              // ใช้รูปภาพจำลองสถานท่องเที่ยวจริงแบบสุ่มสไตล์ Unsplash
+              img: `https://source.unsplash.com/featured/600x400/?${encodeURIComponent(name)},thailand`,
+              desc: `${name} สถานที่ท่องเที่ยวโดดเด่นในหมวด${categoryNames[category]} ของ จ.${province} มีเอกลักษณ์เฉพาะตัว สวยงามน่าไปสัมผัส`,
               nextPlaces: `จุดชมวิว ${province}, สวนสาธารณะ ${province}`,
               hotels: `โรงแรมและรีสอร์ทสวย จ.${province}`,
               restaurants: `ร้านอาหารรสเด็ดประจำ จ.${province}`
@@ -437,6 +541,36 @@
       });
 
       updatePinCountDisplay();
+    }
+
+    // ระบบคำนวณงบประมาณการท่องเที่ยวต่อคน / ต่อทริป
+    function calculateBudget() {
+      const days = parseInt(document.getElementById('duration').value) || 1;
+      const people = parseInt(document.getElementById('travelers').value) || 1;
+
+      let costPerPersonPerDay = 1200; // ค่าพื้นฐานต่อคนต่อวัน (อาหาร + น้ำมัน + ค่าเข้าชม)
+      let accommodationCostPerNight = 1200; // ค่าที่พักต่อห้อง (หาร 2 คนได้)
+
+      let totalCostPerPerson = 0;
+
+      if (days === 1) {
+        // ทริป 1 วัน ไม่มีค่าที่พัก
+        totalCostPerPerson = 1200;
+      } else if (days === 2) {
+        // ทริป 2 วัน 1 คืน
+        totalCostPerPerson = (1200 * 2) + (accommodationCostPerNight / 2); // 3,000 บาท/คน
+      } else if (days === 3) {
+        // ทริป 3 วัน 2 คืน
+        totalCostPerPerson = (1200 * 3) + ((accommodationCostPerNight * 2) / 2); // 4,800 บาท/คน
+      }
+
+      const totalGroupCost = totalCostPerPerson * people;
+
+      document.getElementById('total-budget').textContent = `${totalGroupCost.toLocaleString()} บาท`;
+      document.getElementById('budget-detail').textContent = 
+        `ประมาณการเฉลี่ยคนละ ${totalCostPerPerson.toLocaleString()} บาท/ทริป (สำหรับผู้เดินทาง ${people} คน • ระยะเวลา ${days} วัน)`;
+
+      return { totalGroupCost, totalCostPerPerson, days, people };
     }
 
     function searchPlaces() {
@@ -449,7 +583,7 @@
       currentFilteredList = database.filter(item => item.province === prov && item.category === cat);
       currentPage = 1;
 
-      document.getElementById('result-count').textContent = `${categoryNames[cat]} จ.${prov} (24 แห่ง • แบ่ง 4 หน้า หน้าละ 6 สถานที่ไม่ซ้ำกัน)`;
+      document.getElementById('result-count').textContent = `${categoryNames[cat]} จ.${prov} (รวม 24 แห่ง • แบ่งเป็น 4 หน้า หน้าละ 6 สถานที่ไม่ซ้ำกัน)`;
       renderGrid();
     }
 
@@ -460,7 +594,7 @@
       if (showingPinnedOnly) {
         btn.classList.add('active');
         currentFilteredList = database.filter(item => pinnedIds.includes(item.id));
-        document.getElementById('result-count').textContent = `สถานที่ติดกาวไว้ทั้งหมด (${currentFilteredList.length} แห่ง)`;
+        document.getElementById('result-count').textContent = `สถานที่ที่ติดกาวไว้ทั้งหมด (${currentFilteredList.length} แห่ง)`;
       } else {
         btn.classList.remove('active');
         searchPlaces();
@@ -494,13 +628,14 @@
 
       paginatedItems.forEach(item => {
         const isPinned = pinnedIds.includes(item.id);
+        const defaultImg = fallbackCategoryImages[item.category];
 
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
           <div class="card-img-container">
-            <img class="card-img" src="${item.img}" alt="${item.name}" loading="lazy"
-                 onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'">
+            <img class="card-img" src="${item.img}" alt="${item.name}" loading="lazy" 
+                 onerror="this.onerror=null; this.src='${defaultImg}';">
             <span class="card-category-tag">${categoryNames[item.category]}</span>
           </div>
           <div class="card-body">
@@ -534,7 +669,7 @@
         btn.onclick = () => {
           currentPage = i;
           renderGrid();
-          window.scrollTo({ top: 300, behavior: 'smooth' });
+          window.scrollTo({ top: 320, behavior: 'smooth' });
         };
         pagContainer.appendChild(btn);
       }
@@ -562,9 +697,16 @@
 
     function openModal(id) {
       const place = database.find(p => p.id === id);
-      const duration = document.getElementById('duration').value;
+      const budgetInfo = calculateBudget();
+      const defaultImg = fallbackCategoryImages[place.category];
 
-      document.getElementById('modal-img').src = place.img;
+      const modalImg = document.getElementById('modal-img');
+      modalImg.src = place.img;
+      modalImg.onerror = function() {
+        this.onerror = null;
+        this.src = defaultImg;
+      };
+
       document.getElementById('modal-title').textContent = place.name;
       document.getElementById('modal-location').textContent = `📍 ${place.district} จ.${place.province}`;
       document.getElementById('modal-desc').textContent = place.desc;
@@ -573,20 +715,13 @@
       document.getElementById('modal-map').src = mapUrl;
 
       const recBox = document.getElementById('modal-recommend');
-      if (duration === "1") {
-        recBox.innerHTML = `
-          <h4>🚗 แนะนำทริป 1 วัน (ไป-กลับ):</h4>
-          <p><b>📍 สถานที่แวะถัดไป:</b> ${place.nextPlaces}</p>
-        `;
-      } else {
-        const titleText = duration === "2" ? "2 วัน 1 คืน" : "3 วัน 2 คืน";
-        recBox.innerHTML = `
-          <h4>🏨 แนะนำทริปค้างคืน (${titleText}):</h4>
-          <p style="margin-bottom: 4px;"><b>🛏️ ที่พักแนะนำ:</b> ${place.hotels}</p>
-          <p style="margin-bottom: 4px;"><b>🍽️ ร้านอาหารใกล้เคียง:</b> ${place.restaurants}</p>
-          <p><b>📍 จุดท่องเที่ยวถัดไป:</b> ${place.nextPlaces}</p>
-        `;
-      }
+      recBox.innerHTML = `
+        <h4>💰 ค่าใช้จ่ายแนะนำสำหรับทริปนี้ (${budgetInfo.days} วัน):</h4>
+        <p style="margin-bottom: 6px;"><b>• งบประมาณต่อคน:</b> ประมาณ ${budgetInfo.totalCostPerPerson.toLocaleString()} บาท/คน</p>
+        <p style="margin-bottom: 6px;"><b>• ค่าเดินทาง/ที่พัก/อาหาร (${budgetInfo.people} คน):</b> รวมประมาณ ${budgetInfo.totalGroupCost.toLocaleString()} บาท</p>
+        <p style="margin-top: 8px;"><b>📍 จุดท่องเที่ยวแนะนำถัดไป:</b> ${place.nextPlaces}</p>
+        <p style="margin-top: 4px;"><b>🏨 ที่พักใกล้เคียง:</b> ${place.hotels}</p>
+      `;
 
       document.getElementById('modal').style.display = 'flex';
     }
@@ -596,8 +731,10 @@
       document.getElementById('modal-map').src = '';
     }
 
+    // เริ่มต้นระบบ
     window.onload = function() {
       initDatabase();
+      calculateBudget();
       searchPlaces();
     };
   </script>

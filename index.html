@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>สุ่มเที่ยวฉะเชิงเทรา - วางแผนทริปสุดคุ้ม</title>
+  <title>สุ่มเที่ยวภาคตะวันออก - วางแผนทริปสุดคุ้ม</title>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <style>
     :root{
@@ -49,8 +49,8 @@
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-16 lg:px-10">
      <div class="max-w-3xl">
       <p class="inline-flex rounded-full px-4 py-2 text-sm font-bold tracking-wide bg-[#5e7e4f] text-white">เที่ยวสนุกสุข 360 องศา</p>
-      <h1 class="mt-5 font-extrabold leading-tight text-white text-4xl md:text-5xl">สุ่มเที่ยวฉะเชิงเทรา</h1>
-      <p class="mt-5 max-w-2xl leading-8 text-[#e2ede0]">ระบบสุ่มสถานที่ท่องเที่ยวจังหวัดฉะเชิงเทรา พร้อมคำนวณค่าใช้จ่ายและการเดินทาง</p>
+      <h1 class="mt-5 font-extrabold leading-tight text-white text-4xl md:text-5xl">สุ่มเที่ยวภาคตะวันออก</h1>
+      <p class="mt-5 max-w-2xl leading-8 text-[#e2ede0]">ระบบสุ่มสถานที่ท่องเที่ยวฉะเชิงเทราและจันทบุรี พร้อมคำนวณค่าใช้จ่ายและการเดินทาง</p>
      </div>
     </div>
    </section>
@@ -72,6 +72,7 @@
         <label for="province-select" class="block font-semibold text-[#254034]">เลือกจังหวัดที่ต้องการไป</label> 
         <select id="province-select" class="mt-3 w-full rounded-xl border border-[#cddac4] px-4 py-3 bg-[#fffdf9]"> 
          <option value="ฉะเชิงเทรา">ฉะเชิงเทรา (แปดริ้ว)</option> 
+         <option value="จันทบุรี">จันทบุรี</option> 
         </select>
        </div>
 
@@ -173,7 +174,7 @@
   </div>
 
   <script>
-    // ฐานข้อมูลฉะเชิงเทรา พร้อมรูปภาพจริงตามที่คุณระบุ
+    // ฐานข้อมูลฉะเชิงเทราและจันทบุรี พร้อมรูปภาพจริงครบถ้วน
     const easternThailandTourism = {
         "ฉะเชิงเทรา": {
             "คาเฟ่และร้านกาแฟ": [
@@ -196,6 +197,29 @@
                 { name: "ตลาดบ้านใหม่ 100 ปี", image: "https://i.postimg.cc/hPWPVVbY/IMG-2153.jpg" },
                 { name: "วัดปากน้ำโจ้โล้", image: "https://i.postimg.cc/CLGM7dcj/IMG-2154.jpg" },
                 { name: "วัดเทพนาราม", image: "https://i.postimg.cc/BnNSWkWr/IMG-2155.jpg" }
+            ]
+        },
+        "จันทบุรี": {
+            "คาเฟ่และร้านกาแฟ": [
+                { name: "บางกระจะ คาเฟ่ (ชุมชนริมน้ำจันทบูร)", image: "https://i.postimg.cc/Jhs6QHRt/IMG-8442.jpg" },
+                { name: "Koff House Coffee Bar & Eatery (ริมแม่น้ำจันทบุรี)", image: "https://i.postimg.cc/YCKC7YsW/IMG-8443.jpg" },
+                { name: "The Chanthaboon Coffee (ร้านกาแฟจันทบูร)", image: "https://i.postimg.cc/W4tZFMTW/IMG-8445.jpg" },
+                { name: "Retro Cafe (เมืองจันทบุรี)", image: "https://i.postimg.cc/VLyWxHm9/IMG-8444.jpg" },
+                { name: "Chan River: Cafe & Casual Dishes (ฌาน ริเวอร์)", image: "https://i.postimg.cc/wvG0R6CP/IMG-8446.jpg" }
+            ],
+            "ธรรมชาติและทะเล": [
+                { name: "อุทยานแห่งชาติน้ำตกพลิ้ว", image: "https://i.postimg.cc/rmK7PYcj/IMG-8447.jpg" },
+                { name: "จุดชมวิวเนินนางพญา (อ่าวคุ้งกระเบน)", image: "https://i.postimg.cc/dtKS2079/IMG-8448.webp" },
+                { name: "หาดเจ้าหลาว", image: "https://i.postimg.cc/QMRqj6cs/IMG-8449.jpg" },
+                { name: "อุทยานแห่งชาติเขาคิชฌกูฏ", image: "https://i.postimg.cc/WpSJnWt1/IMG-8450.jpg" },
+                { name: "อ่าวคุ้งกระเบน", image: "https://i.postimg.cc/Sx9swDQF/IMG-8451.jpg" }
+            ],
+            "วัฒนธรรมและวัด": [
+                { name: "ชุมชนเก่าริมน้ำจันทบูร", image: "https://i.postimg.cc/ZRQzYzVt/IMG-8452.webp" },
+                { name: "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", image: "https://i.postimg.cc/HswWzj6b/IMG-8453.jpg" },
+                { name: "วัดเขาสุกิม", image: "https://i.postimg.cc/XNFnNp6M/IMG-8454.jpg" },
+                { name: "ตึกแดง และคุกชี้ไก่", image: "https://i.postimg.cc/4dcR3FMb/IMG-8455.jpg" },
+                { name: "ศาลหลักเมืองจันทบุรี", image: "https://i.postimg.cc/4ywL46J4/IMG-8456.jpg" }
             ]
         }
     };
@@ -238,31 +262,59 @@
             });
         });
 
-        function getTripDetails(days) {
-            if (days === "1") {
-                return {
-                    transport: "เดินทางด้วยรถยนต์ส่วนตัว หรือรถตู้ประจำทาง (Day Trip ไปเช้าเย็นกลับจากกรุงเทพฯ)",
-                    costPerson: "ประมาณ 600 - 1,200 บาท / คน",
-                    costFriends: "ประมาณ 1,500 - 3,000 บาท / กลุ่ม (หารค่าน้ำมัน)",
-                    costFamily: "ประมาณ 2,000 - 4,000 บาท / ครอบครัว (3-4 คน)",
-                    foodTip: "🍽️ แนะนำมื้ออาหาร: แวะทานก๋วยเตี๋ยวปากหม้อสูตรโบราณ หรือร้านอาหารริมแม่น้ำบางปะกง"
-                };
-            } else if (days === "2") {
-                return {
-                    transport: "แนะนำรถยนต์ส่วนตัว ขับรถเที่ยวชิลๆ ทริป 2 วัน 1 คืน",
-                    costPerson: "ประมาณ 2,000 - 3,800 บาท / คน",
-                    costFriends: "ประมาณ 5,000 - 8,500 บาท / กลุ่ม (รวมค่าที่พักโฮมสเตย์ริมน้ำ)",
-                    costFamily: "ประมาณ 5,500 - 10,000 บาท / ครอบครัว (รวมที่พัก 1 คืน)",
-                    foodTip: "🍽 แนะนำมื้ออาหาร: มื้อกลางวันตลาดบ้านใหม่, มื้อเย็นริมแม่น้ำบางปะกง และแวะคาเฟ่สเปเชียลตี้ช่วงบ่าย"
-                };
+        function getTripDetails(province, days) {
+            if (province === "ฉะเชิงเทรา") {
+                if (days === "1") {
+                    return {
+                        transport: "เดินทางด้วยรถยนต์ส่วนตัว หรือรถตู้ประจำทาง (Day Trip ไปเช้าเย็นกลับจากกรุงเทพฯ)",
+                        costPerson: "ประมาณ 600 - 1,200 บาท / คน",
+                        costFriends: "ประมาณ 1,500 - 3,000 บาท / กลุ่ม (หารค่าน้ำมัน)",
+                        costFamily: "ประมาณ 2,000 - 4,000 บาท / ครอบครัว (3-4 คน)",
+                        foodTip: "🍽️ แนะนำมื้ออาหาร: แวะทานก๋วยเตี๋ยวปากหม้อสูตรโบราณ หรือร้านอาหารริมแม่น้ำบางปะกง"
+                    };
+                } else if (days === "2") {
+                    return {
+                        transport: "แนะนำรถยนต์ส่วนตัว ขับรถเที่ยวชิลๆ ทริป 2 วัน 1 คืน",
+                        costPerson: "ประมาณ 2,000 - 3,800 บาท / คน",
+                        costFriends: "ประมาณ 5,000 - 8,500 บาท / กลุ่ม (รวมค่าที่พักโฮมสเตย์ริมน้ำ)",
+                        costFamily: "ประมาณ 5,500 - 10,000 บาท / ครอบครัว (รวมที่พัก 1 คืน)",
+                        foodTip: "🍽 แนะนำมื้ออาหาร: มื้อกลางวันตลาดบ้านใหม่, มื้อเย็นริมแม่น้ำบางปะกง และแวะคาเฟ่สเปเชียลตี้ช่วงบ่าย"
+                    };
+                } else {
+                    return {
+                        transport: "เหมาะสำหรับทริปพักผ่อนยาว เจาะลึกธรรมชาติและวัดวาอาราม (3 วัน 2 คืน)",
+                        costPerson: "ประมาณ 4,000 - 7,000 บาท / คน",
+                        costFriends: "ประมาณ 10,000 - 18,000 บาท / กลุ่ม (รวมที่พักและค่าเดินทางรอบเมือง)",
+                        costFamily: "ประมาณ 12,000 - 20,000 บาท / ครอบครัว (รวมที่พัก 2 คืน)",
+                        foodTip: "🍽️ แนะนำมื้ออาหาร: ตระเวนชิมกาแฟร้านดัง, อาหารพื้นบ้านแปดริ้ว และขนมไทยโบราณในตลาดชุมชน"
+                    };
+                }
             } else {
-                return {
-                    transport: "เหมาะสำหรับทริปพักผ่อนยาว เจาะลึกธรรมชาติและวัดวาอาราม (3 วัน 2 คืน)",
-                    costPerson: "ประมาณ 4,000 - 7,000 บาท / คน",
-                    costFriends: "ประมาณ 10,000 - 18,000 บาท / กลุ่ม (รวมที่พักและค่าเดินทางรอบเมือง)",
-                    costFamily: "ประมาณ 12,000 - 20,000 บาท / ครอบครัว (รวมที่พัก 2 คืน)",
-                    foodTip: "🍽️ แนะนำมื้ออาหาร: ตระเวนชิมกาแฟร้านดัง, อาหารพื้นบ้านแปดริ้ว และขนมไทยโบราณในตลาดชุมชน"
-                };
+                if (days === "1") {
+                    return {
+                        transport: "เดินทางด้วยรถยนต์ส่วนตัว หรือรถทัวร์/รถตู้ (Day Trip เก็บแลนด์มาร์กหลักในเมือง)",
+                        costPerson: "ประมาณ 800 - 1,500 บาท / คน",
+                        costFriends: "ประมาณ 2,000 - 3,500 บาท / กลุ่ม (หารค่าน้ำมัน)",
+                        costFamily: "ประมาณ 2,500 - 4,500 บาท / ครอบครัว (3-4 คน)",
+                        foodTip: "🍽️ แนะนำมื้ออาหาร: แวะชิมก๋วยเตี๋ยวหมูเลียง, ก๋วยเตี๋ยวเส้นจันท์ผัดปู หรือร้านอาหารซีฟู้ดสดๆ ริมเล"
+                    };
+                } else if (days === "2") {
+                    return {
+                        transport: "แนะนำรถยนต์ส่วนตัว ขับรถเที่ยวชมธรรมชาติ ชุมชนริมน้ำ และชายทะเล (2 วัน 1 คืน)",
+                        costPerson: "ประมาณ 2,500 - 4,500 บาท / คน",
+                        costFriends: "ประมาณ 6,000 - 10,000 บาท / กลุ่ม (รวมที่พักโฮมสเตย์/รีสอร์ท)",
+                        costFamily: "ประมาณ 6,500 - 12,000 บาท / ครอบครัว (รวมที่พัก 1 คืน)",
+                        foodTip: "🍽 แนะนำมื้ออาหาร: มื้อกลางวันอาหารพื้นบ้านจันทบูร มื้อเย็นจัดเต็มบุฟเฟต์ซีฟู้ดหรืออาหารทะเลสด"
+                    };
+                } else {
+                    return {
+                        transport: "เหมาะสำหรับทริปพักผ่อนยาว เที่ยวอุทยาน ชายหาด และคาเฟ่ครบสูตร (3 วัน 2 คืน)",
+                        costPerson: "ประมาณ 5,000 - 8,000 บาท / คน",
+                        costFriends: "ประมาณ 12,000 - 20,000 บาท / กลุ่ม (รวมที่พักและค่าเดินทางรอบจังหวัด)",
+                        costFamily: "ประมาณ 14,000 - 24,000 บาท / ครอบครัว (รวมที่พัก 2 คืน)",
+                        foodTip: "🍽️ แนะนำมื้ออาหาร: ตระเวนชิมคาเฟ่สไตล์ชิคๆ ริมแม่น้ำจันทบูร และลิ้มรสผลไม้ตามฤดูกาล"
+                    };
+                }
             }
         }
 
@@ -300,10 +352,10 @@
             }
 
             emptyState.style.display = "none";
-            resultTitle.textContent = `ทริปแนะนำ ${totalDays} วัน (จ.ฉะเชิงเทรา)`;
+            resultTitle.textContent = `ทริปแนะนำ ${totalDays} วัน (จ.${targetProv})`;
             resultSummary.textContent = `สุ่มสถานที่สำเร็จ! คลิกที่ชื่อสถานที่เพื่อดูรูปภาพจริง งบประมาณ และคำแนะนำ`;
 
-            const tripInfo = getTripDetails(totalDays);
+            const tripInfo = getTripDetails(targetProv, totalDays);
 
             finalResults.forEach((item) => {
                 const placeBtn = document.createElement("div");
@@ -330,7 +382,7 @@
                     modalCostFriends.textContent = tripInfo.costFriends;
                     modalCostFamily.textContent = tripInfo.costFamily;
                     modalFoodTip.textContent = tripInfo.foodTip;
-                    modalMapBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + " ฉะเชิงเทรา")}`;
+                    modalMapBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + " " + item.province)}`;
                     
                     const textToCopy = `ทริปแนะนำ: ${item.name} จ.${item.province} (${item.category})\n- รูปภาพ: ${item.image}\n- การเดินทาง: ${tripInfo.transport}\n- งบต่อคน: ${tripInfo.costPerson}\n- งบกลุ่มเพื่อน: ${tripInfo.costFriends}\n- งบครอบครัว: ${tripInfo.costFamily}\n- แนะนำมื้ออาหาร: ${tripInfo.foodTip}`;
                     

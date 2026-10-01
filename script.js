@@ -1,44 +1,168 @@
-// ฐานข้อมูลสถานที่ท่องเที่ยว 7 จังหวัดภาคตะวันออก
+// ฐานข้อมูลสถานที่ท่องเที่ยว 7 จังหวัดภาคตะวันออก (สามารถใส่ลิงก์รูปภาพใน image: "" ของแต่ละที่ได้เลย)
 const easternThailandTourism = {
     "ชลบุรี": {
-        "คาเฟ่และร้านกาแฟ": ["Skoop Beach Cafe (พัทยา)", "Treedom Cafe (บางแสน)", "Red Temp Coffee (เขาสามมุข)", "Wocket Cafe (ศรีราชา)", "Hidden Lab (บางแสน)"],
-        "ธรรมชาติและทะเล": ["เกาะล้าน (พัทยา)", "หาดบางแสน", "สวนนงนุช พัทยา", "เกาะสีชัง", "เขาสามมุข"],
-        "วัฒนธรรมและวัด": ["ปราสาทสัจธรรม (พัทยา)", "วัดแสนสุขสุทธิวารรณ (บางแสน)", "วัดใหญ่อารามหลวง (อ.เมืองชลบุรี)", "วิหารเทพสถิตพระกิติเฉลิม", "เกาะลอย (ศรีราชา)"]
+        "คาเฟ่และร้านกาแฟ": [
+            { name: "Skoop Beach Cafe (พัทยา)", image: "" },
+            { name: "Treedom Cafe (บางแสน)", image: "" },
+            { name: "Red Temp Coffee (เขาสามมุข)", image: "" },
+            { name: "Wocket Cafe (ศรีราชา)", image: "" },
+            { name: "Hidden Lab (บางแสน)", image: "" }
+        ],
+        "ธรรมชาติและทะเล": [
+            { name: "เกาะล้าน (พัทยา)", image: "" },
+            { name: "หาดบางแสน", image: "" },
+            { name: "สวนนงนุช พัทยา", image: "" },
+            { name: "เกาะสีชัง", image: "" },
+            { name: "เขาสามมุข", image: "" }
+        ],
+        "วัฒนธรรมและวัด": [
+            { name: "ปราสาทสัจธรรม (พัทยา)", image: "" },
+            { name: "วัดแสนสุขสุทธิวารรณ (บางแสน)", image: "" },
+            { name: "วัดใหญ่อารามหลวง (อ.เมืองชลบุรี)", image: "" },
+            { name: "วิหารเทพสถิตพระกิติเฉลิม", image: "" },
+            { name: "เกาะลอย (ศรีราชา)", image: "" }
+        ]
     },
     "ระยอง": {
-        "คาเฟ่และร้านกาแฟ": ["Trae Bar & Cafe (หาดแม่พิมพ์)", "Keep U Cafe (เมืองระยอง)", "A Cup of Tree (เมืองระยอง)", "M SLR Cafe (บ้านฉาง)", "Baan Suan Cafe (แกลง)"],
-        "ธรรมชาติและทะเล": ["ทุ่งโปรงทอง (ปากน้ำประแส)", "เกาะเสม็ด", "หาดแหลมแม่พิมพ์", "อุทยานแห่งชาติเขาแหลมหญ้า-หมูเกาะเสม็ด", "สวนพฤกษศาสตร์ระยอง"],
-        "วัฒนธรรมและวัด": ["วัดละหารไร่ (หลวงปู่ทิม)", "ชุมชนปากน้ำประแส", "ศาลสมเด็จพระเจ้าตากสินมหาราช", "วัดป่าประดู่", "ตลาดเก่า 100 ปี ยมจินดา"]
+        "คาเฟ่และร้านกาแฟ": [
+            { name: "Trae Bar & Cafe (หาดแม่พิมพ์)", image: "" },
+            { name: "Keep U Cafe (เมืองระยอง)", image: "" },
+            { name: "A Cup of Tree (เมืองระยอง)", image: "" },
+            { name: "M SLR Cafe (บ้านฉาง)", image: "" },
+            { name: "Baan Suan Cafe (แกลง)", image: "" }
+        ],
+        "ธรรมชาติและทะเล": [
+            { name: "ทุ่งโปรงทอง (ปากน้ำประแส)", image: "" },
+            { name: "เกาะเสม็ด", image: "" },
+            { name: "หาดแหลมแม่พิมพ์", image: "" },
+            { name: "อุทยานแห่งชาติเขาแหลมหญ้า-หมูเกาะเสม็ด", image: "" },
+            { name: "สวนพฤกษศาสตร์ระยอง", image: "" }
+        ],
+        "วัฒนธรรมและวัด": [
+            { name: "วัดละหารไร่ (หลวงปู่ทิม)", image: "" },
+            { name: "ชุมชนปากน้ำประแส", image: "" },
+            { name: "ศาลสมเด็จพระเจ้าตากสินมหาราช", image: "" },
+            { name: "วัดป่าประดู่", image: "" },
+            { name: "ตลาดเก่า 100 ปี ยมจินดา", image: "" }
+        ]
     },
     "จันทบุรี": {
-        "คาเฟ่และร้านกาแฟ": ["บางกระจะ คาเฟ่ (ชุมชนริมน้ำจันทบูร)", "Koff House Cafe (ริมแม่น้ำจันทบุรี)", "Moo Yoo Rose House (ท่าใหม่)", "Retro Cafe (เมืองจันทบุรี)", "Chanthaburi Art House"],
-        "ธรรมชาติและทะเล": ["อุทยานแห่งชาติน้ำตกพลิ้ว", "จุดชมวิวเนินนางพญา (อ่าวคุ้งกระเบน)", "หาดเจ้าหลาว", "อุทยานแห่งชาติน้ำตก (เขาคิชฌกูฏ)", "อ่าวคุ้งกระเบน"],
-        "วัฒนธรรมและวัด": ["ชุมชนเก่าริมน้ำจันทบูร", "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", "วัดเขาสุกิม", "ตึกแดง และคุกขี้ไก่", "ศาลหลักเมืองจันทบุรี"]
+        "คาเฟ่และร้านกาแฟ": [
+            { name: "บางกระจะ คาเฟ่ (ชุมชนริมน้ำจันทบูร)", image: "" },
+            { name: "Koff House Cafe (ริมแม่น้ำจันทบุรี)", image: "" },
+            { name: "Moo Yoo Rose House (ท่าใหม่)", image: "" },
+            { name: "Retro Cafe (เมืองจันทบุรี)", image: "" },
+            { name: "Chanthaburi Art House", image: "" }
+        ],
+        "ธรรมชาติและทะเล": [
+            { name: "อุทยานแห่งชาติน้ำตกพลิ้ว", image: "" },
+            { name: "จุดชมวิวเนินนางพญา (อ่าวคุ้งกระเบน)", image: "" },
+            { name: "หาดเจ้าหลาว", image: "" },
+            { name: "อุทยานแห่งชาติน้ำตก (เขาคิชฌกูฏ)", image: "" },
+            { name: "อ่าวคุ้งกระเบน", image: "" }
+        ],
+        "วัฒนธรรมและวัด": [
+            { name: "ชุมชนเก่าริมน้ำจันทบูร", image: "" },
+            { name: "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", image: "" },
+            { name: "วัดเขาสุกิม", image: "" },
+            { name: "ตึกแดง และคุกขี้ไก่", image: "" },
+            { name: "ศาลหลักเมืองจันทบุรี", image: "" }
+        ]
     },
     "ตราด": {
-        "คาเฟ่และร้านกาแฟ": ["The Ozone Cafe (เมืองตราด)", "Baan Suan Cafe & Restaurant (ตราด)", "M4 Cafe (เกาะช้าง)", "Cafe De Koh Chang", "Rim Klong Cafe (แหลมงอบ)"],
-        "ธรรมชาติและทะเล": ["เกาะช้าง", "เกาะกูด", "เกาะขาม", "อุทยานแห่งชาติน้ำตกคลองพลู (เกาะช้าง)", "หาดทรายดำ (แหลมงอบ)"],
-        "วัฒนธรรมและวัด": ["วัดบุปผาราม (วัดปลายคลอง)", "ชุมชนรักษ์เขา (แหลมงอบ)", "อนุสรณ์สถานยุทธนาวีเกาะช้าง", "ศาลเจ้าพ่อหลักเมืองตราด", "ชุมชนบ้านน้ำเชี่ยว"]
+        "คาเฟ่และร้านกาแฟ": [
+            { name: "The Ozone Cafe (เมืองตราด)", image: "" },
+            { name: "Baan Suan Cafe & Restaurant (ตราด)", image: "" },
+            { name: "M4 Cafe (เกาะช้าง)", image: "" },
+            { name: "Cafe De Koh Chang", image: "" },
+            { name: "Rim Klong Cafe (แหลมงอบ)", image: "" }
+        ],
+        "ธรรมชาติและทะเล": [
+            { name: "เกาะช้าง", image: "" },
+            { name: "เกาะกูด", image: "" },
+            { name: "เกาะขาม", image: "" },
+            { name: "อุทยานแห่งชาติน้ำตกคลองพลู (เกาะช้าง)", image: "" },
+            { name: "หาดทรายดำ (แหลมงอบ)", image: "" }
+        ],
+        "วัฒนธรรมและวัด": [
+            { name: "วัดบุปผาราม (วัดปลายคลอง)", image: "" },
+            { name: "ชุมชนรักษ์เขา (แหลมงอบ)", image: "" },
+            { name: "อนุสรณ์สถานยุทธนาวีเกาะช้าง", image: "" },
+            { name: "ศาลเจ้าพ่อหลักเมืองตราด", image: "" },
+            { name: "ชุมชนบ้านน้ำเชี่ยว", image: "" }
+        ]
     },
     "ฉะเชิงเทรา": {
-        "คาเฟ่และร้านกาแฟ": ["บ้านปิ่นปัก คาเฟ่ (อ.เมือง)", "Chibani Cafe (ฉะเชิงเทรา)", "Riva Camp & Cafe", "นาคาเฟ่ (Nacha Cafe)", "Kratie Cafe"],
-        "ธรรมชาติและทะเล": ["อ่างเก็บน้ำลาดกระทิง", "อุทยานแห่งชาติเขาใหญ่ (โซนรอยต่อ)", "สวนป่าเฉลิมพระเกียรติ (คลองเขื่อน)", "แม่น้ำบางปะกง", "สวนเกษตรอินทรีย์ท้องถิ่น"],
-        "วัฒนธรรมและวัด": ["วัดโสธรวรารามวรวิหาร", "วัดสมานรัตนาราม", "ตลาดบ้านใหม่ 100 ปี", "วัดปากน้ำ", "วัดเทพนาราม"]
+        "คาเฟ่และร้านกาแฟ": [
+            { name: "บ้านปิ่นปัก คาเฟ่ (อ.เมือง)", image: "" },
+            { name: "Chibani Cafe (ฉะเชิงเทรา)", image: "" },
+            { name: "Riva Camp & Cafe", image: "" },
+            { name: "นาคาเฟ่ (Nacha Cafe)", image: "" },
+            { name: "Kratie Cafe", image: "" }
+        ],
+        "ธรรมชาติและทะเล": [
+            { name: "อ่างเก็บน้ำลาดกระทิง", image: "" },
+            { name: "อุทยานแห่งชาติเขาใหญ่ (โซนรอยต่อ)", image: "" },
+            { name: "สวนป่าเฉลิมพระเกียรติ (คลองเขื่อน)", image: "" },
+            { name: "แม่น้ำบางปะกง", image: "" },
+            { name: "สวนเกษตรอินทรีย์ท้องถิ่น", image: "" }
+        ],
+        "วัฒนธรรมและวัด": [
+            { name: "วัดโสธรวรารามวรวิหาร", image: "" },
+            { name: "วัดสมานรัตนาราม", image: "" },
+            { name: "ตลาดบ้านใหม่ 100 ปี", image: "" },
+            { name: "วัดปากน้ำ", image: "" },
+            { name: "วัดเทพนาราม", image: "" }
+        ]
     },
     "ปราจีนบุรี": {
-        "คาเฟ่และร้านกาแฟ": ["A-Lek Cafe (เมืองปราจีน)", "Tree House Cafe (ประจันตคาม)", "Baan Suan Khun Yai Cafe", "Moka Cafe Prachinburi", "The Canal Cafe"],
-        "ธรรมชาติและทะเล": ["แก่งหินเพิง (นาดี)", "น้ำตกเขาอีโต้", "อ่างเก็บน้ำจักรพงษ์", "น้ำตกตะคร้อ (ประจันตคาม)", "อุทยานแห่งชาติทับลาน"],
-        "วัฒนธรรมและวัด": ["วัดแก้วพิจิตร", "โบราณสถานเมืองสระมรกต", "พิพิธภัณฑสถานแห่งชาติ ปราจีนบุรี", "วัดต้นโพธิ์ศรีมหโพธิ"]
+        "คาเฟ่และร้านกาแฟ": [
+            { name: "A-Lek Cafe (เมืองปราจีน)", image: "" },
+            { name: "Tree House Cafe (ประจันตคาม)", image: "" },
+            { name: "Baan Suan Khun Yai Cafe", image: "" },
+            { name: "Moka Cafe Prachinburi", image: "" },
+            { name: "The Canal Cafe", image: "" }
+        ],
+        "ธรรมชาติและทะเล": [
+            { name: "แก่งหินเพิง (นาดี)", image: "" },
+            { name: "น้ำตกเขาอีโต้", image: "" },
+            { name: "อ่างเก็บน้ำจักรพงษ์", image: "" },
+            { name: "น้ำตกตะคร้อ (ประจันตคาม)", image: "" },
+            { name: "อุทยานแห่งชาติทับลาน", image: "" }
+        ],
+        "วัฒนธรรมและวัด": [
+            { name: "วัดแก้วพิจิตร", image: "" },
+            { name: "โบราณสถานเมืองสระมรกต", image: "" },
+            { name: "พิพิธภัณฑสถานแห่งชาติ ปราจีนบุรี", image: "" },
+            { name: "วัดต้นโพธิ์ศรีมหโพธิ", image: "" }
+        ]
     },
     "สระแก้ว": {
-        "คาเฟ่และร้านกาแฟ": ["De' Cafe Sa Kaeo", "The Camp Cafe (อรัญประเทศ)", "Baan Suan Coffee (วัฒนานคร)", "Mellow Cafe", "Slow Bar Coffee Sa Kaeo"],
-        "ธรรมชาติและทะเล": ["อุทยานแห่งชาติปางสีดา", "อุทยานแห่งชาติตาพระยา (ละลุ)", "อ่างเก็บน้ำพระปรง", "ถ้ำน้ำเขาสิงโต", "จุดชมวิวผาแดง (ปางสีดา)"],
-        "วัฒนธรรมและวัด": ["ปราสาทสด๊กก๊อกธม (โคกสูง)", "ตลาดโรงเกลือ (อรัญประเทศ)", "วัดนครธรรม (วัฒนานคร)", "ศาลหลักเมืองสระแก้ว", "วัดถ้ำเขาฉกรรจ์"]
+        "คาเฟ่และร้านกาแฟ": [
+            { name: "De' Cafe Sa Kaeo", image: "" },
+            { name: "The Camp Cafe (อรัญประเทศ)", image: "" },
+            { name: "Baan Suan Coffee (วัฒนานคร)", image: "" },
+            { name: "Mellow Cafe", image: "" },
+            { name: "Slow Bar Coffee Sa Kaeo", image: "" }
+        ],
+        "ธรรมชาติและทะเล": [
+            { name: "อุทยานแห่งชาติปางสีดา", image: "" },
+            { name: "อุทยานแห่งชาติตาพระยา (ละลุ)", image: "" },
+            { name: "อ่างเก็บน้ำพระปรง", image: "" },
+            { name: "ถ้ำน้ำเขาสิงโต", image: "" },
+            { name: "จุดชมวิวผาแดง (ปางสีดา)", image: "" }
+        ],
+        "วัฒนธรรมและวัด": [
+            { name: "ปราสาทสด๊กก๊อกธม (โคกสูง)", image: "" },
+            { name: "ตลาดโรงเกลือ (อรัญประเทศ)", image: "" },
+            { name: "วัดนครธรรม (วัฒนานคร)", image: "" },
+            { name: "ศาลหลักเมืองสระแก้ว", image: "" },
+            { name: "วัดถ้ำเขาฉกรรจ์", image: "" }
+        ]
     }
 };
 
-// รูปภาพประกอบจำลองตามหมวดหมู่
-const categoryImages = {
+const defaultImages = {
     "คาเฟ่และร้านกาแฟ": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
     "ธรรมชาติและทะเล": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
     "วัฒนธรรมและวัด": "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=600&q=80"
@@ -68,22 +192,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // คำนวณค่าใช้จ่ายและวิธีการเดินทางตามจำนวนวัน
+    // คำนวณค่าใช้จ่ายและวิธีการเดินทาง (รองรับทั้งคนเดียวและครอบครัว)
     function getTripDetails(days) {
         if (days === "1") {
             return {
-                transport: "เดินทางด้วยรถยนต์ส่วนตัว หรือรถตู้โดยสารประจำทาง แวะเที่ยวแบบไปกลับ (Day Trip)",
-                cost: "ประมาณ 800 - 1,500 บาท / คน (ค่าน้ำมัน/ค่ารถ + ค่าอาหาร + ค่าเข้าชม)"
+                transport: "เดินทางด้วยรถยนต์ส่วนตัว หรือรถตู้ประจำทาง แวะเที่ยวแบบไปกลับ (Day Trip)",
+                costPerPerson: "ประมาณ 800 - 1,500 บาท / คน",
+                costFamily: "ประมาณ 2,550 - 4,500 บาท / ครอบครัว (3-4 คน)"
             };
         } else if (days === "2") {
             return {
-                transport: "แนะนำรถยนต์ส่วนตัวเพื่อความสะดวกในการขับเที่ยวหลายจุดระหว่างทาง (2 วัน 1 คืน)",
-                cost: "ประมาณ 2,500 - 4,500 บาท / คน (รวมค่าที่พัก 1 คืน + ค่าอาหาร + ค่าเดินทาง)"
+                transport: "แนะนำรถยนต์ส่วนตัว ขับเที่ยวสบายๆ ทริป 2 วัน 1 คืน",
+                costPerPerson: "ประมาณ 2,500 - 4,500 บาท / คน",
+                costFamily: "ประมาณ 6,500 - 12,000 บาท / ครอบครัว (รวมที่พัก 1 คืน)"
             };
         } else {
             return {
                 transport: "เหมาะสำหรับทริปพักผ่อนยาว ขับรถเที่ยวรอบเมืองและข้ามเกาะ (3 วัน 2 คืน)",
-                cost: "ประมาณ 5,000 - 8,000 บาท / คน (รวมค่าที่พัก 2 คืน + อาหารซีฟู้ด + ค่ากิจกรรม)"
+                costPerPerson: "ประมาณ 5,000 - 8,000 บาท / คน",
+                costFamily: "ประมาณ 14,000 - 24,000 บาท / ครอบครัว (รวมที่พัก 2 คืนและอาหารซีฟู้ด)"
             };
         }
     }
@@ -99,8 +226,13 @@ document.addEventListener("DOMContentLoaded", function () {
         targetProvinces.forEach(prov => {
             Object.keys(easternThailandTourism[prov]).forEach(cat => {
                 if (selectedCategories.has(cat)) {
-                    easternThailandTourism[prov][cat].forEach(place => {
-                        collectedPlaces.push({ name: place, province: prov, category: cat });
+                    easternThailandTourism[prov][cat].forEach(item => {
+                        collectedPlaces.push({ 
+                            name: item.name, 
+                            image: item.image, 
+                            province: prov, 
+                            category: cat 
+                        });
                     });
                 }
             });
@@ -108,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // สุ่มสลับตำแหน่ง
         collectedPlaces.sort(() => Math.random() - 0.5);
-        const finalResults = collectedPlaces.slice(0, 6);
+        const finalResults = collectedPlaces.slice(0, 4); // แสดงผลการ์ดหลัก 4 แห่ง
 
         resultsGrid.innerHTML = "";
         if (finalResults.length === 0) {
@@ -119,18 +251,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
         emptyState.hidden = true;
         resultTitle.textContent = `ทริปแนะนำ ${totalDays} วัน (${targetProv === 'all' ? 'ทุกจังหวัดภาคตะวันออก' : targetProv})`;
-        resultSummary.textContent = `สุ่มพบสถานที่น่าสนใจ ${finalResults.length} แห่ง พร้อมประเมินค่าใช้จ่าย`;
+        resultSummary.textContent = `สุ่มพบสถานที่น่าสนใจ พร้อมประเมินค่าใช้จ่ายสำหรับคุณ`;
 
         const tripInfo = getTripDetails(totalDays);
 
-        finalResults.forEach((item, index) => {
-            const imgSrc = categoryImages[item.category] || categoryImages["ธรรมชาติและทะเล"];
+        // 1. สร้างการ์ดแสดงผลหลัก (มีรูป, รายละเอียด, แผนที่, ปุ่มก๊อปปี้)
+        finalResults.forEach((item) => {
+            const imgSrc = (item.image && item.image.trim() !== "") ? item.image : (defaultImages[item.category] || defaultImages["ธรรมชาติและทะเล"]);
+            
             const card = document.createElement("article");
             card.className = "result-card overflow-hidden rounded-[1.5rem] bg-white flex flex-col justify-between border border-[#e2e8df]";
             
             card.innerHTML = `
                 <div>
-                  <div class="relative h-44 w-full overflow-hidden">
+                  <div class="relative h-44 w-full overflow-hidden bg-gray-100">
                     <img src="${imgSrc}" alt="${item.name}" class="h-full w-full object-cover">
                     <span class="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-[#3c5c36]">${item.province}</span>
                     <span class="absolute top-3 right-3 rounded-full bg-[#a5653a] px-3 py-1 text-xs font-bold text-white">${item.category}</span>
@@ -144,8 +278,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span>${tripInfo.transport}</span>
                       </p>
                       <p class="flex items-start gap-2">
-                        <strong class="text-[#254034] shrink-0">💰 ค่าใช้จ่าย:</strong> 
-                        <span class="text-[#a5653a] font-semibold">${tripInfo.cost}</span>
+                        <strong class="text-[#254034] shrink-0">💰 ค่าใช้จ่ายต่อคน:</strong> 
+                        <span class="text-[#a5653a] font-semibold">${tripInfo.costPerPerson}</span>
+                      </p>
+                      <p class="flex items-start gap-2">
+                        <strong class="text-[#254034] shrink-0">👨‍👩‍👧‍👦 งบครอบครัว:</strong> 
+                        <span class="text-[#a5653a] font-semibold">${tripInfo.costFamily}</span>
                       </p>
                     </div>
                   </div>
@@ -155,13 +293,13 @@ document.addEventListener("DOMContentLoaded", function () {
                   <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}" target="_blank" class="rounded-xl py-3 px-3 text-sm font-semibold text-center bg-[#527849] text-white hover:brightness-105 transition">
                     📍 เปิดแผนที่
                   </a>
-                  <button type="button" class="copy-btn rounded-xl py-3 px-3 text-sm font-semibold text-center bg-[#edf4e9] text-[#3c5c36] hover:bg-[#e2ebd9] transition" data-text="ไปเที่ยว ${item.name} จ.${item.province} (${item.category}) - แนวทางเดินทาง: ${tripInfo.transport} งบประมาณ: ${tripInfo.cost}">
+                  <button type="button" class="copy-btn rounded-xl py-3 px-3 text-sm font-semibold text-center bg-[#edf4e9] text-[#3c5c36] hover:bg-[#e2ebd9] transition" data-text="ไปเที่ยว ${item.name} จ.${item.province} (${item.category}) - การเดินทาง: ${tripInfo.transport} | งบคนเดียว: ${tripInfo.costPerPerson} | งบครอบครัว: ${tripInfo.costFamily}">
                     📋 ก๊อปปี้ลิงก์แชร์
                   </button>
                 </div>
             `;
 
-            // ฟังก์ชันปุ่มก๊อปปี้ข้อมูลให้เพื่อน
+            // ฟังก์ชันปุ่มก๊อปปี้ข้อมูล
             const copyBtn = card.querySelector(".copy-btn");
             copyBtn.addEventListener("click", function() {
                 const textToCopy = this.getAttribute("data-text");
@@ -178,6 +316,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
             resultsGrid.appendChild(card);
         });
+
+        // 2. เพิ่มส่วน "สถานที่แนะนำอื่นๆ" (แสดงเฉพาะชื่อและหมวดหมู่ ไม่ใส่รูปภาพ ตามต้องการ)
+        const remainingPlaces = collectedPlaces.slice(4, 10);
+        if (remainingPlaces.length > 0) {
+            const extraSection = document.createElement("div");
+            extraSection.className = "mt-10 col-span-full rounded-2xl bg-white p-6 border border-[#e2e8df]";
+            extraSection.innerHTML = `
+                <h3 class="text-lg font-bold text-[#1f4d3a] mb-4">🌟 สถานที่ท่องเที่ยวแนะนำเพิ่มเติม (เผื่อเป็นตัวเลือกเสริม)</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm text-[#506357]">
+                    ${remainingPlaces.map(p => `
+                        <li class="p-3 rounded-xl bg-[#f5eedf]/60 flex items-center justify-between">
+                            <div>
+                                <span class="font-semibold text-[#254034] block">${p.name}</span>
+                                <span class="text-xs text-[#a5653a]">${p.province} •${p.category}</span>
+                            </div>
+                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name)}" target="_blank" class="text-xs font-bold text-[#527849] hover:underline">แผนที่ 📍</a>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+            resultsGrid.appendChild(extraSection);
+        }
 
         document.getElementById("results-section").scrollIntoView({ behavior: "smooth", block: "start" });
     });

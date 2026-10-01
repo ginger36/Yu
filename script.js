@@ -1,4 +1,4 @@
-// ฐานข้อมูลสถานที่ท่องเที่ยว 7 จังหวัดภาคตะวันออก (สามารถใส่ลิงก์รูปภาพใน image: "" ของแต่ละที่ได้เลย)
+// ฐานข้อมูลสถานที่ท่องเที่ยว 7 จังหวัดภาคตะวันออก
 const easternThailandTourism = {
     "ชลบุรี": {
         "คาเฟ่และร้านกาแฟ": [
@@ -178,6 +178,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const resultSummary = document.getElementById("result-summary");
     const resultTitle = document.getElementById("result-title");
 
+    // Elements ของ Modal ป๊อปอัพ
+    const modal = document.getElementById("place-modal");
+    const modalImg = document.getElementById("modal-img");
+    const modalProvince = document.getElementById("modal-province");
+    const modalCategory = document.getElementById("modal-category");
+    const modalTitle = document.getElementById("modal-title");
+    const modalTransport = document.getElementById("modal-transport");
+    const modalCostPerson = document.getElementById("modal-cost-person");
+    const modalCostFamily = document.getElementById("modal-cost-family");
+    const modalMapBtn = document.getElementById("modal-map-btn");
+    const modalCopyBtn = document.getElementById("modal-copy-btn");
+    const modalClose = document.getElementById("modal-close");
+
     // ระบบเลือกหมวดหมู่
     document.querySelectorAll("[data-category]").forEach(button => {
         button.addEventListener("click", () => {
@@ -192,24 +205,24 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // คำนวณค่าใช้จ่ายและวิธีการเดินทาง (รองรับทั้งคนเดียวและครอบครัว)
+    // คำนวณค่าใช้จ่ายและวิธีการเดินทาง
     function getTripDetails(days) {
         if (days === "1") {
             return {
                 transport: "เดินทางด้วยรถยนต์ส่วนตัว หรือรถตู้ประจำทาง แวะเที่ยวแบบไปกลับ (Day Trip)",
-                costPerPerson: "ประมาณ 800 - 1,500 บาท / คน",
+                costPerson: "ประมาณ 800 - 1,500 บาท / คน",
                 costFamily: "ประมาณ 2,550 - 4,500 บาท / ครอบครัว (3-4 คน)"
             };
         } else if (days === "2") {
             return {
                 transport: "แนะนำรถยนต์ส่วนตัว ขับเที่ยวสบายๆ ทริป 2 วัน 1 คืน",
-                costPerPerson: "ประมาณ 2,500 - 4,500 บาท / คน",
+                costPerson: "ประมาณ 2,500 - 4,500 บาท / คน",
                 costFamily: "ประมาณ 6,500 - 12,000 บาท / ครอบครัว (รวมที่พัก 1 คืน)"
             };
         } else {
             return {
-                transport: "เหมาะสำหรับทริปพักผ่อนยาว ขับรถเที่ยวรอบเมืองและข้ามเกาะ (3 วัน 2 คืน)",
-                costPerPerson: "ประมาณ 5,000 - 8,000 บาท / คน",
+                transport: "เหมาะสำหรับทริปพักผ่อนยาว ขับรถเที่ยวรอบเมืองและเกาะ (3 วัน 2 คืน)",
+                costPerson: "ประมาณ 5,000 - 8,000 บาท / คน",
                 costFamily: "ประมาณ 14,000 - 24,000 บาท / ครอบครัว (รวมที่พัก 2 คืนและอาหารซีฟู้ด)"
             };
         }
@@ -238,9 +251,8 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
 
-        // สุ่มสลับตำแหน่ง
         collectedPlaces.sort(() => Math.random() - 0.5);
-        const finalResults = collectedPlaces.slice(0, 4); // แสดงผลการ์ดหลัก 4 แห่ง
+        const finalResults = collectedPlaces.slice(0, 4); // แสดงการ์ดหลัก 4 แห่ง
 
         resultsGrid.innerHTML = "";
         if (finalResults.length === 0) {
@@ -251,73 +263,65 @@ document.addEventListener("DOMContentLoaded", function () {
 
         emptyState.hidden = true;
         resultTitle.textContent = `ทริปแนะนำ ${totalDays} วัน (${targetProv === 'all' ? 'ทุกจังหวัดภาคตะวันออก' : targetProv})`;
-        resultSummary.textContent = `สุ่มพบสถานที่น่าสนใจ พร้อมประเมินค่าใช้จ่ายสำหรับคุณ`;
+        resultSummary.textContent = `สุ่มพบสถานที่น่าสนใจ คลิกที่การ์ดเพื่อดูรายละเอียดและงบประมาณ`;
 
         const tripInfo = getTripDetails(totalDays);
 
-        // 1. สร้างการ์ดแสดงผลหลัก (มีรูป, รายละเอียด, แผนที่, ปุ่มก๊อปปี้)
+        // 1. สร้างการ์ดหลักแบบกระชับ (มีแค่รูป ชื่อ จังหวัด หมวดหมู่)
         finalResults.forEach((item) => {
             const imgSrc = (item.image && item.image.trim() !== "") ? item.image : (defaultImages[item.category] || defaultImages["ธรรมชาติและทะเล"]);
             
             const card = document.createElement("article");
-            card.className = "result-card overflow-hidden rounded-[1.5rem] bg-white flex flex-col justify-between border border-[#e2e8df]";
+            card.className = "result-card overflow-hidden rounded-[1.5rem] bg-white border border-[#e2e8df] flex flex-col";
             
             card.innerHTML = `
-                <div>
-                  <div class="relative h-44 w-full overflow-hidden bg-gray-100">
-                    <img src="${imgSrc}" alt="${item.name}" class="h-full w-full object-cover">
-                    <span class="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-[#3c5c36]">${item.province}</span>
-                    <span class="absolute top-3 right-3 rounded-full bg-[#a5653a] px-3 py-1 text-xs font-bold text-white">${item.category}</span>
-                  </div>
-                  <div class="p-6">
-                    <h3 class="text-xl font-bold text-[#294837]">${item.name}</h3>
-                    
-                    <div class="mt-4 space-y-2 text-sm text-[#506357]">
-                      <p class="flex items-start gap-2">
-                        <strong class="text-[#254034] shrink-0">🚗 การเดินทาง:</strong> 
-                        <span>${tripInfo.transport}</span>
-                      </p>
-                      <p class="flex items-start gap-2">
-                        <strong class="text-[#254034] shrink-0">💰 ค่าใช้จ่ายต่อคน:</strong> 
-                        <span class="text-[#a5653a] font-semibold">${tripInfo.costPerPerson}</span>
-                      </p>
-                      <p class="flex items-start gap-2">
-                        <strong class="text-[#254034] shrink-0">👨‍👩‍👧‍👦 งบครอบครัว:</strong> 
-                        <span class="text-[#a5653a] font-semibold">${tripInfo.costFamily}</span>
-                      </p>
-                    </div>
-                  </div>
+                <div class="relative h-48 w-full overflow-hidden bg-gray-100">
+                  <img src="${imgSrc}" alt="${item.name}" class="h-full w-full object-cover">
+                  <span class="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-[#3c5c36]">${item.province}</span>
+                  <span class="absolute top-3 right-3 rounded-full bg-[#a5653a] px-3 py-1 text-xs font-bold text-white">${item.category}</span>
                 </div>
-
-                <div class="p-6 pt-0 grid grid-cols-2 gap-3">
-                  <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}" target="_blank" class="rounded-xl py-3 px-3 text-sm font-semibold text-center bg-[#527849] text-white hover:brightness-105 transition">
-                    📍 เปิดแผนที่
-                  </a>
-                  <button type="button" class="copy-btn rounded-xl py-3 px-3 text-sm font-semibold text-center bg-[#edf4e9] text-[#3c5c36] hover:bg-[#e2ebd9] transition" data-text="ไปเที่ยว ${item.name} จ.${item.province} (${item.category}) - การเดินทาง: ${tripInfo.transport} | งบคนเดียว: ${tripInfo.costPerPerson} | งบครอบครัว: ${tripInfo.costFamily}">
-                    📋 ก๊อปปี้ลิงก์แชร์
-                  </button>
+                <div class="p-5 flex items-center justify-between">
+                  <h3 class="text-lg font-bold text-[#294837] line-clamp-1">${item.name}</h3>
+                  <span class="text-xs font-bold text-[#527849] bg-[#edf4e9] px-2.5 py-1.5 rounded-lg shrink-0">ดูรายละเอียด 🔍</span>
                 </div>
             `;
 
-            // ฟังก์ชันปุ่มก๊อปปี้ข้อมูล
-            const copyBtn = card.querySelector(".copy-btn");
-            copyBtn.addEventListener("click", function() {
-                const textToCopy = this.getAttribute("data-text");
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    const originalText = this.textContent;
-                    this.textContent = "✅ ก๊อปปี้แล้ว!";
-                    this.classList.add("bg-[#d4edbc]");
-                    setTimeout(() => {
-                        this.textContent = originalText;
-                        this.classList.remove("bg-[#d4edbc]");
-                    }, 2000);
-                });
+            // กดที่การ์ดเพื่อเปิด Modal ป๊อปอัพ
+            card.addEventListener("click", () => {
+                modalImg.src = imgSrc;
+                modalProvince.textContent = item.province;
+                modalCategory.textContent = item.category;
+                modalTitle.textContent = item.name;
+                modalTransport.textContent = tripInfo.transport;
+                modalCostPerson.textContent = tripInfo.costPerson;
+                modalCostFamily.textContent = tripInfo.costFamily;
+                modalMapBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`;
+                
+                // ตั้งค่าข้อความสำหรับปุ่มก๊อปปี้
+                const textToCopy = `ไปเที่ยว ${item.name} จ.${item.province} (${item.category}) - การเดินทาง: ${tripInfo.transport} | งบคนเดียว: ${tripInfo.costPerson} | งบครอบครัว: ${tripInfo.costFamily}`;
+                modalCopyBtn.onclick = function() {
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        const originalText = modalCopyBtn.innerHTML;
+                        modalCopyBtn.innerHTML = "✅ ก๊อปปี้เรียบร้อย!";
+                        modalCopyBtn.classList.add("bg-[#d4edbc]");
+                        setTimeout(() => {
+                            modalCopyBtn.innerHTML = originalText;
+                            modalCopyBtn.classList.remove("bg-[#d4edbc]");
+                        }, 2000);
+                    });
+                };
+
+                modal.hidden = false;
             });
 
             resultsGrid.appendChild(card);
         });
 
-        // 2. เพิ่มส่วน "สถานที่แนะนำอื่นๆ" (แสดงเฉพาะชื่อและหมวดหมู่ ไม่ใส่รูปภาพ ตามต้องการ)
+        // ปิด Modal
+        modalClose.onclick = () => modal.hidden = true;
+        modal.onclick = (e) => { if (e.target === modal) modal.hidden = true; };
+
+        // 2. ส่วน "สถานที่แนะนำเพิ่มเติม" ด้านล่าง (แสดงรายชื่อตัวอักษร ไม่มีรูป)
         const remainingPlaces = collectedPlaces.slice(4, 10);
         if (remainingPlaces.length > 0) {
             const extraSection = document.createElement("div");

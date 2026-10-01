@@ -50,7 +50,7 @@
      <div class="max-w-3xl">
       <p class="inline-flex rounded-full px-4 py-2 text-sm font-bold tracking-wide bg-[#5e7e4f] text-white">เที่ยวสนุกสุข 360 องศา</p>
       <h1 class="mt-5 font-extrabold leading-tight text-white text-4xl md:text-5xl">สุ่มเที่ยวภาคตะวันออก</h1>
-      <p class="mt-5 max-w-2xl leading-8 text-[#e2ede0]">ระบบสุ่มสถานที่ท่องเที่ยวฉะเชิงเทราและจันทบุรี พร้อมคำนวณค่าใช้จ่ายและการเดินทาง</p>
+      <p class="mt-5 max-w-2xl leading-8 text-[#e2ede0]">ระบบสุ่มสถานที่ท่องเที่ยว พร้อมคำนวณค่าใช้จ่ายและการเดินทาง</p>
      </div>
     </div>
    </section>
@@ -71,8 +71,14 @@
        <div>
         <label for="province-select" class="block font-semibold text-[#254034]">เลือกจังหวัดที่ต้องการไป</label> 
         <select id="province-select" class="mt-3 w-full rounded-xl border border-[#cddac4] px-4 py-3 bg-[#fffdf9]"> 
-         <option value="ฉะเชิงเทรา">ฉะเชิงเทรา (แปดริ้ว)</option> 
+         <option value="all">สุ่มได้ทุกจังหวัดในภาคตะวันออก</option> 
+         <option value="ชลบุรี">ชลบุรี</option> 
+         <option value="ระยอง">ระยอง</option> 
          <option value="จันทบุรี">จันทบุรี</option> 
+         <option value="ตราด">ตราด</option> 
+         <option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option> 
+         <option value="ปราจีนบุรี">ปราจีนบุรี</option> 
+         <option value="สระแก้ว">สระแก้ว</option> 
         </select>
        </div>
 
@@ -90,7 +96,7 @@
         <div class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
          <button class="choice-button category-button is-active rounded-xl px-4 py-3 text-sm font-semibold" type="button" data-category="คาเฟ่และร้านกาแฟ">☕ คาเฟ่</button> 
          <button class="choice-button category-button is-active rounded-xl px-4 py-3 text-sm font-semibold" type="button" data-category="ธรรมชาติและทะเล">🌲 ธรรมชาติ</button> 
-         <button class="choice-button category-button is-active rounded-xl px-4 py-3 text-sm font-semibold" type="button" data-category="วัฒนธรรมและวัด">🏛️ วัฒนธรรม</button>
+         <button class="choice-button category-button is-active rounded-xl px-4 py-3 text-sm font-semibold" type="button" data-category="วัฒนธรรมและวัด">🏛 วัฒนธรรม</button>
         </div>
        </fieldset>
 
@@ -105,7 +111,7 @@
       <img class="h-52 w-full rounded-[1.4rem] object-cover" src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80" alt="แนะนำ">
       <p class="mt-6 text-sm font-bold tracking-[.13em] uppercase text-[#a5653a]">คำแนะนำการใช้งาน</p>
       <h2 class="mt-2 font-bold text-xl text-[#1f4d3a]">เลือกสถานที่จากรายการ</h2>
-      <p class="mt-3 leading-7 text-[#617167]">เมื่อกดปุ่มสุ่ม ระบบจะแสดงรายชื่อสถานที่ออกมาเป็นข้อความ ให้คุณเลือกคลิกดูสถานที่ที่สนใจ ป๊อปอัพรายละเอียดและรูปภาพจริงจึงจะเด้งขึ้นมาครับ</p>
+      <p class="mt-3 leading-7 text-[#617167]">เมื่อกดปุ่มสุ่ม ระบบจะแสดงรายชื่อสถานที่ออกมาเป็นข้อความ ให้คุณเลือกคลิกดูสถานที่ที่สนใจ ป๊อปอัพรายละเอียดจึงจะเด้งขึ้นมาครับ</p>
      </aside>
     </div>
    </section>
@@ -125,10 +131,10 @@
    </section>
   </main>
 
-  <!-- Modal ป๊อปอัพแสดงรายละเอียดและรูปภาพจริง -->
+  <!-- Modal ป๊อปอัพ -->
   <div id="place-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
    <div class="modal-content w-full max-w-lg rounded-[2rem] bg-white overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
-    <div class="relative h-64 w-full bg-gray-100 shrink-0">
+    <div class="relative h-52 w-full bg-gray-100 shrink-0">
      <img id="modal-img" src="" alt="" class="h-full w-full object-cover">
      <button id="modal-close" class="absolute top-4 right-4 rounded-full bg-black/60 text-white p-2 hover:bg-black/80 transition">
       <i data-lucide="x" class="w-5 h-5"></i>
@@ -138,6 +144,7 @@
     </div>
     <div class="p-6 md:p-8 space-y-4 overflow-y-auto">
      <h3 id="modal-title" class="text-2xl font-bold text-[#294837]"></h3>
+     <p id="modal-desc" class="text-sm leading-relaxed text-[#506357] bg-[#f9fbf7] p-3 rounded-xl border border-[#e2e8df]"></p>
      
      <div class="space-y-2.5 text-sm text-[#506357] border-t border-b border-[#eee] py-3">
       <p class="flex items-start gap-2">
@@ -153,7 +160,7 @@
        <span id="modal-cost-friends" class="text-[#a5653a] font-semibold"></span>
       </p>
       <p class="flex items-start gap-2">
-       <strong class="text-[#254034] shrink-0">👨‍👩‍👧‍👦 งบครอบครัว:</strong> 
+       <strong class="text-[#254034] shrink-0">👨‍👩‍‍👧‍👦 งบครอบครัว:</strong> 
        <span id="modal-cost-family" class="text-[#a5653a] font-semibold"></span>
       </p>
       <p class="flex items-start gap-2 pt-1">
@@ -174,54 +181,133 @@
   </div>
 
   <script>
-    // ฐานข้อมูลฉะเชิงเทราและจันทบุรี พร้อมรูปภาพจริงครบถ้วน
     const easternThailandTourism = {
-        "ฉะเชิงเทรา": {
+        "ชลบุรี": {
             "คาเฟ่และร้านกาแฟ": [
-                { name: "Mood&Tone Roastery : Specialty Coffee", image: "https://i.postimg.cc/HnzRNGRt/IMG-2131.jpg" },
-                { name: "Rosetta Roastery: Specialty Coffee", image: "https://i.postimg.cc/vZck0NzZ/IMG-2133.jpg" },
-                { name: "19 SUNDAY CAFE", image: "https://i.postimg.cc/RFzYVVzL/IMG-2137.jpg" },
-                { name: "BEURRE & BOULANGER", image: "https://i.postimg.cc/zvzPKtvf/IMG-2138.jpg" },
-                { name: "Coffee For Rest @ฉะเชิงเทรา", image: "https://i.postimg.cc/brmVTxSx/IMG-2139.jpg" }
+                { name: "Sheeva Cafe Pattaya", image: "https://i.postimg.cc/bY6RmHvz/IMG-8459.jpg", desc: "คาเฟ่สุดชิคในพัทยา บรรยากาศน่านั่ง ถ่ายรูปสวย เครื่องดื่มและเบเกอรี่หลากหลาย" },
+                { name: "blue house café sriracha", image: "https://i.postimg.cc/5t1v46tm/IMG-8457.jpg", desc: "คาเฟ่สไตล์โฮมมี่โทนสีฟ้าขาวอบอุ่นริมศรีราชา เหมาะกับการนั่งพักผ่อนชิลๆ" },
+                { name: "artory cafe and crafts", image: "https://i.postimg.cc/L8SBXyCs/IMG-8456.webp", desc: "คาเฟ่ริมทะเลสไตล์มินิมอล ผสมผสานงานศิลปะและงานคราฟต์สุดสร้างสรรค์" },
+                { name: "ฮารุดอท ชลบุรี บาย นานา คอฟฟี่ โรสเตอร์", image: "https://i.postimg.cc/MZRQQ7jV/IMG-8455.jpg", desc: "คาเฟ่ดีไซน์สถาปัตยกรรมสุดล้ำและต้นไม้ใหญ่ตรงกลาง กาแฟพรีเมียมคั่วสด" }
             ],
             "ธรรมชาติและทะเล": [
-                { name: "อ่างเก็บน้ำลาดกระทิง", image: "https://i.postimg.cc/m227WxKx/IMG-2148.jpg" },
-                { name: "อุทยานแห่งชาติเขาใหญ่ (โซนรอยต่อ)", image: "https://i.postimg.cc/8kbLYkXV/IMG-2141.jpg" },
-                { name: "สวนป่าเฉลิมพระเกียรติ (คลองเขื่อน)", image: "https://i.postimg.cc/nzG9NTk1/IMG-2142.webp" },
-                { name: "แม่น้ำบางปะกง", image: "https://i.postimg.cc/8kwrHKc3/IMG-2143.jpg" },
-                { name: "สวนเกษตรอินทรีย์ท้องถิ่น กลุ่มเกษตรอินทรีย์สนามชัยเขต (บ้านยางแดง)", image: "https://i.postimg.cc/X7zBMrfW/IMG-2147.jpg" }
+                { name: "เขาสามมุข", image: "https://i.postimg.cc/vZPgsXpD/IMG-8454.jpg", desc: "จุดชมวิวทะเลมุมสูงยอดฮิต ชมวิวพระอาทิตย์ตกดินและน้องลิงธรรมชาติ" },
+                { name: "น้ำตกชันตาเถร", image: "https://i.postimg.cc/1XZ4HdNr/IMG-8453.jpg", desc: "น้ำตกธรรมชาติร่มรื่นในป่าเขียวขจี เหมาะกับการศึกษาธรรมชาติและพักผ่อน" },
+                { name: "บางแสน", image: "https://i.postimg.cc/VkNvDn5p/IMG-8451.jpg", desc: "ชายหาดยอดนิยมตลอดกาล เพลิดเพลินกับบรรยากาศรับลมและอาหารทะเลสดใหม่" },
+                { name: "เกาะล้าน", image: "https://i.postimg.cc/B62nXCw1/IMG-8450.jpg", desc: "เกาะสวรรค์น้ำใสทรายขาวใกล้พัทยา เหมาะกับการเล่นน้ำและทำกิจกรรมริมทะเล" }
             ],
             "วัฒนธรรมและวัด": [
-                { name: "วัดโสธรวรารามวรวิหาร", image: "https://i.postimg.cc/tTsCN5cg/IMG-2150.jpg" },
-                { name: "วัดสมานรัตนาราม", image: "https://i.postimg.cc/66Gp7MRG/IMG-2151.jpg" },
-                { name: "ตลาดบ้านใหม่ 100 ปี", image: "https://i.postimg.cc/hPWPVVbY/IMG-2153.jpg" },
-                { name: "วัดปากน้ำโจ้โล้", image: "https://i.postimg.cc/CLGM7dcj/IMG-2154.jpg" },
-                { name: "วัดเทพนาราม", image: "https://i.postimg.cc/BnNSWkWr/IMG-2155.jpg" }
+                { name: "ตลาดหนองมน", image: "https://i.postimg.cc/fyMgYw5m/IMG-8463.jpg", desc: "แหล่งซื้อของฝากขึ้นชื่อ ทั้งข้าวหลามหนองมนและขนมท้องถิ่นมากมาย" },
+                { name: "ตลาดเก่าอ่างศิลา", image: "https://i.postimg.cc/7hPmfKYd/IMG-8460.jpg", desc: "ชุมชนประมงเก่าแก่ สัมผัสวิถีชีวิตดั้งเดิมและเลือกซื้ออาหารทะเลสดๆ" },
+                { name: "วิหารเซียน (อเนกกุศลศาลา)", image: "https://i.postimg.cc/tgh5kKsv/IMG-8461.jpg", desc: "แหล่งเรียนรู้ศิลปวัฒนธรรมจีนโบราณ สถาปัตยกรรมและโบราณวัตถุล้ำค่า" },
+                { name: "ปราสาทสัจธรรม", image: "https://i.postimg.cc/qBmG1X7J/IMG-8458.jpg", desc: "ปราสาทไม้แกะสลักมือที่ใหญ่ที่สุดในโลก วิจิตรตระการตาด้วยงานศิลปะไทย" }
+            ]
+        },
+        "ระยอง": {
+            "คาเฟ่และร้านกาแฟ": [
+                { name: "สน คาเฟ่ระยอง", image: "https://i.postimg.cc/bv0zwyvk/IMG-2791.jpg", desc: "คาเฟ่บรรยากาศอบอุ่นใต้ร่มสน เครื่องดื่มชื่นใจและมุมถ่ายรูปสไตล์ธรรมชาติ" },
+                { name: "Verde Wood & Cafe", image: "https://i.postimg.cc/cH8PLTTS/IMG-2799.jpg", desc: "คาเฟ่ไม้ดีไซน์อบอุ่น กลมกลืนไปกับธรรมชาติและสวนเขียวขจี" },
+                { name: "Kyoto Shi Cafe ระยอง", image: "https://i.postimg.cc/rpG8wVp9/IMG-2792.jpg", desc: "คาเฟ่สไตล์ญี่ปุ่นจำลอง ยกบรรยากาศเกียวโตมาไว้ที่ระยอง พร้อมมุมถ่ายรูปเพียบ" },
+                { name: "Bellinee’s Rayong Riverside", image: "https://i.postimg.cc/TPjR3dP9/IMG-2793.jpg", desc: "คาเฟ่และเบเกอรี่ริมแม่น้ำ บรรยากาศน่านั่งพักผ่อนและจิบกาแฟยามบ่าย" }
+            ],
+            "ธรรมชาติและทะเล": [
+                { name: "อุทยานแห่งชาติเขาแหลมหญ้า", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80", desc: "จุดชมวิวสะพานยาวยื่นออกไปในทะเล และวิวพระอาทิตย์ตกดินสุดโรแมนติก" },
+                { name: "เกาะเสม็ด", image: "https://i.postimg.cc/sxR9hwfy/IMG-2788.jpg", desc: "เกาะยอดฮิตหาดทรายขาวเนียนละเอียด น้ำทะเลใสสีฟ้าคราม" },
+                { name: "หาดแหลมเจริญ", image: "https://i.postimg.cc/RhQ1QKqz/IMG-2789.jpg", desc: "ชายหาดบรรยากาศสงบ เหมาะกับการเดินเล่นรับลมชมวิวทะเลระยอง" },
+                { name: "สวนพฤกษศาสตร์ระยอง", image: "https://i.postimg.cc/J0c3cZtL/IMG-2790.jpg", desc: "ผืนป่าเสม็ดโบราณ พายเรือคายัคชมธรรมชาติและพืชพรรณท้องถิ่นอันอุดมสมบูรณ์" }
+            ],
+            "วัฒนธรรมและวัด": [
+                { name: "วัดป่าประดู่ พระอารามหลวง", image: "https://i.postimg.cc/XvKVYjvx/IMG-2794.jpg", desc: "วัดโบราณประดิษฐานพระนอนตะตะแคงซ้ายอันเป็นเอกลักษณ์ไม่เหมือนที่อื่น" },
+                { name: "วัดลุ่มมหาชัยชุมพล", image: "https://i.postimg.cc/MG0Wp6G5/IMG-2795.jpg", desc: "วัดประวัติศาสตร์สมัยสมเด็จพระเจ้าตากสินมหาราช ร่มรื่นและเป็นสิริมงคล" },
+                { name: "วัดละหารไร่", image: "https://i.postimg.cc/CMnwRsd5/IMG-2797.jpg", desc: "วัดเกจิอาจารย์ดัง (หลวงปู่ทิม) ที่ศิษยานุศิษย์นิยมมากราบไหว้ขอพร" },
+                { name: "วัดโขดทิมทาราม", image: "https://i.postimg.cc/3r03kFWy/IMG-2798.jpg", desc: "วัดเก่าแก่ที่สุดของจังหวัดระยอง สถาปัตยกรรมและเรื่องราวโบราณทรงคุณค่า" }
             ]
         },
         "จันทบุรี": {
             "คาเฟ่และร้านกาแฟ": [
-                { name: "บางกระจะ คาเฟ่ (ชุมชนริมน้ำจันทบูร)", image: "https://i.postimg.cc/Jhs6QHRt/IMG-8442.jpg" },
-                { name: "Koff House Coffee Bar & Eatery (ริมแม่น้ำจันทบุรี)", image: "https://i.postimg.cc/YCKC7YsW/IMG-8443.jpg" },
-                { name: "The Chanthaboon Coffee (ร้านกาแฟจันทบูร)", image: "https://i.postimg.cc/W4tZFMTW/IMG-8445.jpg" },
-                { name: "Retro Cafe (เมืองจันทบุรี)", image: "https://i.postimg.cc/VLyWxHm9/IMG-8444.jpg" },
-                { name: "Chan River: Cafe & Casual Dishes (ฌาน ริเวอร์)", image: "https://i.postimg.cc/wvG0R6CP/IMG-8446.jpg" }
+                { name: "ชุมชนริมน้ำจันทบูร", image: "", desc: "คาเฟ่บรรยากาศอบอุ่นริมแม่น้ำจันทบุรี ผสมผสานกลิ่นอายวัฒนธรรมชุมชนโบราณ" },
+                { name: "จุดชมวิวเนินนางพญา", image: "", desc: "คาเฟ่และจุดชมวิวถนนเลียบชายหาดที่สวยที่สุดในภาคตะวันออก" }
             ],
             "ธรรมชาติและทะเล": [
-                { name: "อุทยานแห่งชาติน้ำตกพลิ้ว", image: "https://i.postimg.cc/rmK7PYcj/IMG-8447.jpg" },
-                { name: "จุดชมวิวเนินนางพญา (อ่าวคุ้งกระเบน)", image: "https://i.postimg.cc/dtKS2079/IMG-8448.webp" },
-                { name: "หาดเจ้าหลาว", image: "https://i.postimg.cc/QMRqj6cs/IMG-8449.jpg" },
-                { name: "อุทยานแห่งชาติเขาคิชฌกูฏ", image: "https://i.postimg.cc/WpSJnWt1/IMG-8450.jpg" },
-                { name: "อ่าวคุ้งกระเบน", image: "https://i.postimg.cc/Sx9swDQF/IMG-8451.jpg" }
+                { name: "อุทยานแห่งชาติน้ำตกพลิ้ว", image: "", desc: "น้ำตกใสสะอาดท่ามกลางธรรมชาติร่มรื่น มีปลาพลวงหินว่ายวนเวียนจำนวนมาก" },
+                { name: "หาดเจ้าหลาว จันทบุรี", image: "", desc: "ชายหาดยอดนิยมของจันทบุรี ทรายสีนวลน้ำทะเลใส เหมาะกับการพักผ่อน" }
             ],
             "วัฒนธรรมและวัด": [
-                { name: "ชุมชนเก่าริมน้ำจันทบูร", image: "https://i.postimg.cc/ZRQzYzVt/IMG-8452.webp" },
-                { name: "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", image: "https://i.postimg.cc/HswWzj6b/IMG-8453.jpg" },
-                { name: "วัดเขาสุกิม", image: "https://i.postimg.cc/XNFnNp6M/IMG-8454.jpg" },
-                { name: "ตึกแดง และคุกชี้ไก่", image: "https://i.postimg.cc/4dcR3FMb/IMG-8455.jpg" },
-                { name: "ศาลหลักเมืองจันทบุรี", image: "https://i.postimg.cc/4ywL46J4/IMG-8456.jpg" }
+                { name: "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", image: "", desc: "โบสถ์คาทอลิกสไตล์โกธิคที่ใหญ่ที่สุดในประเทศไทย งดงามตระการตา" },
+                { name: "วัดเขาสุกิม จันทบุรี", image: "", desc: "วัดปฏิบัติธรรมชื่อดัง ตั้งอยู่บนเนินเขา ร่มรื่นและมีวัตถุโบราณจัดแสดง" }
+            ]
+        },
+        "ตราด": {
+            "คาเฟ่และร้านกาแฟ": [
+                { name: "เมืองตราด คาเฟ่", image: "", desc: "คาเฟ่บรรยากาศสบายๆ ร่มรื่นด้วยสวนดอกไม้และเครื่องดื่มสดชื่น" },
+                { name: "เกาะช้าง คาเฟ่", image: "", desc: "คาเฟ่ริมหาดบนเกาะช้าง ชมวิวทะเลสีครามแบบพาโนรามา" }
+            ],
+            "ธรรมชาติและทะเล": [
+                { name: "เกาะช้าง ตราด", image: "", desc: "เกาะใหญ่อันดับ 2 ของไทย เต็มไปด้วยป่าสมบูรณ์ น้ำตก และหาดทรายสวยงาม" },
+                { name: "เกาะกูด ตราด", image: "", desc: "สวรรค์แห่งการพักผ่อน น้ำใสราวกระจก เงียบสงบ เป็นธรรมชาติสุดๆ" },
+                { name: "หาดทรายดำ แหลมงอบ", image: "", desc: "แหล่งท่องเที่ยวทางธรรมชาติหาดูยาก เม็ดทรายสีดำสนิท 1 ใน 5 ของโลก" }
+            ],
+            "วัฒนธรรมและวัด": [
+                { name: "วัดบุปผาราม ตราด", image: "", desc: "วัดเก่าแก่ที่สุดในจังหวัดตราด ชมสถาปัตยกรรมและพิพิธภัณฑ์พื้นบ้าน" },
+                { name: "ชุมชนบ้านน้ำเชี่ยว ตราด", image: "", desc: "ชุมชนท่องเที่ยววิถีพุทธ-มุสลิม ลิ้มลองอาหารพื้นบ้านและขนมตังเมกรอบ" }
+            ]
+        },
+        "ฉะเชิงเทรา": {
+            "คาเฟ่และร้านกาแฟ": [
+                { name: "แม่น้ำบางปะกง คาเฟ่", image: "", desc: "คาเฟ่สไตล์ไทยคลาสสิกริมแม่น้ำบางปะกง เบเกอรี่โฮมเมดอร่อย" },
+                { name: "ฉะเชิงเทรา คาเฟ่", image: "", desc: "คาเฟ่มินิมอลสไตล์ญี่ปุ่น มีมุมสวนทุ่งหญ้า ถ่ายรูปสวยละมุน" }
+            ],
+            "ธรรมชาติและทะเล": [
+                { name: "แม่น้ำบางปะกง", image: "", desc: "ล่องเรือชมวิถีชีวิตริมน้ำและธรรมชาติอันอุดมสมบูรณ์ของแปดริ้ว" },
+                { name: "อ่างเก็บน้ำลาดกระทิง", image: "", desc: "จุดชมวิวธรรมชาติ ยามเย็นพระอาทิตย์ตกสวยงาม บรรยากาศเงียบสงบ" }
+            ],
+            "วัฒนธรรมและวัด": [
+                { name: "วัดโสธรวรารามวรวิหาร", image: "", desc: "วัดคู่บ้านคู่เมืองแปดริ้ว กราบไหว้ขอพรหลวงพ่อโสธรศักดิ์สิทธิ์" },
+                { name: "วัดสมานรัตนาราม ฉะเชิงเทรา", image: "", desc: "สักการะพระพิฆเนศปางนอนเสวยสุของค์ใหญ่ที่สุดในประเทศไทย" }
+            ]
+        },
+        "ปราจีนบุรี": {
+            "คาเฟ่และร้านกาแฟ": [
+                { name: "Lek Lek Coffee (เล็ก เล็ก คอฟฟี่)", image: "https://i.postimg.cc/bJK77cz4/IMG-8473.jpg", desc: "คาเฟ่บรรยากาศน่ารัก นั่งสบาย กาแฟและเครื่องดื่มรสชาติดีในปราจีนบุรี" },
+                { name: "On the Tree Café", image: "https://i.postimg.cc/x1cPzkGT/IMG-8474.jpg", desc: "คาเฟ่ท่ามกลางบรรยากาศธรรมชาติ ร่มรื่น สไตล์อบอุ่นน่านั่ง" },
+                { name: "Baan Suan Coffee", image: "https://i.postimg.cc/Xqqrz5YR/IMG-8475.jpg", desc: "คาเฟ่ในสวน บรรยากาศเขียวขจี เหมาะกับการพักผ่อนหย่อนใจ" },
+                { name: "Nana Cafe'", image: "https://i.postimg.cc/hPFJrXqm/IMG-8477.jpg", desc: "คาเฟ่สุดชิค มุมถ่ายรูปสวยเพียบ เครื่องดื่มและเบเกอรี่หลากหลาย" },
+                { name: "myrrh. (เมอร์ คาเฟ่ ปราจีนบุรี)", image: "https://i.postimg.cc/TPyGFcVM/IMG-8478.webp", desc: "คาเฟ่สุดเก๋ ดีไซน์โดดเด่น กาแฟพรีเมียมและมุมถ่ายรูปสไตล์มินิมอล" }
+            ],
+            "ธรรมชาติและทะเล": [
+                { name: "แก่งหินเพิง (นาดี)", image: "https://i.postimg.cc/P5JkvMFp/IMG-8479.jpg", desc: "แหล่งล่องแก่งยอดฮิต สนุกสนานเร้าใจในช่วงฤดูน้ำหลากของปราจีนบุรี" },
+                { name: "น้ำตกเขาอีโต้", image: "https://i.postimg.cc/3RXMQfd4/IMG-8480.jpg", desc: "น้ำตกธรรมชาติไหลผ่านโขดหิน บรรยากาศร่มรื่นเหมาะแก่การพักผ่อน" },
+                { name: "อ่างเก็บน้ำจักรพงษ์", image: "https://i.postimg.cc/QCjd2TNY/IMG-2174.jpg", desc: "จุดชมวิวบรรยากาศกว้างขวาง เหมาะกับการพักผ่อนหย่อนใจและชมวิวธรรมชาติ" },
+                { name: "น้ำตกตะคร้อ (ประจันตคาม)", image: "https://i.postimg.cc/qMbvFqPs/IMG-2175.webp", desc: "น้ำตกใสสะอาดในอำเภอประจันตคาม เหมาะกับการเล่นน้ำและสัมผัสธรรมชาติ" },
+                { name: "อุทยานแห่งชาติทับลาน", image: "https://i.postimg.cc/pLmLMxx5/IMG-2176.jpg", desc: "ผืนป่ามรดกโลกอันอุดมสมบูรณ์ เต็มไปด้วยธรรมชาติและจุดชมวิวสวยงาม" }
+            ],
+            "วัฒนธรรมและวัด": [
+                { name: "วัดแก้วพิจิตร", image: "https://i.postimg.cc/s2Sf1cMy/IMG-2177.jpg", desc: "วัดเก่าแก่สร้างด้วยสถาปัตยกรรมผสมผสานไทย จีน และยุโรป งดงามแปลกตา" },
+                { name: "โบราณสถานเมืองศรีมโหสถ", image: "https://i.postimg.cc/qRxkxvcG/IMG-2178.jpg", desc: "แหล่งโบราณคดีสำคัญทางประวัติศาสตร์ เต็มไปด้วยเรื่องราวอารยธรรมโบราณ" },
+                { name: "พิพิธภัณฑสถานแห่งชาติ ปราจีนบุรี", image: "https://i.postimg.cc/MKTW1xn5/IMG-2179.jpg", desc: "แหล่งเรียนรู้ประวัติศาสตร์ จัดแสดงโบราณวัตถุและเรื่องราวท้องถิ่น" },
+                { name: "วัดต้นโพธิ์ศรีมหาโพธิ", image: "", desc: "วัดสำคัญที่ประดิษฐานต้นพระศรีมหาโพธิ์เก่าแก่ที่สุดในประเทศไทย" },
+                { name: "วัดรัตนเนตตาราม", image: "https://i.postimg.cc/nLvZnhPS/IMG-2181.jpg", desc: "วัดสวยที่มีงานปูนปั้นประดับเปลือกหอยและงานศิลปะพุทธศาสนาวิจิตรบรรจง" }
+            ]
+        },
+        "สระแก้ว": {
+            "คาเฟ่และร้านกาแฟ": [
+                { name: "สระแก้ว คาเฟ่", image: "", desc: "คาเฟ่บรรยากาศสบายๆ มุมถ่ายรูปเพียบ เครื่องดื่มชื่นใจ" },
+                { name: "อรัญประเทศ คาเฟ่", image: "", desc: "คาเฟ่สไตล์แคมป์ปิ้ง อบอุ่น เป็นกันเองใกล้ตลาดโรงเกลือ" }
+            ],
+            "ธรรมชาติและทะเล": [
+                { name: "อุทยานแห่งชาติปางสีดา สระแก้ว", image: "", desc: "แหล่งดูผีเสื้อนานาชนิด ป่าอุดมสมบูรณ์ น้ำตกสวยงาม" },
+                { name: "ละลุ ตาพระยา สระแก้ว", image: "", desc: "ประติมากรรมธรรมชาติจากดินที่ยุบตัว คล้ายแพะเมืองผีที่สวยงาม" }
+            ],
+            "วัฒนธรรมและวัด": [
+                { name: "ปราสาทสด๊กก๊อกธม โคกสูง", image: "", desc: "ปราสาทหินขอมโบราณขนาดใหญ่ที่สุดในภาคตะวันออก" },
+                { name: "ตลาดโรงเกลือ อรัญประเทศ", image: "", desc: "แหล่งช้อปปิ้งสินค้าราคาประหยัดชายแดนไทย-กัมพูชา" }
             ]
         }
+    };
+
+    const defaultImages = {
+        "คาเฟ่และร้านกาแฟ": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+        "ธรรมชาติและทะเล": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+        "วัฒนธรรมและวัด": "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=600&q=80"
     };
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -240,6 +326,7 @@
         const modalProvince = document.getElementById("modal-province");
         const modalCategory = document.getElementById("modal-category");
         const modalTitle = document.getElementById("modal-title");
+        const modalDesc = document.getElementById("modal-desc");
         const modalTransport = document.getElementById("modal-transport");
         const modalCostPerson = document.getElementById("modal-cost-person");
         const modalCostFriends = document.getElementById("modal-cost-friends");
@@ -262,59 +349,31 @@
             });
         });
 
-        function getTripDetails(province, days) {
-            if (province === "ฉะเชิงเทรา") {
-                if (days === "1") {
-                    return {
-                        transport: "เดินทางด้วยรถยนต์ส่วนตัว หรือรถตู้ประจำทาง (Day Trip ไปเช้าเย็นกลับจากกรุงเทพฯ)",
-                        costPerson: "ประมาณ 600 - 1,200 บาท / คน",
-                        costFriends: "ประมาณ 1,500 - 3,000 บาท / กลุ่ม (หารค่าน้ำมัน)",
-                        costFamily: "ประมาณ 2,000 - 4,000 บาท / ครอบครัว (3-4 คน)",
-                        foodTip: "🍽️ แนะนำมื้ออาหาร: แวะทานก๋วยเตี๋ยวปากหม้อสูตรโบราณ หรือร้านอาหารริมแม่น้ำบางปะกง"
-                    };
-                } else if (days === "2") {
-                    return {
-                        transport: "แนะนำรถยนต์ส่วนตัว ขับรถเที่ยวชิลๆ ทริป 2 วัน 1 คืน",
-                        costPerson: "ประมาณ 2,000 - 3,800 บาท / คน",
-                        costFriends: "ประมาณ 5,000 - 8,500 บาท / กลุ่ม (รวมค่าที่พักโฮมสเตย์ริมน้ำ)",
-                        costFamily: "ประมาณ 5,500 - 10,000 บาท / ครอบครัว (รวมที่พัก 1 คืน)",
-                        foodTip: "🍽 แนะนำมื้ออาหาร: มื้อกลางวันตลาดบ้านใหม่, มื้อเย็นริมแม่น้ำบางปะกง และแวะคาเฟ่สเปเชียลตี้ช่วงบ่าย"
-                    };
-                } else {
-                    return {
-                        transport: "เหมาะสำหรับทริปพักผ่อนยาว เจาะลึกธรรมชาติและวัดวาอาราม (3 วัน 2 คืน)",
-                        costPerson: "ประมาณ 4,000 - 7,000 บาท / คน",
-                        costFriends: "ประมาณ 10,000 - 18,000 บาท / กลุ่ม (รวมที่พักและค่าเดินทางรอบเมือง)",
-                        costFamily: "ประมาณ 12,000 - 20,000 บาท / ครอบครัว (รวมที่พัก 2 คืน)",
-                        foodTip: "🍽️ แนะนำมื้ออาหาร: ตระเวนชิมกาแฟร้านดัง, อาหารพื้นบ้านแปดริ้ว และขนมไทยโบราณในตลาดชุมชน"
-                    };
-                }
+        function getTripDetails(days) {
+            if (days === "1") {
+                return {
+                    transport: "เดินทางด้วยรถยนต์ส่วนตัว หรือรถตู้ประจำทาง (Day Trip ไปเช้าเย็นกลับ)",
+                    costPerson: "ประมาณ 800 - 1,500 บาท / คน",
+                    costFriends: "ประมาณ 2,000 - 3,500 บาท / กลุ่ม (หารค่าน้ำมัน)",
+                    costFamily: "ประมาณ 2,550 - 4,500 บาท / ครอบครัว (3-4 คน)",
+                    foodTip: "🍽️ แนะนำมื้ออาหาร: แวะร้านอาหารพื้นบ้านหรือซีฟู้ดชื่อดังในท้องถิ่น และแวะคาเฟ่ชิคๆ ช่วงบ่าย"
+                };
+            } else if (days === "2") {
+                return {
+                    transport: "แนะนำรถยนต์ส่วนตัว ขับรถเที่ยวสบายๆ ทริป 2 วัน 1 คืน",
+                    costPerson: "ประมาณ 2,500 - 4,500 บาท / คน",
+                    costFriends: "ประมาณ 6,000 - 10,000 บาท / กลุ่ม (หารค่าห้องพัก)",
+                    costFamily: "ประมาณ 6,500 - 12,000 บาท / ครอบครัว (รวมที่พัก 1 คืน)",
+                    foodTip: "🍽 แนะนำมื้ออาหาร: วันแรกมื้อเที่ยงริมเล มื้อเย็นจัดเต็มปิ้งย่างซีฟู้ดสดๆ / วันที่สองแวะร้านกาแฟวิวสวยก่อนกลับ"
+                };
             } else {
-                if (days === "1") {
-                    return {
-                        transport: "เดินทางด้วยรถยนต์ส่วนตัว หรือรถทัวร์/รถตู้ (Day Trip เก็บแลนด์มาร์กหลักในเมือง)",
-                        costPerson: "ประมาณ 800 - 1,500 บาท / คน",
-                        costFriends: "ประมาณ 2,000 - 3,500 บาท / กลุ่ม (หารค่าน้ำมัน)",
-                        costFamily: "ประมาณ 2,500 - 4,500 บาท / ครอบครัว (3-4 คน)",
-                        foodTip: "🍽️ แนะนำมื้ออาหาร: แวะชิมก๋วยเตี๋ยวหมูเลียง, ก๋วยเตี๋ยวเส้นจันท์ผัดปู หรือร้านอาหารซีฟู้ดสดๆ ริมเล"
-                    };
-                } else if (days === "2") {
-                    return {
-                        transport: "แนะนำรถยนต์ส่วนตัว ขับรถเที่ยวชมธรรมชาติ ชุมชนริมน้ำ และชายทะเล (2 วัน 1 คืน)",
-                        costPerson: "ประมาณ 2,500 - 4,500 บาท / คน",
-                        costFriends: "ประมาณ 6,000 - 10,000 บาท / กลุ่ม (รวมที่พักโฮมสเตย์/รีสอร์ท)",
-                        costFamily: "ประมาณ 6,500 - 12,000 บาท / ครอบครัว (รวมที่พัก 1 คืน)",
-                        foodTip: "🍽 แนะนำมื้ออาหาร: มื้อกลางวันอาหารพื้นบ้านจันทบูร มื้อเย็นจัดเต็มบุฟเฟต์ซีฟู้ดหรืออาหารทะเลสด"
-                    };
-                } else {
-                    return {
-                        transport: "เหมาะสำหรับทริปพักผ่อนยาว เที่ยวอุทยาน ชายหาด และคาเฟ่ครบสูตร (3 วัน 2 คืน)",
-                        costPerson: "ประมาณ 5,000 - 8,000 บาท / คน",
-                        costFriends: "ประมาณ 12,000 - 20,000 บาท / กลุ่ม (รวมที่พักและค่าเดินทางรอบจังหวัด)",
-                        costFamily: "ประมาณ 14,000 - 24,000 บาท / ครอบครัว (รวมที่พัก 2 คืน)",
-                        foodTip: "🍽️ แนะนำมื้ออาหาร: ตระเวนชิมคาเฟ่สไตล์ชิคๆ ริมแม่น้ำจันทบูร และลิ้มรสผลไม้ตามฤดูกาล"
-                    };
-                }
+                return {
+                    transport: "เหมาะสำหรับทริปพักผ่อนยาว ขับรถเที่ยวรอบเมืองหรือข้ามเกาะ (3 วัน 2 คืน)",
+                    costPerson: "ประมาณ 5,000 - 8,000 บาท / คน",
+                    costFriends: "ประมาณ 12,000 - 20,000 บาท / กลุ่ม (รวมที่พักและค่าเรือข้ามเกาะ)",
+                    costFamily: "ประมาณ 14,000 - 24,000 บาท / ครอบครัว (รวมที่พัก 2 คืนและอาหารซีฟู้ด)",
+                    foodTip: "🍽️️ แนะนำมื้ออาหาร: จัดเต็มตระเวนกินร้านอาหารท้องถิ่นชื่อดัง, อาหารทะเลสดๆ มื้อค่ำริมหาด และคาเฟ่สไตล์มินิมอลตลอดทริป"
+                };
             }
         }
 
@@ -326,19 +385,23 @@
             const targetProv = provinceSelect.value;
             const totalDays = daysSelect.value;
             
+            let targetProvinces = targetProv === "all" ? Object.keys(easternThailandTourism) : [targetProv];
             let collectedPlaces = [];
 
-            Object.keys(easternThailandTourism[targetProv]).forEach(cat => {
-                if (selectedCategories.has(cat)) {
-                    easternThailandTourism[targetProv][cat].forEach(item => {
-                        collectedPlaces.push({ 
-                            name: item.name, 
-                            image: item.image, 
-                            province: targetProv, 
-                            category: cat 
+            targetProvinces.forEach(prov => {
+                Object.keys(easternThailandTourism[prov]).forEach(cat => {
+                    if (selectedCategories.has(cat)) {
+                        easternThailandTourism[prov][cat].forEach(item => {
+                            collectedPlaces.push({ 
+                                name: item.name, 
+                                image: item.image, 
+                                desc: item.desc, 
+                                province: prov, 
+                                category: cat 
+                            });
                         });
-                    });
-                }
+                    }
+                });
             });
 
             collectedPlaces.sort(() => Math.random() - 0.5);
@@ -352,12 +415,14 @@
             }
 
             emptyState.style.display = "none";
-            resultTitle.textContent = `ทริปแนะนำ ${totalDays} วัน (จ.${targetProv})`;
-            resultSummary.textContent = `สุ่มสถานที่สำเร็จ! คลิกที่ชื่อสถานที่เพื่อดูรูปภาพจริง งบประมาณ และคำแนะนำ`;
+            resultTitle.textContent = `ทริปแนะนำ ${totalDays} วัน (${targetProv === 'all' ? 'ทุกจังหวัดภาคตะวันออก' : targetProv})`;
+            resultSummary.textContent = `สุ่มสถานที่สำเร็จ! คลิกที่ชื่อสถานที่เพื่อดูรายละเอียด งบประมาณ และคำแนะนำ`;
 
-            const tripInfo = getTripDetails(targetProv, totalDays);
+            const tripInfo = getTripDetails(totalDays);
 
             finalResults.forEach((item) => {
+                const imgSrc = (item.image && item.image.trim() !== "") ? item.image : (defaultImages[item.category] || defaultImages["ธรรมชาติและทะเล"]);
+                
                 const placeBtn = document.createElement("div");
                 placeBtn.className = "place-item-btn p-4 rounded-xl bg-white border border-[#dce5d5] flex items-center justify-between shadow-sm";
                 
@@ -373,18 +438,19 @@
                 `;
 
                 placeBtn.addEventListener("click", () => {
-                    modalImg.src = item.image;
+                    modalImg.src = imgSrc;
                     modalProvince.textContent = item.province;
                     modalCategory.textContent = item.category;
                     modalTitle.textContent = item.name;
+                    modalDesc.textContent = item.desc;
                     modalTransport.textContent = tripInfo.transport;
                     modalCostPerson.textContent = tripInfo.costPerson;
                     modalCostFriends.textContent = tripInfo.costFriends;
                     modalCostFamily.textContent = tripInfo.costFamily;
                     modalFoodTip.textContent = tripInfo.foodTip;
-                    modalMapBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + " " + item.province)}`;
+                    modalMapBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`;
                     
-                    const textToCopy = `ทริปแนะนำ: ${item.name} จ.${item.province} (${item.category})\n- รูปภาพ: ${item.image}\n- การเดินทาง: ${tripInfo.transport}\n- งบต่อคน: ${tripInfo.costPerson}\n- งบกลุ่มเพื่อน: ${tripInfo.costFriends}\n- งบครอบครัว: ${tripInfo.costFamily}\n- แนะนำมื้ออาหาร: ${tripInfo.foodTip}`;
+                    const textToCopy = `ทริปแนะนำ: ${item.name} จ.${item.province} (${item.category})\n- รายละเอียด: ${item.desc}\n- การเดินทาง: ${tripInfo.transport}\n- งบต่อคน: ${tripInfo.costPerson}\n- งบกลุ่มเพื่อน: ${tripInfo.costFriends}\n- งบครอบครัว: ${tripInfo.costFamily}\n- แนะนำมื้ออาหาร: ${tripInfo.foodTip}`;
                     
                     modalCopyBtn.onclick = function() {
                         navigator.clipboard.writeText(textToCopy).then(() => {

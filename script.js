@@ -115,7 +115,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedCategories = new Set(["คาเฟ่และร้านกาแฟ", "ธรรมชาติและทะเล", "วัฒนธรรมและวัด"]);
     const provinceSelect = document.getElementById("province-select");
     const daysSelect = document.getElementById("days-select");
-    const resultsGrid = document.getElementById("results-grid");
+    
+    // อ้างอิง ID ให้ตรงกับโครงสร้าง HTML ล่าสุด
+    const resultsContainer = document.getElementById("results-list-container");
     const emptyState = document.getElementById("results-empty");
     const resultSummary = document.getElementById("result-summary");
     const resultTitle = document.getElementById("result-title");
@@ -166,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 costPerson: "ประมาณ 2,500 - 4,500 บาท / คน",
                 costFriends: "ประมาณ 6,000 - 10,000 บาท / กลุ่ม (หารค่าห้องพัก)",
                 costFamily: "ประมาณ 6,500 - 12,000 บาท / ครอบครัว (รวมที่พัก 1 คืน)",
-                foodTip: "🍽️ แนะนำมื้ออาหาร: วันแรกมื้อเที่ยงริมเล มื้อเย็นจัดเต็มปิ้งย่างซีฟู้ดสดๆ / วันที่สองแวะร้านกาแฟวิวสวยก่อนกลับ"
+                foodTip: "🍽️️ แนะนำมื้ออาหาร: วันแรกมื้อเที่ยงริมเล มื้อเย็นจัดเต็มปิ้งย่างซีฟู้ดสดๆ / วันที่สองแวะร้านกาแฟวิวสวยก่อนกลับ"
             };
         } else {
             return {
@@ -179,7 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // แก้ไขการปิดและเปิด Modal ให้ใช้คลาส .show-modal แทนการใช้ .hidden
     if (modalClose) modalClose.onclick = () => modal.classList.remove("show-modal");
     if (modal) modal.onclick = (e) => { if (e.target === modal) modal.classList.remove("show-modal"); };
 
@@ -210,40 +211,39 @@ document.addEventListener("DOMContentLoaded", function () {
         collectedPlaces.sort(() => Math.random() - 0.5);
         const finalResults = collectedPlaces.slice(0, 4);
 
-        resultsGrid.innerHTML = "";
+        resultsContainer.innerHTML = "";
         if (finalResults.length === 0) {
-            emptyState.hidden = false;
+            emptyState.style.display = "block";
             resultSummary.textContent = "ไม่พบสถานที่ กรุณาเลือกหมวดหมู่อย่างน้อย 1 หมวด";
             return;
         }
 
-        emptyState.hidden = true;
+        emptyState.style.display = "none";
         resultTitle.textContent = `ทริปแนะนำ ${totalDays} วัน (${targetProv === 'all' ? 'ทุกจังหวัดภาคตะวันออก' : targetProv})`;
-        resultSummary.textContent = `สุ่มสถานที่สำเร็จ! คลิกที่การ์ดเพื่อดูรายละเอียด งบประมาณ และคำแนะนำมื้ออาหาร`;
+        resultSummary.textContent = `สุ่มสถานที่สำเร็จ! คลิกที่ชื่อสถานที่เพื่อดูรายละเอียด งบประมาณ และคำแนะนำ`;
 
         const tripInfo = getTripDetails(totalDays);
 
-        // 1. สร้างการ์ดหลักแบบกระชับ แสดงรูปและชื่อ
+        // แสดงผลลัพธ์เป็นรายชื่อให้คลิกเลือกดู Modal ตามที่ดีไซน์ไว้
         finalResults.forEach((item) => {
             const imgSrc = (item.image && item.image.trim() !== "") ? item.image : (defaultImages[item.category] || defaultImages["ธรรมชาติและทะเล"]);
             
-            const card = document.createElement("article");
-            card.className = "result-card overflow-hidden rounded-[1.5rem] bg-white border border-[#e2e8df] flex flex-col cursor-pointer";
+            const placeBtn = document.createElement("div");
+            placeBtn.className = "place-item-btn p-4 rounded-xl bg-white border border-[#dce5d5] flex items-center justify-between shadow-sm";
             
-            card.innerHTML = `
-                <div class="relative h-48 w-full overflow-hidden bg-gray-100">
-                  <img src="${imgSrc}" alt="${item.name}" class="h-full w-full object-cover">
-                  <span class="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-[#3c5c36]">${item.province}</span>
-                  <span class="absolute top-3 right-3 rounded-full bg-[#a5653a] px-3 py-1 text-xs font-bold text-white">${item.category}</span>
+            placeBtn.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-lg bg-[#edf4e9] text-[#527849] flex items-center justify-center font-bold text-sm">📍</span>
+                    <div>
+                        <h4 class="font-bold text-[#1f4d3a] text-base">${item.name}</h4>
+                        <p class="text-xs text-[#a5653a] font-medium mt-0.5">${item.province} • ${item.category}</p>
+                    </div>
                 </div>
-                <div class="p-5 flex items-center justify-between">
-                  <h3 class="text-lg font-bold text-[#294837] line-clamp-1">${item.name}</h3>
-                  <span class="text-xs font-bold text-[#527849] bg-[#edf4e9] px-2.5 py-1.5 rounded-lg shrink-0">ดูรายละเอียด 🔍</span>
-                </div>
+                <span class="text-xs font-bold text-[#527849] bg-[#edf4e9] px-3 py-1.5 rounded-lg">คลิกดูรายละเอียด 🔍</span>
             `;
 
-            // เปิดป๊อปอัพแสดงรายละเอียดทั้งหมดเมื่อคลิก โดยใช้คลาส show-modal
-            card.addEventListener("click", () => {
+            // กดที่รายการเพื่อเปิด Modal รายละเอียด
+            placeBtn.addEventListener("click", () => {
                 modalImg.src = imgSrc;
                 modalProvince.textContent = item.province;
                 modalCategory.textContent = item.category;
@@ -273,30 +273,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 modal.classList.add("show-modal");
             });
 
-            resultsGrid.appendChild(card);
+            resultsContainer.appendChild(placeBtn);
         });
-
-        // 2. ส่วน "สถานที่แนะนำเพิ่มเติม" ด้านล่าง (แสดงรายชื่อตัวอักษร ไม่มีรูป)
-        const remainingPlaces = collectedPlaces.slice(4, 10);
-        if (remainingPlaces.length > 0) {
-            const extraSection = document.createElement("div");
-            extraSection.className = "mt-10 col-span-full rounded-2xl bg-white p-6 border border-[#e2e8df]";
-            extraSection.innerHTML = `
-                <h3 class="text-lg font-bold text-[#1f4d3a] mb-4">🌟 สถานที่ท่องเที่ยวแนะนำเพิ่มเติม (ตัวเลือกเสริมสำหรับทริปคุณ)</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm text-[#506357]">
-                    ${remainingPlaces.map(p => `
-                        <li class="p-3 rounded-xl bg-[#f5eedf]/60 flex items-center justify-between">
-                            <div>
-                                <span class="font-semibold text-[#254034] block">${p.name}</span>
-                                <span class="text-xs text-[#a5653a]">${p.province} •${p.category}</span>
-                            </div>
-                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name)}" target="_blank" class="text-xs font-bold text-[#527849] hover:underline">แผนที่ 📍</a>
-                        </li>
-                    `).join('')}
-                </ul>
-            `;
-            resultsGrid.appendChild(extraSection);
-        }
 
         document.getElementById("results-section").scrollIntoView({ behavior: "smooth", block: "start" });
     });

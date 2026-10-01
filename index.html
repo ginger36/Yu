@@ -27,12 +27,13 @@
     .choice-button.is-active{background:#527849;border-color:#527849;color:#fff}
     .action-button{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
     .action-button:hover{transform:translateY(-2px);filter:brightness(1.04);box-shadow:0 12px 24px rgba(45,72,42,.21)}
-    .result-card{cursor:pointer;box-shadow:0 12px 28px rgba(60,80,50,.12);animation:rise .48s ease both;transition:transform .2s ease,box-shadow .2s ease}
-    .result-card:hover{transform:translateY(-6px);box-shadow:0 18px 33px rgba(60,80,50,.17)}
+    
+    /* สไตล์ปุ่มเลือกสถานที่จากรายชื่อ */
+    .place-item-btn{transition:all 0.2s ease; cursor:pointer;}
+    .place-item-btn:hover{background-color:#eaf2e4; transform:translateX(4px); border-color:#527849;}
     
     .modal-backdrop { background-color: rgba(31, 77, 58, 0.6); backdrop-filter: blur(4px); }
     .modal-content { animation: scaleUp 0.3s ease both; }
-    @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
     @keyframes scaleUp{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
   </style>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
@@ -107,8 +108,8 @@
      <aside class="rounded-[2rem] p-6 md:p-8 bg-white shadow-sm">
       <img class="h-52 w-full rounded-[1.4rem] object-cover" src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80" alt="แนะนำ">
       <p class="mt-6 text-sm font-bold tracking-[.13em] uppercase text-[#a5653a]">คำแนะนำการใช้งาน</p>
-      <h2 class="mt-2 font-bold text-xl text-[#1f4d3a]">คลิกการ์ดเพื่อดูรายละเอียด</h2>
-      <p class="mt-3 leading-7 text-[#617167]">หลังจากกดสุ่ม จะแสดงการ์ดสถานที่ขึ้นมา คุณสามารถ **คลิกที่การ์ดสถานที่ใดก็ได้** เพื่อเปิดดูข้อมูลเชิงลึก งบประมาณ และแผนที่</p>
+      <h2 class="mt-2 font-bold text-xl text-[#1f4d3a]">เลือกสถานที่จากรายการ</h2>
+      <p class="mt-3 leading-7 text-[#617167]">เมื่อกดปุ่มสุ่ม ระบบจะแสดง **รายชื่อสถานที่** ออกมาเป็นข้อความ ให้คุณเลือกคลิกดูสถานที่ที่สนใจ ป๊อปอัพรายละเอียดจึงจะเด้งขึ้นมาครับ</p>
      </aside>
     </div>
    </section>
@@ -119,14 +120,17 @@
       <p class="text-sm font-bold tracking-[.13em] uppercase text-[#557a4e]">ผลลัพธ์การสุ่ม</p>
       <h2 id="result-title" class="mt-1 font-bold text-2xl text-[#1f4d3a]">รายชื่อสถานที่ท่องเที่ยวแนะนำ</h2>
      </div>
-     <p id="result-summary" class="max-w-xl leading-7 text-[#607163]">กดปุ่ม "สุ่มสถานที่และคำนวณทริป" เพื่อเริ่มค้นหา</p>
+     <p id="result-summary" class="max-w-xl leading-7 text-[#607163]">กรอกข้อมูลด้านบนแล้วกดปุ่ม "สุ่มสถานที่และคำนวณทริป"</p>
     </div>
+    
     <div id="results-empty" class="mt-7 rounded-2xl border border-dashed border-[#bdcdb0] px-6 py-8 text-center bg-white/50">ยังไม่ได้สุ่มข้อมูล กรุณากดปุ่มด้านบนเพื่อค้นหาที่เที่ยว</div>
-    <div id="results-grid" class="mt-7 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"></div>
+    
+    <!-- พื้นที่แสดงรายชื่อสถานที่ (ไม่มีรูปภาพโชว์ก่อน จนกว่าจะคลิก) -->
+    <div id="results-list-container" class="mt-7 space-y-3"></div>
    </section>
   </main>
 
-  <!-- Modal ป๊อปอัพ (ตั้งค่าซ่อนไว้เป็นค่าเริ่มต้นด้วย hidden) -->
+  <!-- Modal ป๊อปอัพ (จะเด้งขึ้นมาเฉพาะตอนคลิกเลือกสถานที่เท่านั้น) -->
   <div id="place-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop" hidden>
    <div class="modal-content w-full max-w-lg rounded-[2rem] bg-white overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
     <div class="relative h-52 w-full bg-gray-100 shrink-0">
@@ -155,7 +159,7 @@
        <span id="modal-cost-friends" class="text-[#a5653a] font-semibold"></span>
       </p>
       <p class="flex items-start gap-2">
-       <strong class="text-[#254034] shrink-0">👨‍👩‍👧‍👦 งบครอบครัว:</strong> 
+       <strong class="text-[#254034] shrink-0">👨‍👩‍‍👧‍👦 งบครอบครัว:</strong> 
        <span id="modal-cost-family" class="text-[#a5653a] font-semibold"></span>
       </p>
       <p class="flex items-start gap-2 pt-1">

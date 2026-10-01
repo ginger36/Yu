@@ -179,8 +179,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    if (modalClose) modalClose.onclick = () => modal.hidden = true;
-    if (modal) modal.onclick = (e) => { if (e.target === modal) modal.hidden = true; };
+    // แก้ไขการปิดและเปิด Modal ให้ใช้คลาส .show-modal แทนการใช้ .hidden
+    if (modalClose) modalClose.onclick = () => modal.classList.remove("show-modal");
+    if (modal) modal.onclick = (e) => { if (e.target === modal) modal.classList.remove("show-modal"); };
 
     document.getElementById("trip-form").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -241,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             `;
 
-            // เปิดป๊อปอัพแสดงรายละเอียดทั้งหมดเมื่อคลิก
+            // เปิดป๊อปอัพแสดงรายละเอียดทั้งหมดเมื่อคลิก โดยใช้คลาส show-modal
             card.addEventListener("click", () => {
                 modalImg.src = imgSrc;
                 modalProvince.textContent = item.province;
@@ -269,7 +270,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 };
 
-                modal.hidden = false;
+                modal.classList.add("show-modal");
             });
 
             resultsGrid.appendChild(card);

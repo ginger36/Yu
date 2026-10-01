@@ -3,12 +3,19 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>สุ่มเที่ยวภาคตะวันออก - วางแผนทริปสุดคุ้ม</title>
+  <title>สุ่มเที่ยวภาคตะวันออก</title>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <style>
     :root{
-      --forest:#1f4d3a; --moss:#557a4e; --leaf:#8da65a; --clay:#a5653a;
-      --sand:#f5eedf; --cream:#fffaf0; --ink:#254034; --muted:#617167; --line:#d9e0cf;
+      --forest:#1f4d3a;
+      --moss:#557a4e;
+      --leaf:#8da65a;
+      --clay:#a5653a;
+      --sand:#f5eedf;
+      --cream:#fffaf0;
+      --ink:#254034;
+      --muted:#617167;
+      --line:#d9e0cf;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -19,57 +26,81 @@
       background-image:radial-gradient(rgba(84,106,72,.12) 1px,transparent 1px);
       background-size:18px 18px;
     }
-    .hero-shade{background:linear-gradient(90deg,rgba(17,55,40,.91) 0%,rgba(29,74,53,.74) 48%,rgba(35,76,50,.2) 100%)}
-    .leaf-mark{width:48px;height:48px;border-radius:17px;background:#5e7e4f;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px rgba(44,78,45,.18)}
+    .hero-shade{
+      background:linear-gradient(90deg,rgba(17,55,40,.91) 0%,rgba(29,74,53,.74) 48%,rgba(35,76,50,.2) 100%);
+    }
+    .leaf-mark{
+      width:48px;height:48px;border-radius:17px;
+      background:#5e7e4f;color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 10px 22px rgba(44,78,45,.18);
+    }
     .planner-shadow{box-shadow:0 20px 55px rgba(55,77,48,.13)}
-    .choice-button{border:1px solid #ced9c5;background:#fffdf6;color:#45604f;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
-    .choice-button:hover,.choice-button:focus-visible{transform:translateY(-2px);box-shadow:0 8px 16px rgba(53,84,50,.14);outline:3px solid rgba(127,163,89,.34);outline-offset:2px}
+    .choice-button{
+      border:1px solid #ced9c5;background:#fffdf6;color:#45604f;
+      transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+    }
+    .choice-button:hover,.choice-button:focus-visible{
+      transform:translateY(-2px);box-shadow:0 8px 16px rgba(53,84,50,.14);
+      outline:3px solid rgba(127,163,89,.34);outline-offset:2px;
+    }
     .choice-button.is-active{background:#527849;border-color:#527849;color:#fff}
-    .action-button{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
-    .action-button:hover{transform:translateY(-2px);filter:brightness(1.04);box-shadow:0 12px 24px rgba(45,72,42,.21)}
-    .result-card{cursor:pointer;box-shadow:0 12px 28px rgba(60,80,50,.12);animation:rise .48s ease both;transition:transform .2s ease,box-shadow .2s ease}
-    .result-card:hover{transform:translateY(-6px);box-shadow:0 18px 33px rgba(60,80,50,.17)}
-    .result-card[hidden]{display:none!important}
-    
-    /* สไตล์ Modal ป๊อปอัพ */
-    .modal-backdrop { background-color: rgba(31, 77, 58, 0.6); backdrop-filter: blur(4px); }
-    .modal-content { animation: scaleUp 0.3s ease both; }
+    .category-button.is-active{background:#a5683e;border-color:#a5683e}
+    .action-button,.detail-button,.map-link{
+      transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+    }
+    .action-button:hover,.detail-button:hover,.map-link:hover,
+    .action-button:focus-visible,.detail-button:focus-visible,.map-link:focus-visible{
+      transform:translateY(-2px);filter:brightness(1.04);
+      box-shadow:0 12px 24px rgba(45,72,42,.21);
+      outline:3px solid rgba(119,151,84,.4);outline-offset:3px;
+    }
+    .result-card{
+      box-shadow:0 12px 28px rgba(60,80,50,.12);
+      animation:rise .48s ease both;
+      transition:transform .2s ease,box-shadow .2s ease;
+    }
+    .result-card:hover{transform:translateY(-4px);box-shadow:0 18px 33px rgba(60,80,50,.17)}
+    .result-card[hidden],.trip-modal[hidden]{display:none!important}
+    .place-photo{height:12rem;width:100%;object-fit:cover}
+    .modal-backdrop{background:rgba(20,47,35,.61);backdrop-filter:blur(7px)}
+    .modal-sheet{max-height:calc(88 * min(var(--vh, 1vh), 1vh));animation:modalIn .28s ease both}
+    .route-panel{border-left:4px solid #a5683e;background:#fcf1e5}
     @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes scaleUp{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+    @keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
  </head>
  <body class="w-full min-h-screen">
   <header class="w-full">
    <section class="relative min-h-[440px] overflow-hidden flex items-center">
-    <img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80" alt="ธรรมชาติ">
+    <img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80" loading="lazy" alt="ทะเลและธรรมชาติภาคตะวันออก">
     <div class="hero-shade absolute inset-0"></div>
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-16 lg:px-10">
      <div class="max-w-3xl">
       <p class="inline-flex rounded-full px-4 py-2 text-sm font-bold tracking-wide bg-[#5e7e4f] text-white">เที่ยวสนุกสุข 360 องศา</p>
       <h1 class="mt-5 font-extrabold leading-tight text-white text-4xl md:text-5xl">สุ่มเที่ยวภาคตะวันออก</h1>
-      <p class="mt-5 max-w-2xl leading-8 text-[#e2ede0]">ระบบสุ่มสถานที่ท่องเที่ยว พร้อมคำนวณค่าใช้จ่ายและการเดินทาง</p>
+      <p class="mt-5 max-w-2xl leading-8 text-[#e2ede0]">ระบบสุ่มสถานที่ท่องเที่ยวจากฐานข้อมูล 7 จังหวัดภาคตะวันออก ทั้งคาเฟ่ ธรรมชาติ และวัฒนธรรม</p>
      </div>
     </div>
    </section>
   </header>
-
   <main class="w-full nature-grain">
    <section class="w-full max-w-7xl mx-auto px-6 py-12 lg:px-10">
     <div class="grid grid-cols-1 xl:grid-cols-[1.15fr_.85fr] gap-8 items-start">
      <section class="planner-shadow rounded-[2rem] p-6 md:p-9 bg-white">
       <div class="flex items-start gap-4">
-       <div class="leaf-mark"><i data-lucide="trees" class="w-6 h-6"></i></div>
+       <div class="leaf-mark" aria-hidden="true"><i data-lucide="trees" class="w-6 h-6"></i></div>
        <div>
         <p class="text-sm font-bold tracking-[.13em] uppercase text-[#557a4e]">ตัวช่วยวางแผนทริป</p>
-        <h2 class="mt-1 font-bold text-2xl text-[#1f4d3a]">กำหนดรายละเอียดการเดินทาง</h2>
+        <h2 class="mt-1 font-bold text-2xl text-[#1f4d3a]">เลือกจังหวัดและหมวดหมู่</h2>
        </div>
       </div>
-      <form id="trip-form" class="mt-8 space-y-6">
+      <form id="trip-form" class="mt-8">
        <div>
         <label for="province-select" class="block font-semibold text-[#254034]">เลือกจังหวัดที่ต้องการไป</label> 
-        <select id="province-select" class="mt-3 w-full rounded-xl border border-[#cddac4] px-4 py-3 bg-[#fffdf9]"> 
+        <select id="province-select" class="mt-3 w-full rounded-xl border border-[#cddac4] px-4 py-3 focus:outline-none focus:ring-4 focus:ring-[#9ab77e80] bg-[#fffdf9]"> 
          <option value="all">สุ่มได้ทุกจังหวัดในภาคตะวันออก</option> 
          <option value="ชลบุรี">ชลบุรี</option> 
          <option value="ระยอง">ระยอง</option> 
@@ -80,93 +111,211 @@
          <option value="สระแก้ว">สระแก้ว</option> 
         </select>
        </div>
-
-       <div>
-        <label for="days-select" class="block font-semibold text-[#254034]">จำนวนวันที่ต้องการไปเที่ยว</label>
-        <select id="days-select" class="mt-3 w-full rounded-xl border border-[#cddac4] px-4 py-3 bg-[#fffdf9]">
-         <option value="1">1 วัน (Day Trip)</option>
-         <option value="2">2 วัน 1 คืน</option>
-         <option value="3">3 วัน 2 คืน</option>
-        </select>
-       </div>
-
-       <fieldset>
+       <fieldset class="mt-7">
         <legend class="font-semibold text-[#254034]">หมวดหมู่สถานที่ท่องเที่ยว</legend>
         <div class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
-         <button class="choice-button category-button is-active rounded-xl px-4 py-3 text-sm font-semibold" type="button" data-category="คาเฟ่และร้านกาแฟ">☕ คาเฟ่</button> 
-         <button class="choice-button category-button is-active rounded-xl px-4 py-3 text-sm font-semibold" type="button" data-category="ธรรมชาติและทะเล">🌲 ธรรมชาติ</button> 
-         <button class="choice-button category-button is-active rounded-xl px-4 py-3 text-sm font-semibold" type="button" data-category="วัฒนธรรมและวัด">🏛️ วัฒนธรรม</button>
+         <button class="choice-button category-button is-active rounded-xl px-4 py-3 text-sm font-semibold" type="button" data-category="คาเฟ่และร้านกาแฟ" aria-pressed="true">☕ คาเฟ่และร้านกาแฟ</button> 
+         <button class="choice-button category-button is-active rounded-xl px-4 py-3 text-sm font-semibold" type="button" data-category="ธรรมชาติและทะเล" aria-pressed="true">🌲 ธรรมชาติและทะเล</button> 
+         <button class="choice-button category-button is-active rounded-xl px-4 py-3 text-sm font-semibold" type="button" data-category="วัฒนธรรมและวัด" aria-pressed="true">🏛️ วัฒนธรรมและวัด</button>
         </div>
        </fieldset>
-
-       <button class="action-button w-full rounded-xl px-5 py-4 font-bold flex items-center justify-center gap-3 bg-[#527849] text-white shadow-md" type="submit"> 
-        <i data-lucide="sprout" class="w-5 h-5"></i> 
-        <span>สุ่มสถานที่และคำนวณทริป</span> 
+       <button class="action-button mt-8 w-full rounded-xl px-5 py-4 font-bold flex items-center justify-center gap-3 bg-[#527849] text-white shadow-md" type="submit"> 
+        <i data-lucide="sprout" class="w-5 h-5" aria-hidden="true"></i> 
+        <span>สุ่มสถานที่ท่องเที่ยวภาคตะวันออก</span> 
        </button>
       </form>
      </section>
-
      <aside class="rounded-[2rem] p-6 md:p-8 bg-white shadow-sm">
-      <img class="h-52 w-full rounded-[1.4rem] object-cover" src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80" alt="แนะนำ">
-      <p class="mt-6 text-sm font-bold tracking-[.13em] uppercase text-[#a5653a]">ฟีเจอร์ใหม่</p>
-      <h2 class="mt-2 font-bold text-xl text-[#1f4d3a]">คลิกดูรายละเอียด & งบประมาณ</h2>
-      <p class="mt-3 leading-7 text-[#617167]">สุ่มสถานที่แล้วคลิกที่การ์ดเพื่อเปิดดูข้อมูลการเดินทาง งบประมาณครอบครัว และก๊อปปี้ลิงก์แชร์ให้เพื่อนได้ทันที</p>
+      <img class="h-52 w-full rounded-[1.4rem] object-cover" src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="คู่มือแนะนำ">
+      <p class="mt-6 text-sm font-bold tracking-[.13em] uppercase text-[#a5653a]">แนะนำการใช้งาน</p>
+      <h2 class="mt-2 font-bold text-xl text-[#1f4d3a]">เที่ยวภาคตะวันออกให้คุ้มค่า</h2>
+      <p class="mt-3 leading-7 text-[#617167]">ระบบจะทำการสุ่มรายชื่อสถานที่ท่องเที่ยวจากฐานข้อมูลจริงที่คุณกำหนดขึ้นมาโดยอัตโนมัติ พร้อมลิงก์นำทาง</p>
      </aside>
     </div>
    </section>
-
-   <section id="results-section" class="w-full max-w-7xl mx-auto px-6 pb-14 lg:px-10">
+   <section id="results-section" class="w-full max-w-7xl mx-auto px-6 pb-14 lg:px-10" aria-live="polite">
     <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
      <div>
       <p class="text-sm font-bold tracking-[.13em] uppercase text-[#557a4e]">ผลลัพธ์การสุ่ม</p>
-      <h2 id="result-title" class="mt-1 font-bold text-2xl text-[#1f4d3a]">รายชื่อสถานที่ท่องเที่ยวแนะนำ</h2>
+      <h2 class="mt-1 font-bold text-2xl text-[#1f4d3a]">รายชื่อสถานที่ท่องเที่ยวแนะนำ</h2>
      </div>
-     <p id="result-summary" class="max-w-xl leading-7 text-[#607163]">กดปุ่ม "สุ่มสถานที่และคำนวณทริป" เพื่อเริ่มค้นหา</p>
+     <p id="result-summary" class="max-w-xl leading-7 text-[#607163]">กดปุ่ม "สุ่มสถานที่ท่องเที่ยว" เพื่อเริ่มค้นหา</p>
     </div>
     <div id="results-empty" class="mt-7 rounded-2xl border border-dashed border-[#bdcdb0] px-6 py-8 text-center bg-white/50">ยังไม่ได้สุ่มข้อมูล กรุณากดปุ่มด้านบนเพื่อค้นหาที่เที่ยว</div>
-    <div id="results-grid" class="mt-7 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"></div>
+    <div id="results-grid" class="mt-7 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
    </section>
   </main>
-
-  <!-- Modal ป๊อปอัพแสดงรายละเอียด -->
-  <div id="place-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop" hidden>
-   <div class="modal-content w-full max-w-lg rounded-[2rem] bg-white overflow-hidden shadow-2xl">
-    <div class="relative h-60 w-full bg-gray-100">
-     <img id="modal-img" src="" alt="" class="h-full w-full object-cover">
-     <button id="modal-close" class="absolute top-4 right-4 rounded-full bg-black/60 text-white p-2 hover:bg-black/80 transition">
-      <i data-lucide="x" class="w-5 h-5"></i>
-     </button>
-     <span id="modal-province" class="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-[#3c5c36]"></span>
-     <span id="modal-category" class="absolute bottom-4 left-4 rounded-full bg-[#a5653a] px-3 py-1 text-xs font-bold text-white"></span>
+  <footer class="w-full px-6 py-8 text-center">
+   <p class="text-sm text-[#617167]">© สุ่มเที่ยวภาคตะวันออก — ออกแบบมาเพื่อการเดินทางที่เต็มไปด้วยความสุข</p>
+  </footer>
+  <div id="trip-modal" class="trip-modal fixed inset-0 z-50 modal-backdrop p-4 sm:p-8 flex items-center justify-center" hidden role="dialog" aria-modal="true">
+   <div class="modal-sheet w-full max-w-lg overflow-y-auto rounded-[2rem] bg-[#fffdf7] shadow-2xl p-6 md:p-8">
+    <div class="flex justify-between items-start">
+     <div>
+      <p id="modal-province" class="text-sm font-bold tracking-[.12em] uppercase text-[#9a633e]"></p>
+      <h2 id="modal-place-name" class="mt-1 text-2xl font-bold text-[#294837]"></h2>
+     </div>
+     <button id="modal-close" class="rounded-xl p-2 bg-[#edf4e9] text-[#294837]" type="button"><i data-lucide="x" class="w-5 h-5"></i></button>
     </div>
-    <div class="p-6 md:p-8 space-y-4">
-     <h3 id="modal-title" class="text-2xl font-bold text-[#294837]"></h3>
-     <div class="space-y-3 text-sm text-[#506357] border-t border-b border-[#eee] py-4">
-      <p class="flex items-start gap-2">
-       <strong class="text-[#254034] shrink-0">🚗 การเดินทาง:</strong> 
-       <span id="modal-transport"></span>
-      </p>
-      <p class="flex items-start gap-2">
-       <strong class="text-[#254034] shrink-0">💰 งบต่อคน:</strong> 
-       <span id="modal-cost-person" class="text-[#a5653a] font-semibold"></span>
-      </p>
-      <p class="flex items-start gap-2">
-       <strong class="text-[#254034] shrink-0">👨‍👩‍👧‍👦 งบครอบครัว:</strong> 
-       <span id="modal-cost-family" class="text-[#a5653a] font-semibold"></span>
-      </p>
-     </div>
-     <div class="grid grid-cols-2 gap-3 pt-2">
-      <a id="modal-map-btn" href="#" target="_blank" class="rounded-xl py-3 px-3 text-sm font-semibold text-center bg-[#527849] text-white hover:brightness-105 transition flex items-center justify-center gap-2">
-       📍 เปิดแผนที่
-      </a>
-      <button type="button" id="modal-copy-btn" class="rounded-xl py-3 px-3 text-sm font-semibold text-center bg-[#edf4e9] text-[#3c5c36] hover:bg-[#e2ebd9] transition flex items-center justify-center gap-2">
-       📋 ก๊อปปี้ลิงก์แชร์
-      </button>
-     </div>
+    <p id="modal-category" class="mt-3 text-sm font-semibold text-[#5d7c53]"></p>
+    <div class="mt-6">
+     <a id="modal-map-link" class="action-button rounded-xl px-4 py-3 font-semibold flex items-center justify-center gap-2 bg-[#527849] text-white w-full" target="_blank" rel="noopener noreferrer">
+      <i data-lucide="map" class="w-4 h-4"></i>
+      <span>เปิดแผนที่ Google Maps</span>
+     </a>
     </div>
    </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // ฐานข้อมูลสถานที่ท่องเที่ยว 7 จังหวัดภาคตะวันออกที่คุณให้มา
+    const easternThailandTourism = {
+        "ชลบุรี": {
+            "คาเฟ่และร้านกาแฟ": ["Skoop Beach Cafe (พัทยา)", "Treedom Cafe (บางแสน)", "Red Temp Coffee (เขาสามมุข)", "Wocket Cafe (ศรีราชา)", "Hidden Lab (บางแสน)"],
+            "ธรรมชาติและทะเล": ["เกาะล้าน (พัทยา)", "หาดบางแสน", "สวนนงนุช พัทยา", "เกาะสีชัง", "เขาสามมุข"],
+            "วัฒนธรรมและวัด": ["ปราสาทสัจธรรม (พัทยา)", "วัดแสนสุขสุทธิวารรณ (บางแสน)", "วัดใหญ่อารามหลวง (อ.เมืองชลบุรี)", "วิหารเทพสถิตพระกิติเฉลิม", "เกาะลอย (ศรีราชา)"]
+        },
+        "ระยอง": {
+            "คาเฟ่และร้านกาแฟ": ["Trae Bar & Cafe (หาดแม่พิมพ์)", "Keep U Cafe (เมืองระยอง)", "A Cup of Tree (เมืองระยอง)", "M SLR Cafe (บ้านฉาง)", "Baan Suan Cafe (แกลง)"],
+            "ธรรมชาติและทะเล": ["ทุ่งโปรงทอง (ปากน้ำประแส)", "เกาะเสม็ด", "หาดแหลมแม่พิมพ์", "อุทยานแห่งชาติเขาแหลมหญ้า-หมูเกาะเสม็ด", "สวนพฤกษศาสตร์ระยอง"],
+            "วัฒนธรรมและวัด": ["วัดละหารไร่ (หลวงปู่ทิม)", "ชุมชนปากน้ำประแส", "ศาลสมเด็จพระเจ้าตากสินมหาราช", "วัดป่าประดู่", "ตลาดเก่า 100 ปี ยมจินดา"]
+        },
+        "จันทบุรี": {
+            "คาเฟ่และร้านกาแฟ": ["บางกระจะ คาเฟ่ (ชุมชนริมน้ำจันทบูร)", "Koff House Cafe (ริมแม่น้ำจันทบุรี)", "Moo Yoo Rose House (ท่าใหม่)", "Retro Cafe (เมืองจันทบุรี)", "Chanthaburi Art House"],
+            "ธรรมชาติและทะเล": ["อุทยานแห่งชาติน้ำตกพลิ้ว", "จุดชมวิวเนินนางพญา (อ่าวคุ้งกระเบน)", "หาดเจ้าหลาว", "อุทยานแห่งชาติน้ำตกตรอกلك (เขาคิชฌกูฏ)", "อ่าวคุ้งกระเบน"],
+            "วัฒนธรรมและวัด": ["ชุมชนเก่าริมน้ำจันทบูร", "อาสนวิหารพระนางมารีอาปฏิสนธินิรมล", "วัดเขาสุกิม", "ตึกแดง และคุกขี้ไก่", "ศาลหลักเมืองจันทบุรี"]
+        },
+        "ตราด": {
+            "คาเฟ่และร้านกาแฟ": ["The Ozone Cafe (เมืองตราด)", "Baan Suan Cafe & Restaurant (ตราด)", "M4 Cafe (เกาะช้าง)", "Cafe De Koh Chang", "Rim Klong Cafe (แหลมงอบ)"],
+            "ธรรมชาติและทะเล": ["เกาะช้าง", "เกาะกูด", "เกาะขาม", "อุทยานแห่งชาติน้ำตกคลองพลู (เกาะช้าง)", "หาดทรายดำ (แหลมงอบ)"],
+            "วัฒนธรรมและวัด": ["วัดบุปผาราม (วัดปลายคลอง)", "ชุมชนรักษ์เขาقم (แหลมงอบ)", "อนุสรณ์สถานยุทธนาวีเกาะช้าง", "ศาลเจ้าพ่อหลักเมืองตราด", "ชุมชนบ้านน้ำเชี่ยว"]
+        },
+        "ฉะเชิงเทรา": {
+            "คาเฟ่และร้านกาแฟ": ["บ้านปิ่นปัก คาเฟ่ (อ.เมือง)", "Chibani Cafe (ฉะเชิงเทรา)", "Riva Camp & Cafe", "นาคาเฟ่ (Nacha Cafe)", "Kratie Cafe"],
+            "ธรรมชาติและทะเล": ["อ่างเก็บน้ำลาดกระทิง", "อุทยานแห่งชาติเขาใหญ่ (โซนรอยต่อ)", "สวนป่าเฉลิมพระเกียรติ (คลองเขื่อน)", "แม่น้ำบางปะกง", "สวนเกษตรอินทรีย์ท้องถิ่น"],
+            "วัฒนธรรมและวัด": ["วัดโสธรวรารามวรวิหาร", "วัดสมานรัตนาราม", "ตลาดบ้านใหม่ 100 ปี", "วัดปากน้ำจโจ้", "วัดเทพนาราม"]
+        },
+        "ปราจีนบุรี": {
+            "คาเฟ่และร้านกาแฟ": ["A-Lek Cafe (เมืองปราจีน)", "Tree House Cafe (ประจันตคาม)", "Baan Suan Khun Yai Cafe", "Moka Cafe Prachinburi", "The Canal Cafe"],
+            "ธรรมชาติและทะเล": ["แก่งหินเพิง (นาดี)", "น้ำตกเขาอีโต้", "อ่างเก็บน้ำจักรพงษ์", "น้ำตกตะคร้อ (ประจันตคาม)", "อุทยานแห่งชาติทับลาน"],
+            "วัฒนธรรมและวัด": ["วัดแก้วพิจิตร", "โบราณสถานเมืองสระมรกต", "พิพิธภัณฑสถานแห่งชาติ ปราจีนบุรี", "วัดต้นโพธิ์ศรีมหโพธิ"]
+        },
+        "สระแก้ว": {
+            "คาเฟ่และร้านกาแฟ": ["De' Cafe Sa Kaeo", "The Camp Cafe (อรัญประเทศ)", "Baan Suan Coffee (วัฒนานคร)", "Mellow Cafe", "Slow Bar Coffee Sa Kaeo"],
+            "ธรรมชาติและทะเล": ["อุทยานแห่งชาติปางสีดา", "อุทยานแห่งชาติตาพระยา (ละลุ)", "อ่างเก็บน้ำพระปรง", "ถ้ำน้ำเขาสิงโต", "จุดชมวิวผาแดง (ปางสีดา)"],
+            "วัฒนธรรมและวัด": ["ปราสาทสด๊กก๊อกธม (โคกสูง)", "ตลาดโรงเกลือ (อรัญประเทศ)", "วัดนครธรรม (วัฒนานคร)", "ศาลหลักเมืองสระแก้ว", "วัดถ้ำเขาฉกรรจ์"]
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", function () {
+      lucide.createIcons();
+
+      const selectedCategories = new Set(["คาเฟ่และร้านกาแฟ", "ธรรมชาติและทะเล", "วัฒนธรรมและวัด"]);
+      const provinceSelect = document.getElementById("province-select");
+      const resultsGrid = document.getElementById("results-grid");
+      const emptyState = document.getElementById("results-empty");
+      const resultSummary = document.getElementById("result-summary");
+      const modal = document.getElementById("trip-modal");
+      const closeModalButton = document.getElementById("modal-close");
+
+      function openModal(placeName, provinceName, categoryName) {
+        document.getElementById("modal-province").textContent = provinceName;
+        document.getElementById("modal-place-name").textContent = placeName;
+        document.getElementById("modal-category").textContent = "หมวด: " + categoryName;
+        document.getElementById("modal-map-link").href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(placeName)}`;
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modal.hidden = true;
+        document.body.style.overflow = "";
+      }
+
+      // ระบบเลือกหมวดหมู่
+      document.querySelectorAll("[data-category]").forEach(function(button) {
+        button.addEventListener("click", function() {
+          const category = button.dataset.category;
+          if (selectedCategories.has(category)) {
+            selectedCategories.delete(category);
+            button.classList.remove("is-active");
+            button.setAttribute("aria-pressed", "false");
+          } else {
+            selectedCategories.add(category);
+            button.classList.add("is-active");
+            button.setAttribute("aria-pressed", "true");
+          }
+        });
+      });
+
+      // ฟังก์ชันสุ่มสถานที่
+      document.getElementById("trip-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let targetProvinces = [];
+        const selectedProv = provinceSelect.value;
+        
+        if (selectedProv === "all") {
+          targetProvinces = Object.keys(easternThailandTourism);
+        } else {
+          targetProvinces = [selectedProv];
+        }
+
+        let collectedPlaces = [];
+        targetProvinces.forEach(prov => {
+          const categories = easternThailandTourism[prov];
+          Object.keys(categories).forEach(cat => {
+            if (selectedCategories.has(cat)) {
+              categories[cat].forEach(place => {
+                collectedPlaces.push({ name: place, province: prov, category: cat });
+              });
+            }
+          });
+        });
+
+        // สุ่มสลับตำแหน่ง
+        collectedPlaces.sort(() => Math.random() - 0.5);
+        const finalResults = collectedPlaces.slice(0, 6); // เอามาแสดงสูงสุด 6 ที่
+
+        resultsGrid.innerHTML = "";
+        if (finalResults.length === 0) {
+          emptyState.hidden = false;
+          resultSummary.textContent = "ไม่พบสถานที่ กรุณาเลือกหมวดหมู่อย่างน้อย 1 หมวด";
+          return;
+        }
+
+        emptyState.hidden = true;
+        resultSummary.textContent = `สุ่มพบทั้งหมด ${finalResults.length} สถานที่`;
+
+        finalResults.forEach(item => {
+          const card = document.createElement("article");
+          card.className = "canva-card result-card overflow-hidden rounded-[1.5rem] cursor-pointer bg-white p-6 flex flex-col justify-between";
+          card.innerHTML = `
+            <div>
+              <div class="flex justify-between items-start gap-3">
+                <span class="inline-flex rounded-full bg-[#e7f1df] px-3 py-1 text-sm font-semibold text-[#50704c]">${item.province}</span>
+                <span class="text-sm font-semibold text-[#9a633e]">${item.category}</span>
+              </div>
+              <h3 class="mt-5 text-xl font-bold text-[#294837]">${item.name}</h3>
+            </div>
+            <button type="button" class="mt-6 w-full rounded-xl px-4 py-3 font-semibold flex items-center justify-center gap-2 bg-[#edf4e9] text-[#3c5c36]">
+              ดูพิกัดแผนที่
+            </button>
+          `;
+          card.addEventListener("click", () => {
+            openModal(item.name, item.province, item.category);
+          });
+          resultsGrid.appendChild(card);
+        });
+
+        document.getElementById("results-section").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      closeModalButton.addEventListener("click", closeModal);
+      modal.addEventListener("click", function(event) {
+        if (event.target === modal) closeModal();
+      });
+    });
+  </script>
  </body>
 </html>

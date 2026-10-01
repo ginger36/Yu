@@ -58,7 +58,7 @@ const easternThailandTourism = {
             "อุทยานแห่งชาติน้ำตกพลิ้ว",
             "จุดชมวิวเนินนางพญา (อ่าวคุ้งกระเบน)",
             "หาดเจ้าหลาว",
-            "อุทยานแห่งชาติน้ำตกตรอกلك (เขาคิชฌกูฏ)",
+            "อุทยานแห่งชาติน้ำตกตรอกน่อง (เขาคิชฌกูฏ)",
             "อ่าวคุ้งกระเบน"
         ],
         "วัฒนธรรมและวัด": [
@@ -86,7 +86,7 @@ const easternThailandTourism = {
         ],
         "วัฒนธรรมและวัด": [
             "วัดบุปผาราม (วัดปลายคลอง)",
-            "ชุมชนรักษ์เขาقم (แหลมงอบ)",
+            "ชุมชนรักษ์เขาฉลาก (แหลมงอบ)",
             "อนุสรณ์สถานยุทธนาวีเกาะช้าง",
             "ศาลเจ้าพ่อหลักเมืองตราด",
             "ชุมชนบ้านน้ำเชี่ยว"
@@ -162,7 +162,7 @@ const easternThailandTourism = {
     }
 };
 
-// ฟังก์ชันตัวอย่างที่ 1: ดึงรายชื่อสถานที่ตามจังหวัดและหมวดหมู่
+// ฟังก์ชันดึงรายชื่อทั้งหมด
 function getPlaces(province, category) {
     if (easternThailandTourism[province] && easternThailandTourism[province][category]) {
         return easternThailandTourism[province][category];
@@ -170,7 +170,7 @@ function getPlaces(province, category) {
     return "ไม่พบข้อมูลที่ระบุ";
 }
 
-// ฟังก์ชันตัวอย่างที่ 2: สุ่มเลือกสถานที่ท่องเที่ยว 1 ที่ จากจังหวัดและหมวดหมู่ที่กำหนด
+// ฟังก์ชันสุ่มสถานที่
 function getRandomPlace(province, category) {
     const places = getPlaces(province, category);
     if (Array.isArray(places)) {
@@ -180,9 +180,113 @@ function getRandomPlace(province, category) {
     return places;
 }
 
-// --- ตัวอย่างการเรียกใช้งาน ---
-console.log("=== คาเฟ่ในจังหวัดชลบุรี ===");
-console.log(getPlaces("ชลบุรี", "คาเฟ่และร้านกาแฟ"));
+// ควบคุมการทำงานของหน้าเว็บไซต์
+document.addEventListener("DOMContentLoaded", function () {
+    lucide.createIcons();
 
-console.log("\n=== สุ่มสถานที่ธรรมชาติ จันทบุรี ===");
-console.log(getRandomPlace("จันทบุรี", "ธรรมชาติและทะเล"));
+    const selectedCategories = new Set(["คาเฟ่และร้านกาแฟ", "ธรรมชาติและทะเล", "วัฒนธรรมและวัด"]);
+    const provinceSelect = document.getElementById("province-select");
+    const resultsGrid = document.getElementById("results-grid");
+    const emptyState = document.getElementById("results-empty");
+    const resultSummary = document.getElementById("result-summary");
+    const modal = document.getElementById("trip-modal");
+    const closeModalButton = document.getElementById("modal-close");
+
+    function openModal(placeName, provinceName, categoryName) {
+        document.getElementById("modal-province").textContent = provinceName;
+        document.getElementById("modal-place-name").textContent = placeName;
+        document.getElementById("modal-category").textContent = "หมวด: " + categoryName;
+        document.getElementById("modal-map-link").href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(placeName)}`;
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        modal.hidden = true;
+        document.body.style.overflow = "";
+    }
+
+    // ระบบเลือกหมวดหมู่ปุ่มกด
+    document.querySelectorAll("[data-category]").forEach(function(button) {
+        button.addEventListener("click", function() {
+            const category = button.dataset.category;
+            if (selectedCategories.has(category)) {
+                selectedCategories.delete(category);
+                button.classList.remove("is-active");
+                button.setAttribute("aria-pressed", "false");
+            } else {
+                selectedCategories.add(category);
+                button.classList.add("is-active");
+                button.setAttribute("aria-pressed", "true");
+            }
+        });
+    });
+
+    // เมื่อกดปุ่มสุ่มสถานที่
+    document.getElementById("trip-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let targetProvinces = [];
+        const selectedProv = provinceSelect.value;
+        
+        if (selectedProv === "all") {
+            targetProvinces = Object.keys(easternThailandTourism);
+        } else {
+            targetProvinces = [selectedProv];
+        }
+
+        let collectedPlaces = [];
+        targetProvinces.forEach(prov => {
+            const categories = easternThailandTourism[prov];
+            Object.keys(categories).forEach(cat => {
+                if (selectedCategories.has(cat)) {
+                    categories[cat].forEach(place => {
+                        collectedPlaces.push({ name: place, province: prov, category: cat });
+                    });
+                }
+            });
+        });
+
+        // สุ่มสลับตำแหน่ง
+        collectedPlaces.sort(() => Math.random() - 0.5);
+        const finalResults = collectedPlaces.slice(0, 6);
+
+        resultsGrid.innerHTML = "";
+        if (finalResults.length === 0) {
+            emptyState.hidden = false;
+            resultSummary.textContent = "ไม่พบสถานที่ กรุณาเลือกหมวดหมู่อย่างน้อย 1 หมวด";
+            return;
+        }
+
+        emptyState.hidden = true;
+        resultSummary.textContent = `สุ่มพบทั้งหมด ${finalResults.length} สถานที่`;
+
+        finalResults.forEach(item => {
+            const card = document.createElement("article");
+            card.className = "canva-card result-card overflow-hidden rounded-[1.5rem] cursor-pointer bg-white p-6 flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                  <div class="flex justify-between items-start gap-3">
+                    <span class="inline-flex rounded-full bg-[#e7f1df] px-3 py-1 text-sm font-semibold text-[#50704c]">${item.province}</span>
+                    <span class="text-sm font-semibold text-[#9a633e]">${item.category}</span>
+                  </div>
+                  <h3 class="mt-5 text-xl font-bold text-[#294837]">${item.name}</h3>
+                </div>
+                <button type="button" class="mt-6 w-full rounded-xl px-4 py-3 font-semibold flex items-center justify-center gap-2 bg-[#edf4e9] text-[#3c5c36]">
+                  ดูพิกัดแผนที่
+                </button>
+            `;
+            card.addEventListener("click", () => {
+                openModal(item.name, item.province, item.category);
+            });
+            resultsGrid.appendChild(card);
+        });
+
+        document.getElementById("results-section").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    closeModalButton.addEventListener("click", closeModal);
+    modal.addEventListener("click", function(event) {
+        if (event.target === modal) closeModal();
+    });
+});

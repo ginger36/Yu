@@ -1,4 +1,4 @@
-<<!doctype html>
+<!doctype html>
 <html lang="th">
  <head>
   <meta charset="UTF-8">
@@ -31,6 +31,10 @@
     .place-item-btn{transition:all 0.2s ease; cursor:pointer;}
     .place-item-btn:hover{background-color:#eaf2e4; transform:translateX(4px); border-color:#527849;}
     
+    /* บังคับซ่อน Modal ตั้งแต่ต้นทางด้วย CSS ตรงๆ ไม่มีทางแสดงขึ้นมาเองแน่นอน */
+    #place-modal { display: none !important; }
+    #place-modal.show-modal { display: flex !important; }
+
     .modal-backdrop { background-color: rgba(31, 77, 58, 0.6); backdrop-filter: blur(4px); }
     .modal-content { animation: scaleUp 0.3s ease both; }
     @keyframes scaleUp{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
@@ -128,8 +132,8 @@
    </section>
   </main>
 
-  <!-- ใส่คำว่า hidden ไว้ตรงนี้ เพื่อบังคับให้ซ่อนตั้งแต่เปิดเว็บ -->
-  <div id="place-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop" hidden>
+  <!-- Modal ป๊อปอัพที่จะถูกซ่อนสนิทจนกว่าจะถูกคลิกเลือก -->
+  <div id="place-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
    <div class="modal-content w-full max-w-lg rounded-[2rem] bg-white overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
     <div class="relative h-52 w-full bg-gray-100 shrink-0">
      <img id="modal-img" src="" alt="" class="h-full w-full object-cover">
@@ -177,6 +181,26 @@
    </div>
   </div>
 
+  <script>
+    // อัปเดตการควบคุม Modal ในฝั่ง JS ให้สอดคล้องกับ CSS ใหม่
+    document.addEventListener("DOMContentLoaded", function() {
+        const modal = document.getElementById("place-modal");
+        const modalClose = document.getElementById("modal-close");
+        
+        if(modalClose) {
+            modalClose.addEventListener("click", () => {
+                modal.classList.remove("show-modal");
+            });
+        }
+        if(modal) {
+            modal.addEventListener("click", (e) => {
+                if(e.target === modal) {
+                    modal.classList.remove("show-modal");
+                }
+            });
+        }
+    });
+  </script>
   <script src="script.js"></script>
  </body>
 </html>
